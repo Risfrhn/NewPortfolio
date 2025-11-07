@@ -1,5 +1,5 @@
 <template>
-    <nav id="navbar" class="fixed w-full z-20 top-0 start-0">
+    <nav id="navbar" class="navbar fixed w-full z-20 top-0 start-0">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <!-- Tampil di sm ke atas, sembunyikan di xs -->
             <a href="#" class="hidden sm:flex items-center space-x-3 rtl:space-x-reverse text-xl font-bold bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent">
@@ -129,11 +129,12 @@
     </nav>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
     import { onMounted } from 'vue';
 
     onMounted(()=>{
         const navbar = document.getElementById('navbar') as HTMLElement;
+        console.log('navbar element:', navbar)
         const menu = document.getElementById('navbar-language') as HTMLElement;
         const hamburger = document.querySelector('[data-collapse-toggle="navbar-language"]') as HTMLElement;
         
@@ -155,8 +156,14 @@
 </script>
 
 <style scoped>
-    .scrolled {
-    background-color: rgba(30, 64, 175, 0.9);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    .navbar.scrolled{
+        background-color: #0b0b14;
+        box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.1),   
+        0 6px 12px rgba(0, 0, 0, 0.15), 
+        0 12px 24px rgba(0, 0, 0, 0.2);
+    }
+    .navbar {
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
     }
 </style>
