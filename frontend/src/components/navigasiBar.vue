@@ -57,9 +57,8 @@
             <!-- Menu section -->
             <div class="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1" id="navbar-language">
                 <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 rounded-lg md:space-x-2 rtl:space-x-reverse lg:flex-row lg:mt-0 lg:border-0 bg-transparent">
-                    
                     <li>
-                        <a href="#" class="relative block py-2 px-4 text-white rounded-md overflow-hidden group">
+                        <a href="#" class="relative block py-2 px-2 md:px-4 text-white rounded-md overflow-hidden group">
                             <!-- Background gradient overlay -->
                             <span class="absolute inset-0 bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
                             
@@ -132,25 +131,27 @@
 
 <script lang="ts">
     import { onMounted } from 'vue';
-    const navbar = document.getElementById('navbar') as HTMLElement
-    const menu = document.getElementById('navbar-language') as HTMLElement
-    const hamburger = document.querySelector('[data-collapse-toggle="navbar-language"]') as HTMLElement
 
+    onMounted(()=>{
+        const navbar = document.getElementById('navbar') as HTMLElement;
+        const menu = document.getElementById('navbar-language') as HTMLElement;
+        const hamburger = document.querySelector('[data-collapse-toggle="navbar-language"]') as HTMLElement;
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 0){
+                navbar.classList.add('scrolled')
+            }else{
+                navbar.classList.remove('scrolled')
+            }
+        })
+
+        hamburger.addEventListener('click', () => {
+            if(!menu.classList.contains('block')){
+                navbar?.classList.add('scrolled')
+            }
+        })
     
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 0){
-            navbar?.classList.add('scrolled')
-        }else{
-            navbar?.classList.remove('scrolled')
-        }
     })
-
-    hamburger.addEventListener('click', () => {
-        if(!menu.classList.contains('block')){
-            navbar?.classList.add('scrolled')
-        }
-    })
-
 </script>
 
 <style scoped>
