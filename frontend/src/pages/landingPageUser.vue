@@ -142,56 +142,56 @@
                 </div>
                 <div class="col-span-12 z-10">
                     <div class="flex flex-wrap gap-5 place-content-center">
-                        <div class="relative w-[300px] h-[280px] rounded-xl text-center hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300 p-4" style="background-color: rgba(0, 0, 0, 0.5);">
+                        <div class="relative w-[300px] h-[280px] rounded-xl text-center group hover:bg-gradient-to-r hover:from-[#5b21b6] hover:via-[#3b82f6] hover:to-[#1e3a8a] hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-all duration-300 p-4"style="background-color: rgba(0, 0, 0, 0.5);">
                             <i class="fas fa-laptop-code text-[#a78bfa] text-6xl py-5"></i>
                             <p class="text-white text-xl font-bold py-2">Web development</p>
-                            <p class="text-gray-500 text-sm font-md pb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. sjdnasjd asdiasd asdjnasd </p>
-                            <div class="absolute top-[200px] right-[50px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50"></div>
-                            <div class="absolute top-[230px] right-[100px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50"></div>
-                            <div class="absolute top-[230px] right-[200px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50"></div>
-                            <div class="absolute top-[250px] right-[280px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50"></div>
-                            <div class="absolute top-[270px] right-[170px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50"></div>
-                            <div class="absolute top-[230px] right-[250px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50"></div>
-                            <div class="absolute top-[250px] right-[120px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50"></div>
+                            <p class="text-gray-500 text-sm font-md pb-5 group-hover:text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. sjdnasjd asdiasd asdjnasd </p>
+                            <div class="absolute top-[200px] right-[50px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 group-hover:-translate-y-5"></div>
+                            <div class="absolute top-[230px] right-[100px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-700 group-hover:-translate-y-7"></div>
+                            <div class="absolute top-[230px] right-[200px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-600 group-hover:-translate-y-6"></div>
+                            <div class="absolute top-[250px] right-[280px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-800 group-hover:-translate-y-8"></div>
+                            <div class="absolute top-[270px] right-[170px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-900 group-hover:-translate-y-10"></div>
+                            <div class="absolute top-[230px] right-[250px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-700 group-hover:-translate-y-7"></div>
+                            <div class="absolute top-[250px] right-[120px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-800 group-hover:-translate-y-8"></div>
                             <i class="absolute z-0 top-[10px] left-[5px] fas fa-code text-[#a78bfa] text-md lg:text-[40px] opacity-10 rotate-[-10deg]"></i>
                         </div>
-                        <div class="relative w-[300px] h-[280px] rounded-xl text-center hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300 p-4" style="background-color: rgba(0, 0, 0, 0.5);">
+                        <div class="relative w-[300px] h-[280px] rounded-xl text-center group hover:bg-gradient-to-r hover:from-[#5b21b6] hover:via-[#3b82f6] hover:to-[#1e3a8a] hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-all duration-300 p-4"style="background-color: rgba(0, 0, 0, 0.5);">
                             <i class="fas fa-laptop-code text-[#a78bfa] text-6xl py-5"></i>
                             <p class="text-white text-xl font-bold py-2">Web development</p>
-                            <p class="text-gray-500 text-sm font-md pb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. sjdnasjd asdiasd asdjnasd </p>
-                            <div class="absolute top-[200px] right-[50px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50"></div>
-                            <div class="absolute top-[230px] right-[100px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50"></div>
-                            <div class="absolute top-[230px] right-[200px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50"></div>
-                            <div class="absolute top-[250px] right-[280px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50"></div>
-                            <div class="absolute top-[270px] right-[170px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50"></div>
-                            <div class="absolute top-[230px] right-[250px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50"></div>
-                            <div class="absolute top-[250px] right-[120px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50"></div>
+                            <p class="text-gray-500 text-sm font-md pb-5 group-hover:text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. sjdnasjd asdiasd asdjnasd </p>
+                            <div class="absolute top-[200px] right-[50px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 group-hover:-translate-y-5"></div>
+                            <div class="absolute top-[230px] right-[100px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-700 group-hover:-translate-y-7"></div>
+                            <div class="absolute top-[230px] right-[200px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-600 group-hover:-translate-y-6"></div>
+                            <div class="absolute top-[250px] right-[280px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-800 group-hover:-translate-y-8"></div>
+                            <div class="absolute top-[270px] right-[170px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-900 group-hover:-translate-y-10"></div>
+                            <div class="absolute top-[230px] right-[250px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-700 group-hover:-translate-y-7"></div>
+                            <div class="absolute top-[250px] right-[120px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-800 group-hover:-translate-y-8"></div>
                             <i class="absolute z-0 top-[10px] left-[5px] fas fa-code text-[#a78bfa] text-md lg:text-[40px] opacity-10 rotate-[-10deg]"></i>
                         </div>
-                        <div class="relative w-[300px] h-[280px] rounded-xl text-center hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300 p-4" style="background-color: rgba(0, 0, 0, 0.5);">
+                        <div class="relative w-[300px] h-[280px] rounded-xl text-center group hover:bg-gradient-to-r hover:from-[#5b21b6] hover:via-[#3b82f6] hover:to-[#1e3a8a] hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-all duration-300 p-4"style="background-color: rgba(0, 0, 0, 0.5);">
                             <i class="fas fa-laptop-code text-[#a78bfa] text-6xl py-5"></i>
                             <p class="text-white text-xl font-bold py-2">Web development</p>
-                            <p class="text-gray-500 text-sm font-md pb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. sjdnasjd asdiasd asdjnasd </p>
-                            <div class="absolute top-[200px] right-[50px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50"></div>
-                            <div class="absolute top-[230px] right-[100px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50"></div>
-                            <div class="absolute top-[230px] right-[200px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50"></div>
-                            <div class="absolute top-[250px] right-[280px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50"></div>
-                            <div class="absolute top-[270px] right-[170px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50"></div>
-                            <div class="absolute top-[230px] right-[250px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50"></div>
-                            <div class="absolute top-[250px] right-[120px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50"></div>
+                            <p class="text-gray-500 text-sm font-md pb-5 group-hover:text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. sjdnasjd asdiasd asdjnasd </p>
+                            <div class="absolute top-[200px] right-[50px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 group-hover:-translate-y-5"></div>
+                            <div class="absolute top-[230px] right-[100px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-700 group-hover:-translate-y-7"></div>
+                            <div class="absolute top-[230px] right-[200px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-600 group-hover:-translate-y-6"></div>
+                            <div class="absolute top-[250px] right-[280px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-800 group-hover:-translate-y-8"></div>
+                            <div class="absolute top-[270px] right-[170px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-900 group-hover:-translate-y-10"></div>
+                            <div class="absolute top-[230px] right-[250px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-700 group-hover:-translate-y-7"></div>
+                            <div class="absolute top-[250px] right-[120px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-800 group-hover:-translate-y-8"></div>
                             <i class="absolute z-0 top-[10px] left-[5px] fas fa-code text-[#a78bfa] text-md lg:text-[40px] opacity-10 rotate-[-10deg]"></i>
                         </div>
-                        <div class="relative w-[300px] h-[280px] rounded-xl text-center hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300 p-4" style="background-color: rgba(0, 0, 0, 0.5);">
+                        <div class="relative w-[300px] h-[280px] rounded-xl text-center group hover:bg-gradient-to-r hover:from-[#5b21b6] hover:via-[#3b82f6] hover:to-[#1e3a8a] hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-all duration-300 p-4"style="background-color: rgba(0, 0, 0, 0.5);">
                             <i class="fas fa-laptop-code text-[#a78bfa] text-6xl py-5"></i>
                             <p class="text-white text-xl font-bold py-2">Web development</p>
-                            <p class="text-gray-500 text-sm font-md pb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. sjdnasjd asdiasd asdjnasd </p>
-                            <div class="absolute top-[200px] right-[50px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50"></div>
-                            <div class="absolute top-[230px] right-[100px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50"></div>
-                            <div class="absolute top-[230px] right-[200px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50"></div>
-                            <div class="absolute top-[250px] right-[280px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50"></div>
-                            <div class="absolute top-[270px] right-[170px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50"></div>
-                            <div class="absolute top-[230px] right-[250px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50"></div>
-                            <div class="absolute top-[250px] right-[120px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50"></div>
+                            <p class="text-gray-500 text-sm font-md pb-5 group-hover:text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. sjdnasjd asdiasd asdjnasd </p>
+                            <div class="absolute top-[200px] right-[50px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 group-hover:-translate-y-5"></div>
+                            <div class="absolute top-[230px] right-[100px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-700 group-hover:-translate-y-7"></div>
+                            <div class="absolute top-[230px] right-[200px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-600 group-hover:-translate-y-6"></div>
+                            <div class="absolute top-[250px] right-[280px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-800 group-hover:-translate-y-8"></div>
+                            <div class="absolute top-[270px] right-[170px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-900 group-hover:-translate-y-10"></div>
+                            <div class="absolute top-[230px] right-[250px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-700 group-hover:-translate-y-7"></div>
+                            <div class="absolute top-[250px] right-[120px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-800 group-hover:-translate-y-8"></div>
                             <i class="absolute z-0 top-[10px] left-[5px] fas fa-code text-[#a78bfa] text-md lg:text-[40px] opacity-10 rotate-[-10deg]"></i>
                         </div>
                     </div>
@@ -204,7 +204,99 @@
 
         <!-- Portfolio -->
         <div class="w-full h-[2px] mt-[40px] md:mt-[100px] bg-gradient-to-r from-transparent via-fuchsia-500 to-transparent" style="filter: drop-shadow(0 0 6px rgba(168,85,247,0.8));"></div>
+        <div class="relative my-24">
+            <div class="grid grid-cols-12 my-24 gap-4 z-10">
+                <div class="col-span-12">
+                    <p class="text-3xl text-center lg:text-5xl lg:my-2 font-semibold bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent" style="filter: drop-shadow(0 0 18px rgba(168, 85, 247, 0.9));">What I’ve Done</p>
+                </div>
+                <div class="col-span-12">
+                    <p class="text-gray-500 text-center mt-1 mb-5">Some of my recent projects</p>
+                </div>
+                <div class="col-span-12 z-10">
+                    <div class="flex flex-wrap gap-5 place-content-center">             
+                        <div class="relative w-[400px] h-[500px] border-2 rounded-xl border-[#a78bfa] px-3 py-3 group overflow-hidden hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
+                            <img src="/Image.png" alt="" class="w-[480px] h-[300px] rounded-xl">
+                            
+                            <div class="flex flex-wrap gap-5 py-5">
+                                <p class="text-md font-semibold text-white">WebApp.com</p>
+                                <div class="py-1 px-6 text-black rounded-full text-[11px] ml-auto bg-white font-semibold">Web dev</div>
+                            </div>
+                            
+                            <p class="text-sm text-white">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique</p>
+
+                            <!-- Dots -->
+                            <div class="absolute top-[450px] right-[50px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 group-hover:-translate-y-5"></div>
+                            <div class="absolute top-[470px] right-[100px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-100 group-hover:-translate-y-6"></div>
+                            <div class="absolute top-[470px] right-[200px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-200 group-hover:-translate-y-7"></div>
+                            <div class="absolute top-[450px] right-[280px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-300 group-hover:-translate-y-8"></div>
+                            <div class="absolute top-[470px] right-[170px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-400 group-hover:-translate-y-9"></div>
+                            <div class="absolute top-[470px] right-[250px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-500 group-hover:-translate-y-7"></div>
+                            <div class="absolute top-[450px] right-[120px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-600 group-hover:-translate-y-8"></div>
+                        </div>
+                        <div class="relative w-[400px] h-[500px] border-2 rounded-xl border-[#a78bfa] px-3 py-3 group overflow-hidden hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
+                            <img src="/Image.png" alt="" class="w-[480px] h-[300px] rounded-xl">
+                            
+                            <div class="flex flex-wrap gap-5 py-5">
+                                <p class="text-md font-semibold text-white">WebApp.com</p>
+                                <div class="py-1 px-6 text-black rounded-full text-[11px] ml-auto bg-white font-semibold">Web dev</div>
+                            </div>
+                            
+                            <p class="text-sm text-white">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique</p>
+
+                            <!-- Dots -->
+                            <div class="absolute top-[450px] right-[50px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 group-hover:-translate-y-5"></div>
+                            <div class="absolute top-[470px] right-[100px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-100 group-hover:-translate-y-6"></div>
+                            <div class="absolute top-[470px] right-[200px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-200 group-hover:-translate-y-7"></div>
+                            <div class="absolute top-[450px] right-[280px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-300 group-hover:-translate-y-8"></div>
+                            <div class="absolute top-[470px] right-[170px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-400 group-hover:-translate-y-9"></div>
+                            <div class="absolute top-[470px] right-[250px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-500 group-hover:-translate-y-7"></div>
+                            <div class="absolute top-[450px] right-[120px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-600 group-hover:-translate-y-8"></div>
+                        </div>
+                        <div class="relative w-[400px] h-[500px] border-2 rounded-xl border-[#a78bfa] px-3 py-3 group overflow-hidden hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
+                            <img src="/Image.png" alt="" class="w-[480px] h-[300px] rounded-xl">
+                            
+                            <div class="flex flex-wrap gap-5 py-5">
+                                <p class="text-md font-semibold text-white">WebApp.com</p>
+                                <div class="py-1 px-6 text-black rounded-full text-[11px] ml-auto bg-white font-semibold">Web dev</div>
+                            </div>
+                            
+                            <p class="text-sm text-white">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique</p>
+
+                            <!-- Dots -->
+                            <div class="absolute top-[450px] right-[50px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 group-hover:-translate-y-5"></div>
+                            <div class="absolute top-[470px] right-[100px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-100 group-hover:-translate-y-6"></div>
+                            <div class="absolute top-[470px] right-[200px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-200 group-hover:-translate-y-7"></div>
+                            <div class="absolute top-[450px] right-[280px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-300 group-hover:-translate-y-8"></div>
+                            <div class="absolute top-[470px] right-[170px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-400 group-hover:-translate-y-9"></div>
+                            <div class="absolute top-[470px] right-[250px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-500 group-hover:-translate-y-7"></div>
+                            <div class="absolute top-[450px] right-[120px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-600 group-hover:-translate-y-8"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-12 mx-auto my-10 z-10">
+                    <a href="#"class="inline-flex items-center justify-center p-0.5 text-sm font-medium tracking-wide text-white transition duration-300 rounded-full shadow-lg focus-visible:outline-none whitespace-nowrap group bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none hover:shadow-[0_0_20px_rgba(130,90,250,0.4)]">
+                        <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-[#0b0b14] rounded-full group-hover:bg-transparent">
+                            Show all projects
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <div class="absolute z-0 top-[500px] left-1/2 w-[300px] h-[300px] md:w-[900px] md:h-[700px] rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 opacity-40 blur-[120px] transform -translate-x-1/2 -translate-y-1/2"></div>
+            <img src="/Boostrap.png" alt="" class="animate-icon-1 z-10 absolute w-10 h-10 translate-x-[300px]  -translate-y-[800px] hidden xl:block">
+            <img src="/Canva.png" alt="" class="animate-icon-1 z-10 absolute w-10 h-10 translate-x-[350px]  -translate-y-[900px]">
         
+        
+            <img src="/CI3.png" alt="" class="animate-icon-2 z-10 absolute w-10 h-10  translate-x-[1000px]  -translate-y-[800px]">
+            <img src="/Word.png" alt="" class="animate-icon-2 z-10 absolute w-10 h-10 translate-x-[1100px]  -translate-y-[900px]">
+        
+        
+            <img src="/Excel.png" alt="" class="animate-icon-3 z-10 absolute w-10 h-10 translate-x-[150px]  -translate-y-[880px]">
+            <img src="/Laravel.png" alt="" class="animate-icon-3 z-10 absolute w-10 h-10 translate-x-[900px]  -translate-y-[930px]">
+        </div>  
+        
+        <!-- Product -->
+        <div class="w-full h-[2px] mt-[40px] md:mt-[100px] bg-gradient-to-r from-transparent via-fuchsia-500 to-transparent" style="filter: drop-shadow(0 0 6px rgba(168,85,247,0.8));"></div>
+        <div class="relative my-24"></div>
     </div>
 </template>
 
