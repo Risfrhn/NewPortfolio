@@ -132,23 +132,79 @@
 
         <!-- Services -->
         <div class="w-full h-[2px] mt-[40px] md:mt-[100px] bg-gradient-to-r from-transparent via-fuchsia-500 to-transparent" style="filter: drop-shadow(0 0 6px rgba(168,85,247,0.8));"></div>
-        <div class="grid grid-cols-12 my-24 gap-4">
-            <div class="col-span-12">
-                <p class="text-3xl text-center lg:text-5xl lg:my-2 font-semibold bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent" style="filter: drop-shadow(0 0 18px rgba(168, 85, 247, 0.9));">How I can help</p>
-            </div>
-            <div class="col-span-12">
-                <p class="text-gray-500 text-center mt-1 mb-10">Transforming ideas into impactful digital experiences</p>
-            </div>
-            <div class="col-span-12">
-                <div class="flex flex-wrap gap-5 place-content-center">
-                    <div class="w-[300px] h-[400px] border-4 rounded-xl bg-[#0b0b14] border-[#a78bfa] hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300 p-4">
-                        <i class="fab fa-steam text-[#a78bfa] text-xl"></i>
-                        <p>Web development</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod molestiae sunt laboriosam. Consequuntur omnis corrupti delectus impedit a atque totam ad reprehenderit vel necessitatibus officiis distinctio, illum voluptatibus mollitia fuga!</p>
+        <div class="relative my-24">
+            <div class="grid grid-cols-12 my-24 gap-4 z-10">
+                <div class="col-span-12">
+                    <p class="text-3xl text-center lg:text-5xl lg:my-2 font-semibold bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent" style="filter: drop-shadow(0 0 18px rgba(168, 85, 247, 0.9));">How I can help</p>
+                </div>
+                <div class="col-span-12">
+                    <p class="text-gray-500 text-center mt-1 mb-10">Transforming ideas into impactful digital experiences</p>
+                </div>
+                <div class="col-span-12 z-10">
+                    <div class="flex flex-wrap gap-5 place-content-center">
+                        <div class="relative w-[300px] h-[280px] rounded-xl text-center hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300 p-4" style="background-color: rgba(0, 0, 0, 0.5);">
+                            <i class="fas fa-laptop-code text-[#a78bfa] text-6xl py-5"></i>
+                            <p class="text-white text-xl font-bold py-2">Web development</p>
+                            <p class="text-gray-500 text-sm font-md pb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. sjdnasjd asdiasd asdjnasd </p>
+                            <div class="absolute top-[200px] right-[50px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50"></div>
+                            <div class="absolute top-[230px] right-[100px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50"></div>
+                            <div class="absolute top-[230px] right-[200px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50"></div>
+                            <div class="absolute top-[250px] right-[280px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50"></div>
+                            <div class="absolute top-[270px] right-[170px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50"></div>
+                            <div class="absolute top-[230px] right-[250px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50"></div>
+                            <div class="absolute top-[250px] right-[120px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50"></div>
+                            <i class="absolute z-0 top-[10px] left-[5px] fas fa-code text-[#a78bfa] text-md lg:text-[40px] opacity-10 rotate-[-10deg]"></i>
+                        </div>
+                        <div class="relative w-[300px] h-[280px] rounded-xl text-center hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300 p-4" style="background-color: rgba(0, 0, 0, 0.5);">
+                            <i class="fas fa-laptop-code text-[#a78bfa] text-6xl py-5"></i>
+                            <p class="text-white text-xl font-bold py-2">Web development</p>
+                            <p class="text-gray-500 text-sm font-md pb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. sjdnasjd asdiasd asdjnasd </p>
+                            <div class="absolute top-[200px] right-[50px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50"></div>
+                            <div class="absolute top-[230px] right-[100px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50"></div>
+                            <div class="absolute top-[230px] right-[200px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50"></div>
+                            <div class="absolute top-[250px] right-[280px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50"></div>
+                            <div class="absolute top-[270px] right-[170px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50"></div>
+                            <div class="absolute top-[230px] right-[250px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50"></div>
+                            <div class="absolute top-[250px] right-[120px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50"></div>
+                            <i class="absolute z-0 top-[10px] left-[5px] fas fa-code text-[#a78bfa] text-md lg:text-[40px] opacity-10 rotate-[-10deg]"></i>
+                        </div>
+                        <div class="relative w-[300px] h-[280px] rounded-xl text-center hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300 p-4" style="background-color: rgba(0, 0, 0, 0.5);">
+                            <i class="fas fa-laptop-code text-[#a78bfa] text-6xl py-5"></i>
+                            <p class="text-white text-xl font-bold py-2">Web development</p>
+                            <p class="text-gray-500 text-sm font-md pb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. sjdnasjd asdiasd asdjnasd </p>
+                            <div class="absolute top-[200px] right-[50px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50"></div>
+                            <div class="absolute top-[230px] right-[100px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50"></div>
+                            <div class="absolute top-[230px] right-[200px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50"></div>
+                            <div class="absolute top-[250px] right-[280px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50"></div>
+                            <div class="absolute top-[270px] right-[170px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50"></div>
+                            <div class="absolute top-[230px] right-[250px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50"></div>
+                            <div class="absolute top-[250px] right-[120px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50"></div>
+                            <i class="absolute z-0 top-[10px] left-[5px] fas fa-code text-[#a78bfa] text-md lg:text-[40px] opacity-10 rotate-[-10deg]"></i>
+                        </div>
+                        <div class="relative w-[300px] h-[280px] rounded-xl text-center hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300 p-4" style="background-color: rgba(0, 0, 0, 0.5);">
+                            <i class="fas fa-laptop-code text-[#a78bfa] text-6xl py-5"></i>
+                            <p class="text-white text-xl font-bold py-2">Web development</p>
+                            <p class="text-gray-500 text-sm font-md pb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. sjdnasjd asdiasd asdjnasd </p>
+                            <div class="absolute top-[200px] right-[50px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50"></div>
+                            <div class="absolute top-[230px] right-[100px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50"></div>
+                            <div class="absolute top-[230px] right-[200px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50"></div>
+                            <div class="absolute top-[250px] right-[280px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50"></div>
+                            <div class="absolute top-[270px] right-[170px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50"></div>
+                            <div class="absolute top-[230px] right-[250px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50"></div>
+                            <div class="absolute top-[250px] right-[120px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50"></div>
+                            <i class="absolute z-0 top-[10px] left-[5px] fas fa-code text-[#a78bfa] text-md lg:text-[40px] opacity-10 rotate-[-10deg]"></i>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="absolute z-0 top-[300px] left-1/2 w-[300px] h-[300px] md:w-[900px] md:h-[200px] rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 opacity-40 blur-[120px] transform -translate-x-1/2 -translate-y-1/2"></div>
+            <i class="absolute z-0 top-[-50px] left-[50px] fas fa-laptop-code text-[#a78bfa] text-md lg:text-[170px] opacity-20 rotate-[-10deg]"></i>
+            <i class="absolute z-0 top-[10px] right-[50px] fas fa-code text-[#a78bfa] text-md lg:text-[100px] opacity-20 rotate-[-10deg]"></i>
         </div>
+
+        <!-- Portfolio -->
+        <div class="w-full h-[2px] mt-[40px] md:mt-[100px] bg-gradient-to-r from-transparent via-fuchsia-500 to-transparent" style="filter: drop-shadow(0 0 6px rgba(168,85,247,0.8));"></div>
+        
     </div>
 </template>
 
