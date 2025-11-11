@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { ref, onMounted, onBeforeUnmount } from 'vue'
+    import { ref, onMounted, onBeforeUnmount, defineComponent } from 'vue'
     import Typed from 'typed.js'
 
     const typedElement = ref<HTMLElement | null>(null)
@@ -20,6 +20,20 @@
     onBeforeUnmount(() => {
     if (typedInstance) typedInstance.destroy()
     });
+
+    
+    const name= ref("");
+    const desc= ref("");
+
+    const sendEmail = ()=>{
+        const subject = encodeURIComponent(`Message from ${name.value}`);
+        const body = encodeURIComponent(`Halo nama saya ${name.value}, saya ingin ${desc.value}`);
+        window.location.href = `mailto:rskyfrhn801@gmail.com?subject=${subject}&body=${body}`;
+    };
+    const sendWA = ()=>{
+        const text = encodeURIComponent(`Halo nama saya ${name.value}, saya ingin ${desc.value}`);
+        window.open(`https://wa.me/6281345765427?text=${text}`, "_blank");
+    };       
 </script>
 
 
@@ -133,7 +147,7 @@
         <!-- Services -->
         <div class="w-full h-[2px] mt-[40px] md:mt-[100px] bg-gradient-to-r from-transparent via-fuchsia-500 to-transparent" style="filter: drop-shadow(0 0 6px rgba(168,85,247,0.8));"></div>
         <div class="relative my-24">
-            <div class="grid grid-cols-12 my-24 gap-4 z-10">
+            <div class="grid grid-cols-12 gap-4 z-10">
                 <div class="col-span-12">
                     <p class="text-3xl text-center lg:text-5xl lg:my-2 font-semibold bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent" style="filter: drop-shadow(0 0 18px rgba(168, 85, 247, 0.9));">How I can help</p>
                 </div>
@@ -197,9 +211,9 @@
                     </div>
                 </div>
             </div>
-            <div class="absolute z-0 top-[300px] left-1/2 w-[300px] h-[300px] md:w-[900px] md:h-[200px] rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 opacity-40 blur-[120px] transform -translate-x-1/2 -translate-y-1/2"></div>
-            <i class="absolute z-0 top-[-50px] left-[50px] fas fa-laptop-code text-[#a78bfa] text-md lg:text-[170px] opacity-20 rotate-[-10deg]"></i>
-            <i class="absolute z-0 top-[10px] right-[50px] fas fa-code text-[#a78bfa] text-md lg:text-[100px] opacity-20 rotate-[-10deg]"></i>
+            <div class="hidden sm:block absolute z-0 md:top-[400px] xl:top-[300px] left-1/2 w-[300px] h-[300px] md:w-[700px] md:h-[600px] xl:w-[900px] xl:h-[200px] rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 opacity-40 blur-[120px] -translate-x-1/2 -translate-y-1/2"></div>
+            <i class="absolute z-0 top-[-60px] left-[50px] md:top-[-50px] md:left-[50px] fas fa-laptop-code text-[#a78bfa] text-[50px] md:text-[100px] lg:text-[170px] opacity-20 rotate-[-10deg]"></i>
+            <i class="absolute z-0 top-[-60px] right-[50px] fas fa-code text-[#a78bfa] text-[50px] md:text-[100px] lg:text-[100px] opacity-20 rotate-[-10deg]"></i>
         </div>
 
         <!-- Portfolio -->
@@ -211,11 +225,20 @@
                 </div>
                 <div class="col-span-12">
                     <p class="text-gray-500 text-center mt-1 mb-5">Some of my recent projects</p>
+                    <img src="/Boostrap.png" alt="" class="animate-icon-1 z-10 absolute w-5 h-5 xl:w-10 xl:h-10 left-[50px] top-[70px] md:left-[230px] md:top-[70px] xl:top-[90px] xl:left-[300px]">
+                    <img src="/Canva.png" alt="" class="animate-icon-1 z-10 absolute w-5 h-5 xl:w-10 xl:h-10 md:left-[130px] left-[100px] top-[-30px] md:top-[30px] xl:top-[30px] xl:left-[150px]">
+                    <img src="/Excel.png" alt="" class="animate-icon-3 z-10 absolute w-5 h-5 xl:w-10 xl:h-10 md:left-[200px] left-[30px] top-[10px] md:top-[-10px] xl:top-[-10px] xl:left-[400px]">
+                
+                    <img src="/CI3.png" alt="" class="animate-icon-2 z-10 absolute w-5 h-5 xl:w-10 xl:h-10 md:right-[230px] right-[50px] top-[70px] md:top-[70px] xl:top-[90px] xl:right-[300px]">
+                    <img src="/Word.png" alt="" class="animate-icon-2 z-10 absolute w-5 h-5 xl:w-10 xl:h-10 md:right-[130px] right-[100px] top-[-30px] md:top-[30px] xl:top-[30px] xl:right-[150px]">
+                    <img src="/Laravel.png" alt="" class="animate-icon-3 z-10 absolute w-5 h-5 xl:w-10 xl:h-10 md:right-[200px] right-[30px] top-[10px] md:top-[-10px] xl:top-[-10px] xl:right-[400px]">
                 </div>
                 <div class="col-span-12 z-10">
-                    <div class="flex flex-wrap gap-5 place-content-center">             
-                        <div class="relative w-[400px] h-[500px] border-2 rounded-xl border-[#a78bfa] px-3 py-3 group overflow-hidden hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
-                            <img src="/Image.png" alt="" class="w-[480px] h-[300px] rounded-xl">
+                    <div class="flex flex-wrap gap-5 place-content-center"> 
+
+                        <!-- card -->
+                        <div class="relative w-[300px] h-[430px] xl:w-[400px] xl:h-[500px] border-2 rounded-xl border-[#a78bfa] px-3 py-3 group overflow-hidden hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
+                            <img src="/Image.png" alt="" class="w-[280px] h-[240px] xl:w-[480px] xl:h-[300px] rounded-xl">
                             
                             <div class="flex flex-wrap gap-5 py-5">
                                 <p class="text-md font-semibold text-white">WebApp.com</p>
@@ -225,16 +248,16 @@
                             <p class="text-sm text-white">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique</p>
 
                             <!-- Dots -->
-                            <div class="absolute top-[450px] right-[50px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 group-hover:-translate-y-5"></div>
-                            <div class="absolute top-[470px] right-[100px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-100 group-hover:-translate-y-6"></div>
-                            <div class="absolute top-[470px] right-[200px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-200 group-hover:-translate-y-7"></div>
-                            <div class="absolute top-[450px] right-[280px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-300 group-hover:-translate-y-8"></div>
-                            <div class="absolute top-[470px] right-[170px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-400 group-hover:-translate-y-9"></div>
-                            <div class="absolute top-[470px] right-[250px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-500 group-hover:-translate-y-7"></div>
-                            <div class="absolute top-[450px] right-[120px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-600 group-hover:-translate-y-8"></div>
+                            <div class="absolute top-[400px] right-[50px] xl:top-[450px] xl:right-[50px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 group-hover:-translate-y-5"></div>
+                            <div class="absolute top-[410px] right-[100px] xl:top-[450px] xl:right-[100px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-100 group-hover:-translate-y-6"></div>
+                            <div class="absolute top-[390px] right-[210px] xl:top-[460px] xl:right-[210px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-200 group-hover:-translate-y-7"></div>
+                            <div class="absolute top-[400px] right-[250px] xl:top-[470px] xl:right-[250px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-300 group-hover:-translate-y-8"></div>
+                            <div class="absolute top-[400px] right-[170px] xl:top-[470px] xl:right-[170px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-450 group-hover:-translate-y-9"></div>
+                            <div class="absolute top-[400px] right-[220px] xl:top-[450px] xl:right-[220px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-500 group-hover:-translate-y-7"></div>
+                            <div class="absolute top-[400px] right-[120px] xl:top-[440px] xl:right-[120px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-600 group-hover:-translate-y-8"></div>
                         </div>
-                        <div class="relative w-[400px] h-[500px] border-2 rounded-xl border-[#a78bfa] px-3 py-3 group overflow-hidden hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
-                            <img src="/Image.png" alt="" class="w-[480px] h-[300px] rounded-xl">
+                        <div class="relative w-[300px] h-[430px] xl:w-[400px] xl:h-[500px] border-2 rounded-xl border-[#a78bfa] px-3 py-3 group overflow-hidden hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
+                            <img src="/Image.png" alt="" class="w-[280px] h-[240px] xl:w-[480px] xl:h-[300px] rounded-xl">
                             
                             <div class="flex flex-wrap gap-5 py-5">
                                 <p class="text-md font-semibold text-white">WebApp.com</p>
@@ -244,16 +267,16 @@
                             <p class="text-sm text-white">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique</p>
 
                             <!-- Dots -->
-                            <div class="absolute top-[450px] right-[50px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 group-hover:-translate-y-5"></div>
-                            <div class="absolute top-[470px] right-[100px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-100 group-hover:-translate-y-6"></div>
-                            <div class="absolute top-[470px] right-[200px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-200 group-hover:-translate-y-7"></div>
-                            <div class="absolute top-[450px] right-[280px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-300 group-hover:-translate-y-8"></div>
-                            <div class="absolute top-[470px] right-[170px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-400 group-hover:-translate-y-9"></div>
-                            <div class="absolute top-[470px] right-[250px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-500 group-hover:-translate-y-7"></div>
-                            <div class="absolute top-[450px] right-[120px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-600 group-hover:-translate-y-8"></div>
+                            <div class="absolute top-[400px] right-[50px] xl:top-[450px] xl:right-[50px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 group-hover:-translate-y-5"></div>
+                            <div class="absolute top-[410px] right-[100px] xl:top-[450px] xl:right-[100px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-100 group-hover:-translate-y-6"></div>
+                            <div class="absolute top-[390px] right-[210px] xl:top-[460px] xl:right-[210px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-200 group-hover:-translate-y-7"></div>
+                            <div class="absolute top-[400px] right-[250px] xl:top-[470px] xl:right-[250px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-300 group-hover:-translate-y-8"></div>
+                            <div class="absolute top-[400px] right-[170px] xl:top-[470px] xl:right-[170px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-450 group-hover:-translate-y-9"></div>
+                            <div class="absolute top-[400px] right-[220px] xl:top-[450px] xl:right-[220px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-500 group-hover:-translate-y-7"></div>
+                            <div class="absolute top-[400px] right-[120px] xl:top-[440px] xl:right-[120px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-600 group-hover:-translate-y-8"></div>
                         </div>
-                        <div class="relative w-[400px] h-[500px] border-2 rounded-xl border-[#a78bfa] px-3 py-3 group overflow-hidden hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
-                            <img src="/Image.png" alt="" class="w-[480px] h-[300px] rounded-xl">
+                        <div class="relative w-[300px] h-[430px] xl:w-[400px] xl:h-[500px] border-2 rounded-xl border-[#a78bfa] px-3 py-3 group overflow-hidden hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
+                            <img src="/Image.png" alt="" class="w-[280px] h-[240px] xl:w-[480px] xl:h-[300px] rounded-xl">
                             
                             <div class="flex flex-wrap gap-5 py-5">
                                 <p class="text-md font-semibold text-white">WebApp.com</p>
@@ -263,14 +286,15 @@
                             <p class="text-sm text-white">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique</p>
 
                             <!-- Dots -->
-                            <div class="absolute top-[450px] right-[50px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 group-hover:-translate-y-5"></div>
-                            <div class="absolute top-[470px] right-[100px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-100 group-hover:-translate-y-6"></div>
-                            <div class="absolute top-[470px] right-[200px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-200 group-hover:-translate-y-7"></div>
-                            <div class="absolute top-[450px] right-[280px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-300 group-hover:-translate-y-8"></div>
-                            <div class="absolute top-[470px] right-[170px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-400 group-hover:-translate-y-9"></div>
-                            <div class="absolute top-[470px] right-[250px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-500 group-hover:-translate-y-7"></div>
-                            <div class="absolute top-[450px] right-[120px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-600 group-hover:-translate-y-8"></div>
+                            <div class="absolute top-[400px] right-[50px] xl:top-[450px] xl:right-[50px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 group-hover:-translate-y-5"></div>
+                            <div class="absolute top-[410px] right-[100px] xl:top-[450px] xl:right-[100px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-100 group-hover:-translate-y-6"></div>
+                            <div class="absolute top-[390px] right-[210px] xl:top-[460px] xl:right-[210px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-200 group-hover:-translate-y-7"></div>
+                            <div class="absolute top-[400px] right-[250px] xl:top-[470px] xl:right-[250px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-300 group-hover:-translate-y-8"></div>
+                            <div class="absolute top-[400px] right-[170px] xl:top-[470px] xl:right-[170px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-450 group-hover:-translate-y-9"></div>
+                            <div class="absolute top-[400px] right-[220px] xl:top-[450px] xl:right-[220px] w-2 h-2 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-500 group-hover:-translate-y-7"></div>
+                            <div class="absolute top-[400px] right-[120px] xl:top-[440px] xl:right-[120px] w-1 h-1 rounded-full bg-[#a78bfa] opacity-50 transition-transform duration-500 delay-600 group-hover:-translate-y-8"></div>
                         </div>
+
                     </div>
                 </div>
                 <div class="col-span-12 mx-auto my-10 z-10">
@@ -281,22 +305,201 @@
                     </a>
                 </div>
             </div>
-            <div class="absolute z-0 top-[500px] left-1/2 w-[300px] h-[300px] md:w-[900px] md:h-[700px] rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 opacity-40 blur-[120px] transform -translate-x-1/2 -translate-y-1/2"></div>
-            <img src="/Boostrap.png" alt="" class="animate-icon-1 z-10 absolute w-10 h-10 translate-x-[300px]  -translate-y-[800px] hidden xl:block">
-            <img src="/Canva.png" alt="" class="animate-icon-1 z-10 absolute w-10 h-10 translate-x-[350px]  -translate-y-[900px]">
-        
-        
-            <img src="/CI3.png" alt="" class="animate-icon-2 z-10 absolute w-10 h-10  translate-x-[1000px]  -translate-y-[800px]">
-            <img src="/Word.png" alt="" class="animate-icon-2 z-10 absolute w-10 h-10 translate-x-[1100px]  -translate-y-[900px]">
-        
-        
-            <img src="/Excel.png" alt="" class="animate-icon-3 z-10 absolute w-10 h-10 translate-x-[150px]  -translate-y-[880px]">
-            <img src="/Laravel.png" alt="" class="animate-icon-3 z-10 absolute w-10 h-10 translate-x-[900px]  -translate-y-[930px]">
+            <div class="hidden sm:block absolute z-0 md:top-[500px] left-1/2 w-[300px] h-[300px] md:w-[500px] md:h-[700px]  lg:w-[900px] lg:h-[500px] rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 opacity-40 blur-[120px] transform -translate-x-1/2 -translate-y-1/2"></div>
         </div>  
         
         <!-- Product -->
         <div class="w-full h-[2px] mt-[40px] md:mt-[100px] bg-gradient-to-r from-transparent via-fuchsia-500 to-transparent" style="filter: drop-shadow(0 0 6px rgba(168,85,247,0.8));"></div>
-        <div class="relative my-24"></div>
+        <div class="relative my-24">
+            <div class="grid grid-cols-12 my-24 gap-4 z-10">
+                <div class="col-span-12">
+                    <p class="text-3xl text-center lg:text-5xl lg:my-2 font-semibold bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent" style="filter: drop-shadow(0 0 18px rgba(168, 85, 247, 0.9));">Built with Code, Designed for You</p>
+                </div>
+                <div class="col-span-12">
+                    <p class="text-gray-500 text-center mt-1 mb-5">Ready-to-use web applications built for performance and simplicity</p>
+                </div>
+                <div class="col-span-12 z-10">
+                    <div class="grid grid-cols-12 place-content-center gap-3">
+
+                        <!-- card -->
+                        <div class="col-span-12 lg:col-span-6 mx-2">
+                            <div class="relative w-full border-2 rounded-xl border-[#a78bfa] px-3 py-3 group overflow-hidden hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
+                                <div class="flex items-center gap-2 md:gap-5">
+                                    <img src="/Image.png" alt="" class="w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-md md:rounded-xl">
+
+                                    <div class="flex-1 min-w-0 flex items-center gap-1 md:gap-3">
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-sm md:text-md font-semibold text-white">WebApp.com</p>
+                                            <p class="text-xs md:text-sm text-white truncate">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique.</p>
+                                        </div>
+                                        <a href="#" class="ml-auto my-auto py-2 px-3 md:py-3 md:px-5 bg-white text-black text-[11px] font-semibold rounded-md hover:bg-purple-100 transition">Details</a>
+                                        <a href="#" class="ml-auto my-auto py-2 px-3 md:py-3 md:px-5 bg-white text-black text-[11px] font-semibold rounded-md hover:bg-purple-100 transition">Buy Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-span-12 lg:col-span-6 mx-2">
+                            <div class="relative w-full border-2 rounded-xl border-[#a78bfa] px-3 py-3 group overflow-hidden hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
+                                <div class="flex items-center gap-2 md:gap-5">
+                                    <img src="/Image.png" alt="" class="w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-md md:rounded-xl">
+
+                                    <div class="flex-1 min-w-0 flex items-center gap-1 md:gap-3">
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-sm md:text-md font-semibold text-white">WebApp.com</p>
+                                            <p class="text-xs md:text-sm text-white truncate">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique.</p>
+                                        </div>
+                                        <a href="#" class="ml-auto my-auto py-2 px-3 md:py-3 md:px-5 bg-white text-black text-[11px] font-semibold rounded-md hover:bg-purple-100 transition">Details</a>
+                                        <a href="#" class="ml-auto my-auto py-2 px-3 md:py-3 md:px-5 bg-white text-black text-[11px] font-semibold rounded-md hover:bg-purple-100 transition">Buy Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="col-span-12 lg:col-span-6 mx-2">
+                            <div class="relative w-full border-2 rounded-xl border-[#a78bfa] px-3 py-3 group overflow-hidden hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
+                                <div class="flex items-center gap-2 md:gap-5">
+                                    <img src="/Image.png" alt="" class="w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-md md:rounded-xl">
+
+                                    <div class="flex-1 min-w-0 flex items-center gap-1 md:gap-3">
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-sm md:text-md font-semibold text-white">WebApp.com</p>
+                                            <p class="text-xs md:text-sm text-white truncate">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique.</p>
+                                        </div>
+                                        <a href="#" class="ml-auto my-auto py-2 px-3 md:py-3 md:px-5 bg-white text-black text-[11px] font-semibold rounded-md hover:bg-purple-100 transition">Details</a>
+                                        <a href="#" class="ml-auto my-auto py-2 px-3 md:py-3 md:px-5 bg-white text-black text-[11px] font-semibold rounded-md hover:bg-purple-100 transition">Buy Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="col-span-12 lg:col-span-6 mx-2">
+                            <div class="relative w-full border-2 rounded-xl border-[#a78bfa] px-3 py-3 group overflow-hidden hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
+                                <div class="flex items-center gap-2 md:gap-5">
+                                    <img src="/Image.png" alt="" class="w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-md md:rounded-xl">
+
+                                    <div class="flex-1 min-w-0 flex items-center gap-1 md:gap-3">
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-sm md:text-md font-semibold text-white">WebApp.com</p>
+                                            <p class="text-xs md:text-sm text-white truncate">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique.</p>
+                                        </div>
+                                        <a href="#" class="ml-auto my-auto py-2 px-3 md:py-3 md:px-5 bg-white text-black text-[11px] font-semibold rounded-md hover:bg-purple-100 transition">Details</a>
+                                        <a href="#" class="ml-auto my-auto py-2 px-3 md:py-3 md:px-5 bg-white text-black text-[11px] font-semibold rounded-md hover:bg-purple-100 transition">Buy Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="col-span-12 lg:col-span-6 mx-2">
+                            <div class="relative w-full border-2 rounded-xl border-[#a78bfa] px-3 py-3 group overflow-hidden hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
+                                <div class="flex items-center gap-2 md:gap-5">
+                                    <img src="/Image.png" alt="" class="w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-md md:rounded-xl">
+
+                                    <div class="flex-1 min-w-0 flex items-center gap-1 md:gap-3">
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-sm md:text-md font-semibold text-white">WebApp.com</p>
+                                            <p class="text-xs md:text-sm text-white truncate">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique.</p>
+                                        </div>
+                                        <a href="#" class="ml-auto my-auto py-2 px-3 md:py-3 md:px-5 bg-white text-black text-[11px] font-semibold rounded-md hover:bg-purple-100 transition">Details</a>
+                                        <a href="#" class="ml-auto my-auto py-2 px-3 md:py-3 md:px-5 bg-white text-black text-[11px] font-semibold rounded-md hover:bg-purple-100 transition">Buy Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="col-span-12 lg:col-span-6 mx-2">
+                            <div class="relative w-full border-2 rounded-xl border-[#a78bfa] px-3 py-3 group overflow-hidden hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
+                                <div class="flex items-center gap-2 md:gap-5">
+                                    <img src="/Image.png" alt="" class="w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-md md:rounded-xl">
+
+                                    <div class="flex-1 min-w-0 flex items-center gap-1 md:gap-3">
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-sm md:text-md font-semibold text-white">WebApp.com</p>
+                                            <p class="text-xs md:text-sm text-white truncate">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique.</p>
+                                        </div>
+                                        <a href="#" class="ml-auto my-auto py-2 px-3 md:py-3 md:px-5 bg-white text-black text-[11px] font-semibold rounded-md hover:bg-purple-100 transition">Details</a>
+                                        <a href="#" class="ml-auto my-auto py-2 px-3 md:py-3 md:px-5 bg-white text-black text-[11px] font-semibold rounded-md hover:bg-purple-100 transition">Buy Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+                <div class="col-span-12 mx-auto my-10 z-10">
+                    <a href="#"class="inline-flex items-center justify-center p-0.5 text-sm font-medium tracking-wide text-white transition duration-300 rounded-full shadow-lg focus-visible:outline-none whitespace-nowrap group bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none hover:shadow-[0_0_20px_rgba(130,90,250,0.4)]">
+                        <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-[#0b0b14] rounded-full group-hover:bg-transparent">
+                            Show all projects
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <div class="hidden sm:block absolute z-0 md:top-[300px] left-1/2 w-[300px] h-[300px] md:w-[500px] md:h-[700px]  lg:w-[900px] lg:h-[300px] rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 opacity-40 blur-[120px] transform -translate-x-1/2 -translate-y-1/2"></div>
+        </div>
+        <div class="w-full h-[2px] mt-[40px] md:mt-[100px] bg-gradient-to-r from-transparent via-fuchsia-500 to-transparent" style="filter: drop-shadow(0 0 6px rgba(168,85,247,0.8));"></div>
+        <div class="relative my-24 mx-3">
+            <div class="grid grid-cols-12 my-24 gap-4 z-10">
+                <div class="col-span-12">
+                    <p class="text-3xl text-center lg:text-5xl lg:my-2 font-semibold bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent" style="filter: drop-shadow(0 0 18px rgba(168, 85, 247, 0.9));">Get in touch</p>
+                </div>
+                <div class="col-span-12">
+                    <p class="text-gray-500 text-center mt-1">Want to collaborate or build custom software? Get in touch!</p>
+                </div>
+                <div class="col-span-12">
+                    <div class="grid grid-cols-12 my-10 h-full gap-4 z-10">
+                        <div class="col-span-12 md:col-span-6 h-full bg-black/50 rounded-xl pt-10 px-5">
+                            <div class="col-span-12">
+                                <p class="text-3xl text-center lg:text-5xl lg:my-2 font-semibold bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent" style="filter: drop-shadow(0 0 18px rgba(168, 85, 247, 0.9));">Send message</p>
+                            </div>
+                            <div class="col-span-12">
+                                <p class="text-gray-500 text-center mt-1">Want to collaborate or build custom software? Get in touch!</p>
+                            </div>
+                            <form @submit.prevent class="flex flex-col mt-10 gap-3">
+                                <input  v-model="name" type="text" placeholder="Your Name" class="p-3 rounded-lg bg-[#161628] shadow-inner shadow-[inset_2px_2px_5px_rgba(0,0,0,0.7)] text-white placeholder-gray-400 focus:outline-none"/>                                
+                                <textarea v-model="desc" placeholder="Your Message / Description" class="p-3 rounded-lg bg-[#161628] shadow-inner shadow-[inset_2px_2px_5px_rgba(0,0,0,0.7)] text-white placeholder-gray-400 focus:outline-non" rows="4" required></textarea>
+
+                                <div class="flex gap-3 mt-2">
+                                    <button type="button" @click="sendEmail" class="flex-1 bg-transparent border-2 text-[#a78bfa] border-[#a78bfa] hover:bg-[#a78bfa] hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] hover:text-black transition-shadow duration-300 py-2 px-4 rounded-xl font-semibold">
+                                    Send via Email
+                                    </button>
+                                    <button type="button" @click="sendWA" class="flex-1 bg-transparent border-2 text-green-600 border-green-600 hover:bg-green-600 hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] hover:text-black transition-shadow duration-300 py-2 px-4 rounded-xl font-semibold">
+                                    Send via WhatsApp
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-span-12 md:col-span-6 h-full bg-black/50 rounded-xl pt-10 px-5">
+                            <div class="col-span-12">
+                                <p class="text-3xl text-center lg:text-5xl lg:my-2 font-semibold bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent" style="filter: drop-shadow(0 0 18px rgba(168, 85, 247, 0.9));">Join Me Online</p>
+                            </div>
+                            <div class="col-span-12 mb-10">
+                                <p class="text-gray-500 text-center mt-1">Stay in the loop with my projects and posts by following me.</p>
+                            </div>
+                            <div class="flex flex-wrap gap-3">
+                                <a href="#" class="py-3 px-5 rounded-xl bg-transparent border-2 border-[#0077B5] inline-flex items-center justify-center gap-2 hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
+                                    <i class="fab fa-linkedin text-[#0077B5] text-xl"></i>
+                                    <span class="text-[#0077B5] font-medium">LinkedIn/Muhammad Risky Farhan</span>
+                                </a>
+                                <a href="#" class="py-3 px-5 rounded-xl bg-transparent border-2 border-[#4141aa] inline-flex items-center justify-center gap-2 hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
+                                    <i class="fab fa-github text-[#4141aa] text-xl"></i>
+                                    <span class="text-[#4141aa] font-medium">Github/Risfrhn</span>
+                                </a>
+                                <a href="#" class="py-3 px-5 rounded-xl bg-transparent border-2 border-[#8900df] inline-flex items-center justify-center gap-2 hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
+                                    <i class="fab fa-instagram text-[#8900df] text-xl"></i>
+                                    <span class="text-[#8900df] font-medium">Instagram/risfrhn_</span>
+                                </a>
+                                <a href="#" class="py-3 px-5 rounded-xl bg-transparent border-2 border-[#D44638] inline-flex items-center justify-center gap-2 hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
+                                    <i class="fa-solid fa-envelope text-[#D44638] text-xl"></i>
+                                    <span class="text-[#D44638] font-medium">Email/rskyfrhn801@gmail.com</span>
+                                </a>
+                                <a href="#" class="py-3 px-5 rounded-xl bg-transparent border-2 border-[#012f9a] inline-flex items-center justify-center gap-2 hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
+                                    <i class="fab fa-steam text-[#012f9a] text-xl"></i>
+                                    <span class="text-[#012f9a] font-medium">Steam/FarhanKebab</span>
+                                </a>
+                                <a href="#" class="py-3 px-5 rounded-xl bg-transparent border-2 border-[#25D366] inline-flex items-center justify-center gap-2 hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
+                                    <i class="fab fa-linkedin text-[#25D366] text-xl"></i>
+                                    <span class="text-[#25D366] font-medium">Whatsapp/+6281345765427</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
