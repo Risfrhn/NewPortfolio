@@ -1,20 +1,45 @@
 <script setup lang="ts">
-    import { ref, onMounted, onBeforeUnmount, defineComponent } from 'vue'
+    import { ref, onMounted, onBeforeUnmount, defineComponent, watch } from 'vue'
     import Typed from 'typed.js'
+    import { useScrollStore } from '@/assets/ts/scroll';
 
     const typedElement = ref<HTMLElement | null>(null)
     let typedInstance: Typed | null = null
 
     onMounted(() => {
-    // Typed.js
-    typedInstance = new Typed(typedElement.value as HTMLElement, {
-        strings: ['System Analyst', 'Web Developer'],
-        typeSpeed: 80,
-        backSpeed: 50,
-        backDelay: 1500,
-        loop: true,
-        showCursor: false,
-    });
+        // Typed.js
+        typedInstance = new Typed(typedElement.value as HTMLElement, {
+            strings: ['System Analyst', 'Web Developer'],
+            typeSpeed: 80,
+            backSpeed: 50,
+            backDelay: 1500,
+            loop: true,
+            showCursor: false,
+        });
+
+
+        // untuk back to top
+        const backToTop = document.getElementById('backToTop') as HTMLElement
+
+        window.addEventListener('scroll', () =>{
+            if(window.scrollY>500){
+                backToTop.classList.remove('hidden')
+            }else{
+                backToTop.classList.add('hidden')
+            }
+        })
+
+        backToTop.addEventListener('click', () =>{
+            window.scrollTo({top:0, behavior:'smooth'})
+        })
+
+
+        const scrolled = scroll.targetId
+         if(scrolled){
+            const el =document.getElementById(scrolled)
+            if (el) el.scrollIntoView({behavior:'smooth'})
+            scroll.reset()
+         }
     });
 
     onBeforeUnmount(() => {
@@ -33,7 +58,19 @@
     const sendWA = ()=>{
         const text = encodeURIComponent(`Halo nama saya ${name.value}, saya ingin ${desc.value}`);
         window.open(`https://wa.me/6281345765427?text=${text}`, "_blank");
-    };       
+    };
+    
+    // untuk navbar
+    const scroll = useScrollStore()
+    watch(
+        () => scroll.targetId,
+        (id)=>{
+            if(!id)return
+                const el = document.getElementById(id)
+                if(el)el.scrollIntoView({behavior:'smooth'})
+                scroll.reset()
+            }        
+    )
 </script>
 
 
@@ -48,10 +85,10 @@
         <!-- konten -->
 
         <!-- header -->
-        <div class="flex flex-wrap p-4 place-content-center pt-20 md:pt-24 lg:pt-40">
+        <div id="HeroSection" class="flex flex-wrap p-4 place-content-center pt-20 md:pt-24 lg:pt-40">
             <div class="w-[100%] md:w-[50%]">
                 <p class="text-white my-2">Hello, Im</p>
-                <p class="text-white my-2 text-4xl lg:text-5xl my-2 font-semibold">Risky Farhan</p>
+                <p class="text-white my-2 text-4xl lg:text-5xl font-semibold">Risky Farhan</p>
                 <p class="text-4xl lg:text-5xl my-2 font-semibold min-h-[50px] bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent" ref="typedElement"></p>
                 <p class="text-white text-xs lg:text-[15px] my-2 font-thin ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic velit maiores laborum qui, fuga molestias. Recusandae libero tenetur ullam vel aspernatur, labore ex dignissimos asperiores deserunt, iste, illum impedit et.</p>
 
@@ -114,7 +151,7 @@
 
 
         <!-- About me -->
-        <div class="flex flex-wrap p-4 mt-[40px] md:mt-[150px]">
+        <div id="AboutSection" class="flex flex-wrap p-4 mt-[40px] md:mt-[150px]">
             <div class="w-[100%] md:w-[30%] mx-14 mb-32 md:mx-0 md:mb-0">
                 <div class="w-[200px] h-[200px] lg:w-[250px] lg:h-[250px] xl:w-[300px] xl:h-[300px] rounded-xl shadow-lg rotate-[10deg] border-4 border-[#a78bfa] animate-glow translate-x-6 lg:translate-x-14  translate-y-11 lg:translate-y-10 xl:translate-y-1" style="background: linear-gradient(#0b0b14, #0b0b14) padding-box, linear-gradient(to right, #a855f7, #3b82f6, #6366f1) border-box;">
                     <img src="/HeaderHero.png" alt="" class="w-60 h-60 lg:w-80 lg:h-80 xl:w-96 xl:h-96 object-cover rotate-[-10deg] lg:translate-x-11 xl:translate-x-14 translate-x-11 translate-y-7">
@@ -146,7 +183,7 @@
 
         <!-- Services -->
         <div class="w-full h-[2px] mt-[40px] md:mt-[100px] bg-gradient-to-r from-transparent via-fuchsia-500 to-transparent" style="filter: drop-shadow(0 0 6px rgba(168,85,247,0.8));"></div>
-        <div class="relative my-24">
+        <div id="ServicesSection" class="relative my-24">
             <div class="grid grid-cols-12 gap-4 z-10">
                 <div class="col-span-12">
                     <p class="text-3xl text-center lg:text-5xl lg:my-2 font-semibold bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent" style="filter: drop-shadow(0 0 18px rgba(168, 85, 247, 0.9));">How I can help</p>
@@ -218,7 +255,7 @@
 
         <!-- Portfolio -->
         <div class="w-full h-[2px] mt-[40px] md:mt-[100px] bg-gradient-to-r from-transparent via-fuchsia-500 to-transparent" style="filter: drop-shadow(0 0 6px rgba(168,85,247,0.8));"></div>
-        <div class="relative my-24">
+        <div id="PortfolioSection" class="relative my-24">
             <div class="grid grid-cols-12 my-24 gap-4 z-10">
                 <div class="col-span-12">
                     <p class="text-3xl text-center lg:text-5xl lg:my-2 font-semibold bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent" style="filter: drop-shadow(0 0 18px rgba(168, 85, 247, 0.9));">What I’ve Done</p>
@@ -298,11 +335,14 @@
                     </div>
                 </div>
                 <div class="col-span-12 mx-auto my-10 z-10">
-                    <a href="#"class="inline-flex items-center justify-center p-0.5 text-sm font-medium tracking-wide text-white transition duration-300 rounded-full shadow-lg focus-visible:outline-none whitespace-nowrap group bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none hover:shadow-[0_0_20px_rgba(130,90,250,0.4)]">
+                    <router-link 
+                        to="/Projects"
+                        class="inline-flex items-center justify-center p-0.5 text-sm font-medium tracking-wide text-white transition duration-300 rounded-full shadow-lg focus-visible:outline-none whitespace-nowrap group bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none hover:shadow-[0_0_20px_rgba(130,90,250,0.4)]"
+                    >
                         <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-[#0b0b14] rounded-full group-hover:bg-transparent">
-                            Show all projects
+                        Show all projects
                         </span>
-                    </a>
+                    </router-link>
                 </div>
             </div>
             <div class="hidden sm:block absolute z-0 md:top-[500px] left-1/2 w-[300px] h-[300px] md:w-[500px] md:h-[700px]  lg:w-[900px] lg:h-[500px] rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 opacity-40 blur-[120px] transform -translate-x-1/2 -translate-y-1/2"></div>
@@ -310,7 +350,7 @@
         
         <!-- Product -->
         <div class="w-full h-[2px] mt-[40px] md:mt-[100px] bg-gradient-to-r from-transparent via-fuchsia-500 to-transparent" style="filter: drop-shadow(0 0 6px rgba(168,85,247,0.8));"></div>
-        <div class="relative my-24">
+        <div id="ProductSection" class="relative my-24">
             <div class="grid grid-cols-12 my-24 gap-4 z-10">
                 <div class="col-span-12">
                     <p class="text-3xl text-center lg:text-5xl lg:my-2 font-semibold bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent" style="filter: drop-shadow(0 0 18px rgba(168, 85, 247, 0.9));">Built with Code, Designed for You</p>
@@ -322,8 +362,8 @@
                     <div class="grid grid-cols-12 place-content-center gap-3">
 
                         <!-- card -->
-                        <div class="col-span-12 lg:col-span-6 mx-2">
-                            <div class="relative w-full border-2 rounded-xl border-[#a78bfa] px-3 py-3 group overflow-hidden hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
+                        <div class="col-span-12 lg:col-span-6 mx-2 bg-black/20">
+                            <div class="relative w-full border-2 rounded-xl border-[#a78bfa] px-3 py-3 overflow-hidden hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
                                 <div class="flex items-center gap-2 md:gap-5">
                                     <img src="/Image.png" alt="" class="w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-md md:rounded-xl">
 
@@ -332,14 +372,23 @@
                                             <p class="text-sm md:text-md font-semibold text-white">WebApp.com</p>
                                             <p class="text-xs md:text-sm text-white truncate">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique.</p>
                                         </div>
-                                        <a href="#" class="ml-auto my-auto py-2 px-3 md:py-3 md:px-5 bg-white text-black text-[11px] font-semibold rounded-md hover:bg-purple-100 transition">Details</a>
-                                        <a href="#" class="ml-auto my-auto py-2 px-3 md:py-3 md:px-5 bg-white text-black text-[11px] font-semibold rounded-md hover:bg-purple-100 transition">Buy Now</a>
+                                        <a href="#" class="inline-flex items-center justify-center p-0.5 text-xs md:text-sm font-medium tracking-wide text-white transition duration-300 rounded-xl shadow-lg focus-visible:outline-none whitespace-nowrap group bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none hover:shadow-[0_0_20px_rgba(130,90,250,0.4)]">
+                                            <span class="relative px-2 md:px-4 py-2.5 transition-all ease-in duration-75 bg-[#0b0b14] rounded-xl group-hover:bg-transparent group-hover:dark:bg-transparent">
+                                                Details
+                                            </span>
+                                        </a>
+
+                                        <a href="#" class="inline-flex items-center justify-center p-0.5 text-xs md:text-sm font-medium tracking-wide text-white transition duration-300 rounded-xl shadow-lg focus-visible:outline-none whitespace-nowrap group bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none hover:shadow-[0_0_20px_rgba(130,90,250,0.4)]">
+                                            <span class="relative px-2 md:px-4 py-2.5 transition-all ease-in duration-75 bg-[#0b0b14] rounded-xl group-hover:bg-transparent group-hover:dark:bg-transparent">
+                                                Buy Now
+                                            </span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-span-12 lg:col-span-6 mx-2">
-                            <div class="relative w-full border-2 rounded-xl border-[#a78bfa] px-3 py-3 group overflow-hidden hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
+                        <div class="col-span-12 lg:col-span-6 mx-2 bg-black/20">
+                            <div class="relative w-full border-2 rounded-xl border-[#a78bfa] px-3 py-3 overflow-hidden hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
                                 <div class="flex items-center gap-2 md:gap-5">
                                     <img src="/Image.png" alt="" class="w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-md md:rounded-xl">
 
@@ -348,14 +397,23 @@
                                             <p class="text-sm md:text-md font-semibold text-white">WebApp.com</p>
                                             <p class="text-xs md:text-sm text-white truncate">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique.</p>
                                         </div>
-                                        <a href="#" class="ml-auto my-auto py-2 px-3 md:py-3 md:px-5 bg-white text-black text-[11px] font-semibold rounded-md hover:bg-purple-100 transition">Details</a>
-                                        <a href="#" class="ml-auto my-auto py-2 px-3 md:py-3 md:px-5 bg-white text-black text-[11px] font-semibold rounded-md hover:bg-purple-100 transition">Buy Now</a>
+                                        <a href="#" class="inline-flex items-center justify-center p-0.5 text-xs md:text-sm font-medium tracking-wide text-white transition duration-300 rounded-xl shadow-lg focus-visible:outline-none whitespace-nowrap group bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none hover:shadow-[0_0_20px_rgba(130,90,250,0.4)]">
+                                            <span class="relative px-2 md:px-4 py-2.5 transition-all ease-in duration-75 bg-[#0b0b14] rounded-xl group-hover:bg-transparent group-hover:dark:bg-transparent">
+                                                Details
+                                            </span>
+                                        </a>
+
+                                        <a href="#" class="inline-flex items-center justify-center p-0.5 text-xs md:text-sm font-medium tracking-wide text-white transition duration-300 rounded-xl shadow-lg focus-visible:outline-none whitespace-nowrap group bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none hover:shadow-[0_0_20px_rgba(130,90,250,0.4)]">
+                                            <span class="relative px-2 md:px-4 py-2.5 transition-all ease-in duration-75 bg-[#0b0b14] rounded-xl group-hover:bg-transparent group-hover:dark:bg-transparent">
+                                                Buy Now
+                                            </span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-                        </div> 
-                        <div class="col-span-12 lg:col-span-6 mx-2">
-                            <div class="relative w-full border-2 rounded-xl border-[#a78bfa] px-3 py-3 group overflow-hidden hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
+                        </div>
+                        <div class="col-span-12 lg:col-span-6 mx-2 bg-black/20">
+                            <div class="relative w-full border-2 rounded-xl border-[#a78bfa] px-3 py-3 overflow-hidden hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
                                 <div class="flex items-center gap-2 md:gap-5">
                                     <img src="/Image.png" alt="" class="w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-md md:rounded-xl">
 
@@ -364,14 +422,23 @@
                                             <p class="text-sm md:text-md font-semibold text-white">WebApp.com</p>
                                             <p class="text-xs md:text-sm text-white truncate">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique.</p>
                                         </div>
-                                        <a href="#" class="ml-auto my-auto py-2 px-3 md:py-3 md:px-5 bg-white text-black text-[11px] font-semibold rounded-md hover:bg-purple-100 transition">Details</a>
-                                        <a href="#" class="ml-auto my-auto py-2 px-3 md:py-3 md:px-5 bg-white text-black text-[11px] font-semibold rounded-md hover:bg-purple-100 transition">Buy Now</a>
+                                        <a href="#" class="inline-flex items-center justify-center p-0.5 text-xs md:text-sm font-medium tracking-wide text-white transition duration-300 rounded-xl shadow-lg focus-visible:outline-none whitespace-nowrap group bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none hover:shadow-[0_0_20px_rgba(130,90,250,0.4)]">
+                                            <span class="relative px-2 md:px-4 py-2.5 transition-all ease-in duration-75 bg-[#0b0b14] rounded-xl group-hover:bg-transparent group-hover:dark:bg-transparent">
+                                                Details
+                                            </span>
+                                        </a>
+
+                                        <a href="#" class="inline-flex items-center justify-center p-0.5 text-xs md:text-sm font-medium tracking-wide text-white transition duration-300 rounded-xl shadow-lg focus-visible:outline-none whitespace-nowrap group bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none hover:shadow-[0_0_20px_rgba(130,90,250,0.4)]">
+                                            <span class="relative px-2 md:px-4 py-2.5 transition-all ease-in duration-75 bg-[#0b0b14] rounded-xl group-hover:bg-transparent group-hover:dark:bg-transparent">
+                                                Buy Now
+                                            </span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-                        </div> 
-                        <div class="col-span-12 lg:col-span-6 mx-2">
-                            <div class="relative w-full border-2 rounded-xl border-[#a78bfa] px-3 py-3 group overflow-hidden hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
+                        </div>
+                        <div class="col-span-12 lg:col-span-6 mx-2 bg-black/20">
+                            <div class="relative w-full border-2 rounded-xl border-[#a78bfa] px-3 py-3 overflow-hidden hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
                                 <div class="flex items-center gap-2 md:gap-5">
                                     <img src="/Image.png" alt="" class="w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-md md:rounded-xl">
 
@@ -380,14 +447,23 @@
                                             <p class="text-sm md:text-md font-semibold text-white">WebApp.com</p>
                                             <p class="text-xs md:text-sm text-white truncate">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique.</p>
                                         </div>
-                                        <a href="#" class="ml-auto my-auto py-2 px-3 md:py-3 md:px-5 bg-white text-black text-[11px] font-semibold rounded-md hover:bg-purple-100 transition">Details</a>
-                                        <a href="#" class="ml-auto my-auto py-2 px-3 md:py-3 md:px-5 bg-white text-black text-[11px] font-semibold rounded-md hover:bg-purple-100 transition">Buy Now</a>
+                                        <a href="#" class="inline-flex items-center justify-center p-0.5 text-xs md:text-sm font-medium tracking-wide text-white transition duration-300 rounded-xl shadow-lg focus-visible:outline-none whitespace-nowrap group bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none hover:shadow-[0_0_20px_rgba(130,90,250,0.4)]">
+                                            <span class="relative px-2 md:px-4 py-2.5 transition-all ease-in duration-75 bg-[#0b0b14] rounded-xl group-hover:bg-transparent group-hover:dark:bg-transparent">
+                                                Details
+                                            </span>
+                                        </a>
+
+                                        <a href="#" class="inline-flex items-center justify-center p-0.5 text-xs md:text-sm font-medium tracking-wide text-white transition duration-300 rounded-xl shadow-lg focus-visible:outline-none whitespace-nowrap group bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none hover:shadow-[0_0_20px_rgba(130,90,250,0.4)]">
+                                            <span class="relative px-2 md:px-4 py-2.5 transition-all ease-in duration-75 bg-[#0b0b14] rounded-xl group-hover:bg-transparent group-hover:dark:bg-transparent">
+                                                Buy Now
+                                            </span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-                        </div> 
-                        <div class="col-span-12 lg:col-span-6 mx-2">
-                            <div class="relative w-full border-2 rounded-xl border-[#a78bfa] px-3 py-3 group overflow-hidden hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
+                        </div>
+                        <div class="col-span-12 lg:col-span-6 mx-2 bg-black/20">
+                            <div class="relative w-full border-2 rounded-xl border-[#a78bfa] px-3 py-3 overflow-hidden hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
                                 <div class="flex items-center gap-2 md:gap-5">
                                     <img src="/Image.png" alt="" class="w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-md md:rounded-xl">
 
@@ -396,14 +472,23 @@
                                             <p class="text-sm md:text-md font-semibold text-white">WebApp.com</p>
                                             <p class="text-xs md:text-sm text-white truncate">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique.</p>
                                         </div>
-                                        <a href="#" class="ml-auto my-auto py-2 px-3 md:py-3 md:px-5 bg-white text-black text-[11px] font-semibold rounded-md hover:bg-purple-100 transition">Details</a>
-                                        <a href="#" class="ml-auto my-auto py-2 px-3 md:py-3 md:px-5 bg-white text-black text-[11px] font-semibold rounded-md hover:bg-purple-100 transition">Buy Now</a>
+                                        <a href="#" class="inline-flex items-center justify-center p-0.5 text-xs md:text-sm font-medium tracking-wide text-white transition duration-300 rounded-xl shadow-lg focus-visible:outline-none whitespace-nowrap group bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none hover:shadow-[0_0_20px_rgba(130,90,250,0.4)]">
+                                            <span class="relative px-2 md:px-4 py-2.5 transition-all ease-in duration-75 bg-[#0b0b14] rounded-xl group-hover:bg-transparent group-hover:dark:bg-transparent">
+                                                Details
+                                            </span>
+                                        </a>
+
+                                        <a href="#" class="inline-flex items-center justify-center p-0.5 text-xs md:text-sm font-medium tracking-wide text-white transition duration-300 rounded-xl shadow-lg focus-visible:outline-none whitespace-nowrap group bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none hover:shadow-[0_0_20px_rgba(130,90,250,0.4)]">
+                                            <span class="relative px-2 md:px-4 py-2.5 transition-all ease-in duration-75 bg-[#0b0b14] rounded-xl group-hover:bg-transparent group-hover:dark:bg-transparent">
+                                                Buy Now
+                                            </span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-                        </div> 
-                        <div class="col-span-12 lg:col-span-6 mx-2">
-                            <div class="relative w-full border-2 rounded-xl border-[#a78bfa] px-3 py-3 group overflow-hidden hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
+                        </div>
+                        <div class="col-span-12 lg:col-span-6 mx-2 bg-black/20">
+                            <div class="relative w-full border-2 rounded-xl border-[#a78bfa] px-3 py-3 overflow-hidden hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
                                 <div class="flex items-center gap-2 md:gap-5">
                                     <img src="/Image.png" alt="" class="w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-md md:rounded-xl">
 
@@ -412,12 +497,21 @@
                                             <p class="text-sm md:text-md font-semibold text-white">WebApp.com</p>
                                             <p class="text-xs md:text-sm text-white truncate">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique.</p>
                                         </div>
-                                        <a href="#" class="ml-auto my-auto py-2 px-3 md:py-3 md:px-5 bg-white text-black text-[11px] font-semibold rounded-md hover:bg-purple-100 transition">Details</a>
-                                        <a href="#" class="ml-auto my-auto py-2 px-3 md:py-3 md:px-5 bg-white text-black text-[11px] font-semibold rounded-md hover:bg-purple-100 transition">Buy Now</a>
+                                        <a href="#" class="inline-flex items-center justify-center p-0.5 text-xs md:text-sm font-medium tracking-wide text-white transition duration-300 rounded-xl shadow-lg focus-visible:outline-none whitespace-nowrap group bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none hover:shadow-[0_0_20px_rgba(130,90,250,0.4)]">
+                                            <span class="relative px-2 md:px-4 py-2.5 transition-all ease-in duration-75 bg-[#0b0b14] rounded-xl group-hover:bg-transparent group-hover:dark:bg-transparent">
+                                                Details
+                                            </span>
+                                        </a>
+
+                                        <a href="#" class="inline-flex items-center justify-center p-0.5 text-xs md:text-sm font-medium tracking-wide text-white transition duration-300 rounded-xl shadow-lg focus-visible:outline-none whitespace-nowrap group bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none hover:shadow-[0_0_20px_rgba(130,90,250,0.4)]">
+                                            <span class="relative px-2 md:px-4 py-2.5 transition-all ease-in duration-75 bg-[#0b0b14] rounded-xl group-hover:bg-transparent group-hover:dark:bg-transparent">
+                                                Buy Now
+                                            </span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-                        </div>  
+                        </div>
                     </div>
                 </div>
                 <div class="col-span-12 mx-auto my-10 z-10">
@@ -430,8 +524,11 @@
             </div>
             <div class="hidden sm:block absolute z-0 md:top-[300px] left-1/2 w-[300px] h-[300px] md:w-[500px] md:h-[700px]  lg:w-[900px] lg:h-[300px] rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 opacity-40 blur-[120px] transform -translate-x-1/2 -translate-y-1/2"></div>
         </div>
+
+
+        <!-- kontak -->
         <div class="w-full h-[2px] mt-[40px] md:mt-[100px] bg-gradient-to-r from-transparent via-fuchsia-500 to-transparent" style="filter: drop-shadow(0 0 6px rgba(168,85,247,0.8));"></div>
-        <div class="relative my-24 mx-3">
+        <div id="ContactSection" class="relative mt-24 mb-40 mx-3">
             <div class="grid grid-cols-12 my-24 gap-4 z-10">
                 <div class="col-span-12">
                     <p class="text-3xl text-center lg:text-5xl lg:my-2 font-semibold bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent" style="filter: drop-shadow(0 0 18px rgba(168, 85, 247, 0.9));">Get in touch</p>
@@ -441,7 +538,7 @@
                 </div>
                 <div class="col-span-12">
                     <div class="grid grid-cols-12 my-10 h-full gap-4 z-10">
-                        <div class="col-span-12 md:col-span-6 h-full bg-black/50 rounded-xl pt-10 px-5">
+                        <div class="col-span-12 md:col-span-6 h-full bg-[#a78bfa]/10 rounded-xl pt-10 px-5">
                             <div class="col-span-12">
                                 <p class="text-3xl text-center lg:text-5xl lg:my-2 font-semibold bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent" style="filter: drop-shadow(0 0 18px rgba(168, 85, 247, 0.9));">Send message</p>
                             </div>
@@ -449,8 +546,8 @@
                                 <p class="text-gray-500 text-center mt-1">Want to collaborate or build custom software? Get in touch!</p>
                             </div>
                             <form @submit.prevent class="flex flex-col mt-10 gap-3">
-                                <input  v-model="name" type="text" placeholder="Your Name" class="p-3 rounded-lg bg-[#161628] shadow-inner shadow-[inset_2px_2px_5px_rgba(0,0,0,0.7)] text-white placeholder-gray-400 focus:outline-none"/>                                
-                                <textarea v-model="desc" placeholder="Your Message / Description" class="p-3 rounded-lg bg-[#161628] shadow-inner shadow-[inset_2px_2px_5px_rgba(0,0,0,0.7)] text-white placeholder-gray-400 focus:outline-non" rows="4" required></textarea>
+                                <input  v-model="name" type="text" placeholder="Your Name" class="p-3 rounded-lg bg-[#2c2c50] shadow-inner shadow-[inset_2px_2px_5px_rgba(0,0,0,0.7)] text-white placeholder-gray-400 focus:outline-none"/>                                
+                                <textarea v-model="desc" placeholder="Your Message / Description" class="p-3 rounded-lg bg-[#2c2c50] shadow-inner shadow-[inset_2px_2px_5px_rgba(0,0,0,0.7)] text-white placeholder-gray-400 focus:outline-non" rows="4" required></textarea>
 
                                 <div class="flex gap-3 mt-2">
                                     <button type="button" @click="sendEmail" class="flex-1 bg-transparent border-2 text-[#a78bfa] border-[#a78bfa] hover:bg-[#a78bfa] hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] hover:text-black transition-shadow duration-300 py-2 px-4 rounded-xl font-semibold">
@@ -462,14 +559,14 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="col-span-12 md:col-span-6 h-full bg-black/50 rounded-xl pt-10 px-5">
+                        <div class="col-span-12 md:col-span-6 h-full bg-[#a78bfa]/10  rounded-xl pt-10 px-5">
                             <div class="col-span-12">
                                 <p class="text-3xl text-center lg:text-5xl lg:my-2 font-semibold bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent" style="filter: drop-shadow(0 0 18px rgba(168, 85, 247, 0.9));">Join Me Online</p>
                             </div>
                             <div class="col-span-12 mb-10">
                                 <p class="text-gray-500 text-center mt-1">Stay in the loop with my projects and posts by following me.</p>
                             </div>
-                            <div class="flex flex-wrap gap-3">
+                            <div class="flex flex-wrap gap-3 md:place-content-center">
                                 <a href="#" class="py-3 px-5 rounded-xl bg-transparent border-2 border-[#0077B5] inline-flex items-center justify-center gap-2 hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
                                     <i class="fab fa-linkedin text-[#0077B5] text-xl"></i>
                                     <span class="text-[#0077B5] font-medium">LinkedIn/Muhammad Risky Farhan</span>
@@ -501,6 +598,10 @@
             </div>
         </div>
     </div>
+    <button id="backToTop"
+    class="fixed bottom-6 right-6 px-5 py-3 hidden rounded-lg bg-gradient-to-r from-purple-500 to-indigo-600 text-white shadow-lg hover:shadow-[0_0_20px_rgba(130,90,250,0.6)] transition-all duration-300">
+    ↑
+    </button>
 </template>
 
 

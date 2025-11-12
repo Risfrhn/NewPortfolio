@@ -1,6 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import landingPagesUser from '../pages/landingPageUser.vue'
-
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -8,8 +6,14 @@ const router = createRouter({
     {
       path:'/',
       name:'landing',
-      component:landingPagesUser,
+      component: () => import('../pages/landingPageUser.vue')
+    },
+    {
+      path:'/Projects',
+      name:'Project list',
+      component: () => import('../pages/projectPageUser.vue')
     }
+    
   ],
 })
 

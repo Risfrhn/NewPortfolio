@@ -1,12 +1,19 @@
 <template>
-  <div>
+  <div class="min-h-screen flex flex-col">
     <Navbar />
-    <router-view /> 
+    
+    <!-- Konten halaman -->
+    <main class="flex-1">
+      <router-view /> 
+    </main>
+
+    <Footers />
   </div>
 </template>
 
 <script setup lang="ts">
-  import Navbar from "./components/navigasiBar.vue";
+import Navbar from "./components/navigasiBar.vue";
+import Footers from "./components/footer.vue";
 </script>
 
 <style scoped></style>
