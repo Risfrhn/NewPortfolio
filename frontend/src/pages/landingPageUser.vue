@@ -2,6 +2,8 @@
     import { ref, onMounted, onBeforeUnmount, defineComponent, watch } from 'vue'
     import Typed from 'typed.js'
     import { useScrollStore } from '@/assets/ts/scroll';
+    import Icon from "@/components/icon.vue";
+    import Tabs from "@/components/tabs.vue";
 
     const typedElement = ref<HTMLElement | null>(null)
     let typedInstance: Typed | null = null
@@ -151,32 +153,22 @@
 
 
         <!-- About me -->
-        <div id="AboutSection" class="flex flex-wrap p-4 mt-[40px] md:mt-[150px]">
+        <div id="AboutSection" class="flex flex-wrap p-4 mt-[40px] xl:mb-44 md:mt-[150px]">
             <div class="w-[100%] md:w-[30%] mx-14 mb-32 md:mx-0 md:mb-0">
                 <div class="w-[200px] h-[200px] lg:w-[250px] lg:h-[250px] xl:w-[300px] xl:h-[300px] rounded-xl shadow-lg rotate-[10deg] border-4 border-[#a78bfa] animate-glow translate-x-6 lg:translate-x-14  translate-y-11 lg:translate-y-10 xl:translate-y-1" style="background: linear-gradient(#0b0b14, #0b0b14) padding-box, linear-gradient(to right, #a855f7, #3b82f6, #6366f1) border-box;">
                     <img src="/HeaderHero.png" alt="" class="w-60 h-60 lg:w-80 lg:h-80 xl:w-96 xl:h-96 object-cover rotate-[-10deg] lg:translate-x-11 xl:translate-x-14 translate-x-11 translate-y-7">
                 </div>
             </div>
             <div class="w-[100%] md:w-[70%] md:ps-20">
-                <p class="text-white font-bold">About me</p>
+                <p class="text-white text-xs font-bold">About me</p>
                 <p class="text-3xl lg:text-5xl lg:my-2 font-semibold min-h-[50px] bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent" style="filter: drop-shadow(0 0 18px rgba(168, 85, 247, 0.9));">Get to know me better</p>
                 <p class="text-white text-[10px] lg:text-xs xl:text-sm font-thin leading-loose xl:leading-[25px]">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis nisi, ipsam ratione nostrum quam amet vitae iste consectetur fugiat officia aut, unde odit? Officia soluta voluptatum est inventore a omnis ipsum quod reiciendis! Neque, laudantium beatae culpa fugiat perferendis vero dolores tempora dicta esse corporis, veritatis dolore? Quo optio rerum laboriosam soluta harum laudantium ratione eius omnis nesciunt delectus accusamus provident et voluptates ad sapiente dolores, ducimus esse corporis, reprehenderit distinctio similique. Nemo magnam dicta est, voluptatum, explicabo dolores repellendus iure qui eligendi adipisci repellat quo quam ipsa tempore sint blanditiis iste eveniet! Iste reiciendis quos laboriosam sapiente. Recusandae, nihil?</p>
-                
-                <p class="text-white font-bold pt-7">Skill</p>
-                <div class="flex flex-nowrap my-2 gap-4">
-                    <div class="h-10 w-10 lg:h-12 lg:w-12 rounded-md bg-transparent border-2 border-[#a78bfa] inline-flex items-center justify-center hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
-                        <i class="fab fa-linkedin text-[#a78bfa] text-md lg:text-xl"></i>
-                    </div>
-                    <div class="h-10 w-10 lg:h-12 lg:w-12 rounded-md bg-transparent border-2 border-[#a78bfa] inline-flex items-center justify-center hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
-                        <i class="fab fa-linkedin text-[#a78bfa] text-md lg:text-xl"></i>
-                    </div>
-                    <div class="h-10 w-10 lg:h-12 lg:w-12 rounded-md bg-transparent border-2 border-[#a78bfa] inline-flex items-center justify-center hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
-                        <i class="fab fa-linkedin text-[#a78bfa] text-md lg:text-xl"></i>
-                    </div>
-                    <div class="h-10 w-10 lg:h-12 lg:w-12 rounded-md bg-transparent border-2 border-[#a78bfa] inline-flex items-center justify-center hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-shadow duration-300">
-                        <i class="fab fa-linkedin text-[#a78bfa] text-md lg:text-xl"></i>
-                    </div>
-                </div>
+
+                <button class="inline-flex items-center justify-center p-0.5 mt-5 text-sm font-medium tracking-wide text-white transition duration-300 rounded-xl shadow-lg focus-visible:outline-none whitespace-nowrap group bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none hover:shadow-[0_0_20px_rgba(130,90,250,0.4)]">
+                    <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-[#0b0b14] rounded-xl group-hover:bg-transparent group-hover:dark:bg-transparent">
+                        My experiences
+                    </span>
+                </button>  
             </div>
         </div>
 
@@ -184,14 +176,14 @@
         <!-- Services -->
         <div class="w-full h-[2px] mt-[40px] md:mt-[100px] bg-gradient-to-r from-transparent via-fuchsia-500 to-transparent" style="filter: drop-shadow(0 0 6px rgba(168,85,247,0.8));"></div>
         <div id="ServicesSection" class="relative my-24">
-            <div class="grid grid-cols-12 gap-4 z-10">
+            <div class="grid grid-cols-12 gap-4 z-10 px-5">
                 <div class="col-span-12">
                     <p class="text-3xl text-center lg:text-5xl lg:my-2 font-semibold bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent" style="filter: drop-shadow(0 0 18px rgba(168, 85, 247, 0.9));">How I can help</p>
                 </div>
                 <div class="col-span-12">
                     <p class="text-gray-500 text-center mt-1 mb-10">Transforming ideas into impactful digital experiences</p>
                 </div>
-                <div class="col-span-12 z-10">
+                <div class="col-span-12 my-14 z-10">
                     <div class="flex flex-wrap gap-5 place-content-center">
                         <div class="relative w-[300px] h-[280px] rounded-xl text-center group hover:bg-gradient-to-r hover:from-[#5b21b6] hover:via-[#3b82f6] hover:to-[#1e3a8a] hover:shadow-[0_0_20px_rgba(130,90,250,0.4)] transition-all duration-300 p-4"style="background-color: rgba(0, 0, 0, 0.5);">
                             <i class="fas fa-laptop-code text-[#a78bfa] text-6xl py-5"></i>
@@ -246,6 +238,34 @@
                             <i class="absolute z-0 top-[10px] left-[5px] fas fa-code text-[#a78bfa] text-md lg:text-[40px] opacity-10 rotate-[-10deg]"></i>
                         </div>
                     </div>
+                </div>
+                <div class="col-span-12">
+                    <p class="text-3xl text-center lg:text-5xl lg:my-2 font-semibold bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent" style="filter: drop-shadow(0 0 18px rgba(168, 85, 247, 0.9));">My expertise</p>
+                </div>
+                <div class="col-span-12">
+                    <p class="text-gray-500 text-center mt-1 mb-10">The main tools supporting my work and expertise</p>
+                </div>
+                <div class="col-span-12 lg:col-span-6">
+                    <Tabs id="1">
+                        <Icon/>
+                        <Icon/>
+                        <Icon/>
+                        <Icon/>
+                        <Icon/>
+                        <Icon/>
+                        <Icon/>
+                    </Tabs>
+                </div>
+                <div class="col-span-12 lg:col-span-6">
+                   <Tabs id="2">
+                        <Icon/>
+                        <Icon/>
+                        <Icon/>
+                        <Icon/>
+                        <Icon/>
+                        <Icon/>
+                        <Icon/>
+                   </Tabs>
                 </div>
             </div>
             <div class="hidden sm:block absolute z-0 md:top-[400px] xl:top-[300px] left-1/2 w-[300px] h-[300px] md:w-[700px] md:h-[600px] xl:w-[900px] xl:h-[200px] rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 opacity-40 blur-[120px] -translate-x-1/2 -translate-y-1/2"></div>

@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^7.1.0",
+    "flowbite": "^4.0.0",
     "particles.js": "^2.0.0",
     "pinia": "^3.0.3",
     "typed.js": "^2.1.0",
