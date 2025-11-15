@@ -246,25 +246,25 @@
                     <p class="text-gray-500 text-center mt-1 mb-10">The main tools supporting my work and expertise</p>
                 </div>
                 <div class="col-span-12 lg:col-span-6">
-                    <Tabs id="1">
-                        <Icon/>
-                        <Icon/>
-                        <Icon/>
-                        <Icon/>
-                        <Icon/>
-                        <Icon/>
-                        <Icon/>
+                    <Tabs id="1" title="Web development" icon="fas fa-desktop" desc="Specializing in building responsive and user-friendly web applications.">
+                        <Icon  nameTool="Laravel" image="/Image.png" :level= "4"/>
+                        <Icon nameTool="Laravel" image="/Image.png" :level= "4"/>
+                        <Icon nameTool="Laravel" image="/Image.png" :level= "4"/>
+                        <Icon nameTool="Laravel" image="/Image.png" :level= "4"/>
+                        <Icon nameTool="Laravel" image="/Image.png" :level= "4"/>
+                        <Icon nameTool="Laravel" image="/Image.png" :level= "4"/>
+                        <Icon nameTool="Laravel" image="/Image.png" :level= "4"/>
                     </Tabs>
                 </div>
                 <div class="col-span-12 lg:col-span-6">
-                   <Tabs id="2">
-                        <Icon/>
-                        <Icon/>
-                        <Icon/>
-                        <Icon/>
-                        <Icon/>
-                        <Icon/>
-                        <Icon/>
+                   <Tabs id="2" title="Mobile development" icon="fas fa-mobile" desc="Specializing in building responsive and user-friendly web applications.">
+                        <Icon  nameTool="Laravel" image="/Image.png" :level= "1"/>
+                        <Icon nameTool="Laravel" image="/Image.png" :level= "4"/>
+                        <Icon nameTool="Laravel" image="/Image.png" :level= "4"/>
+                        <Icon nameTool="Laravel" image="/Image.png" :level= "4"/>
+                        <Icon nameTool="Laravel" image="/Image.png" :level= "4"/>
+                        <Icon nameTool="Laravel" image="/Image.png" :level= "4"/>
+                        <Icon nameTool="Laravel" image="/Image.png" :level= "4"/>
                    </Tabs>
                 </div>
             </div>
