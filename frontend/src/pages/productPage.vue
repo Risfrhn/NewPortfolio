@@ -1,8 +1,9 @@
 <script lang="ts" setup>
     import templateList from '@/components/listProject.vue'; 
-    import CardProject from '@/components/cardProjectPribadi.vue';
+    import CardProduct from '@/components/cardProduct.vue';
     import searchButton from '@/components/searchButton.vue';
     import filterButton from '@/components/buttonFilter.vue';
+    import templateListProduct from '@/components/listProduct.vue';
     import { ref, watch } from 'vue';
 
     const product = ref<any[]>([])
@@ -30,20 +31,20 @@
         <div class="hidden md:block absolute w-[300px] h-[300px] rounded-full bg-gradient-to-r from-pink-400 via-yellow-400 to-red-400 opacity-30 animate-flare-slow blur-[150px] bottom-[800px] xl:bottom-[40px] right-[0px]"></div>
         
 
-        <templateList title="My projects" desc="Some of my recent projects">
-            <template #controls>
+        <templateListProduct title="Built with Code, Designed for You" desc="Ready-to-use web applications built for performance and simplicity">
+            <template #control>
                 <searchButton @update="Search =$event"/>
                 <filterButton @update="filter =$event"/>
             </template>
 
             <template #card>
-                <CardProject image="/Image.png" name="Lalalili.com" type="App mobile" desc="lorem sasias asdjhasjhd asdjnjaskd ajsnd jkasdnkas asjdn aksjd asnd akd n"></CardProject>
-                <CardProject image="/Image.png" name="Lalalili.com" type="App mobile" desc="lorem sasias asdjhasjhd asdjnjaskd ajsnd jkasdnkas asjdn aksjd asnd akd n"></CardProject>
-                <CardProject image="/Image.png" name="Lalalili.com" type="App mobile" desc="lorem sasias asdjhasjhd asdjnjaskd ajsnd jkasdnkas asjdn aksjd asnd akd n"></CardProject>
-                <CardProject image="/Image.png" name="Lalalili.com" type="App mobile" desc="lorem sasias asdjhasjhd asdjnjaskd ajsnd jkasdnkas asjdn aksjd asnd akd n"></CardProject>
-                <CardProject image="/Image.png" name="Lalalili.com" type="App mobile" desc="lorem sasias asdjhasjhd asdjnjaskd ajsnd jkasdnkas asjdn aksjd asnd akd n"></CardProject>
-                <CardProject image="/Image.png" name="Lalalili.com" type="App mobile" desc="lorem sasias asdjhasjhd asdjnjaskd ajsnd jkasdnkas asjdn aksjd asnd akd n"></CardProject>
+                    <CardProduct name="Hris" image="/Image.png" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique."></CardProduct>
+                    <CardProduct name="Hris" image="/Image.png" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique."></CardProduct>
+                    <CardProduct name="Hris" image="/Image.png" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique."></CardProduct>
+                    <CardProduct name="Hris" image="/Image.png" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique."></CardProduct>
+                    <CardProduct name="Hris" image="/Image.png" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique."></CardProduct>
+                    <CardProduct name="Hris" image="/Image.png" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique."></CardProduct>
             </template>
-        </templateList>
+        </templateListProduct>
     </div>
 </template>
