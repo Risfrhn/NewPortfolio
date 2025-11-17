@@ -1,9 +1,12 @@
 <script lang="ts" setup>
-import buttonRef from './buttonRef.vue'
     defineProps<{
         image: string
         name: string
         desc: string
+    }>()
+    defineSlots<{
+        button1: () => any,
+        button2: () => any
     }>()
 </script>
 
@@ -18,19 +21,8 @@ import buttonRef from './buttonRef.vue'
                         <p class="text-sm md:text-md font-semibold text-white">{{ name }}</p>
                         <p class="text-xs md:text-sm text-white truncate">{{ desc }}</p>
                     </div>
-                    <buttonRef name="Details" link=""></buttonRef>
-                    <buttonRef name="Buy Now" link=""></buttonRef>
-                    <!-- <a href="#" class="inline-flex items-center justify-center p-0.5 text-xs md:text-sm font-medium tracking-wide text-white transition duration-300 rounded-xl shadow-lg focus-visible:outline-none whitespace-nowrap group bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none hover:shadow-[0_0_20px_rgba(130,90,250,0.4)]">
-                        <span class="relative px-2 md:px-4 py-2.5 transition-all ease-in duration-75 bg-[#0b0b14] rounded-xl group-hover:bg-transparent group-hover:dark:bg-transparent">
-                            Details
-                        </span>
-                    </a>
-
-                    <a href="#" class="inline-flex items-center justify-center p-0.5 text-xs md:text-sm font-medium tracking-wide text-white transition duration-300 rounded-xl shadow-lg focus-visible:outline-none whitespace-nowrap group bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none hover:shadow-[0_0_20px_rgba(130,90,250,0.4)]">
-                        <span class="relative px-2 md:px-4 py-2.5 transition-all ease-in duration-75 bg-[#0b0b14] rounded-xl group-hover:bg-transparent group-hover:dark:bg-transparent">
-                            Buy Now
-                        </span>
-                    </a> -->
+                    <slot name="button1"/>
+                    <slot name="button2"/>
                 </div>
             </div>
         </div>

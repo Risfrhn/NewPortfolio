@@ -5,21 +5,21 @@
     import filterButton from '@/components/buttonFilter.vue';
     import { ref, watch } from 'vue';
 
-    const product = ref<any[]>([])
+    const project = ref<any[]>([])
     const Search = ref("")
     const filter = ref("")
 
-    async function fetchproduct(q: string, cat: string) {
+    async function fetchproject(q: string, cat: string) {
         if(!q && !cat){
-            product.value = []
+            project.value = []
             return;
         }
         const res = await fetch(``)
-        product.value = await res.json()
+        project.value = await res.json()
     }
 
     watch([Search, filter], ([newValue, newfilter])=>{
-        fetchproduct(newValue, newfilter)
+        fetchproject(newValue, newfilter)
     })
 </script>
 

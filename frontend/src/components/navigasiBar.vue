@@ -7,7 +7,7 @@
             </a>
 
             <!-- Tampil di xs / layar kecil, sembunyikan di sm ke atas -->
-            <a href="#" class="flex sm:hidden items-center space-x-3 rtl:space-x-reverse px-2 rounded-full bg-gray-800 text-white font-bold text-xl">
+            <a href="#" @click.prevent="goTo('HeroSection')" class="flex sm:hidden items-center space-x-3 rtl:space-x-reverse px-2 rounded-full bg-gray-800 text-white font-bold text-xl">
                 <span class="bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent">P</span>
             </a>
             <!-- Dropdown Language -->

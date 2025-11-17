@@ -19,10 +19,8 @@
             <div class="col-span-12">
                 <p class="text-gray-500 text-center mt-1 mb-5">{{ desc }}</p>
             </div>
-            <div v-if="$slots.control" class="col-span-12 md:flex justify-end mx-auto md:mx-3 mt-12"> 
-                <div class="flex items-center gap-2">
-                    <slot name="control"/>
-                </div>
+            <div v-if="$slots.control" class="col-span-12 flex justify-end gap-3 mx-3 mt-12"> 
+                <slot name="control"/>
             </div>
             <div class="col-span-12 z-10">
                 <div class="grid grid-cols-12 place-content-center gap-3">

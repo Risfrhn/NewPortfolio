@@ -6,7 +6,7 @@
     defineProps<{
         id:string
         title:string
-        desc: string
+        desc?: string
         icon:string
     }>()
 </script>
@@ -30,7 +30,7 @@
                     </div>
             </button>
         </h2>
-        <div :id="`accordion-card-body-${id}`" class="max-w-3xl mx-auto w-full bg-[#a78bfa]/10 py-5 px-5 flex flex-wrap place-content-center gap-3 transition-all duration-300 overflow-y-auto overflow-x-hidden" :class="{'max-h-96 opacity-100 rounded-b-lg rounded-t-0': isOpen, 'max-h-0 opacity-0': !isOpen}" :aria-labelledby="`accordion-card-heading-${id}`">
+        <div :id="`accordion-card-body-${id}`" class="max-w-3xl mx-auto w-full bg-[#a78bfa]/10 px-5 flex flex-wrap items-start gap-x-3 gap-y-1 transition-all duration-300 overflow-y-auto" :class="{'max-h-96 opacity-100 rounded-b-lg rounded-t-0 py-4': isOpen,'max-h-0 opacity-0 py-0': !isOpen}" :aria-labelledby="`accordion-card-heading-${id}`">
             <slot/>
         </div>
     </div>

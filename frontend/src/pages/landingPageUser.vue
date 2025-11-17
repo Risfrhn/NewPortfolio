@@ -11,13 +11,20 @@
     import CardProduct from "@/components/cardProduct.vue";
     import CardService from "@/components/cardServices.vue";
     import ButtonRef from "@/components/buttonRef.vue";
+    import buttonSubmit from '@/components/buttonSubmitForm.vue';
     import IconSosmed from '@/components/iconSosmed.vue';
     import templateListProduct from '@/components/listProduct.vue';
     import templateListProject from '@/components/listProject.vue';
+    import modal from '@/components/modal.vue';
+    import tags from '@/components/iconTools.vue';
     
 
     const typedElement = ref<HTMLElement | null>(null)
     let typedInstance: Typed | null = null
+    const openModal = ref(false)
+    const images = [
+        "/Image.png"
+    ]
 
     onMounted(() => {
         // Typed.js
@@ -80,7 +87,7 @@
                         <ButtonRef link="" name="Download CV"></ButtonRef> 
                     </div>
                     <div class="w-[0%]">
-                        <ButtonRef link="" name="My product"></ButtonRef>
+                        <ButtonRef link="/Product" name="My product"></ButtonRef>
                     </div>
                 </div>
                 <div class="flex flex-nowrap gap-8">
@@ -125,7 +132,7 @@
                     <p class="text-3xl lg:text-5xl lg:my-2 font-semibold min-h-[50px] bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent" style="filter: drop-shadow(0 0 18px rgba(168, 85, 247, 0.9));">Get to know me better</p>
                     <p class="text-white text-[10px] lg:text-xs xl:text-sm font-thin leading-loose xl:leading-[25px] pb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis nisi, ipsam ratione nostrum quam amet vitae iste consectetur fugiat officia aut, unde odit? Officia soluta voluptatum est inventore a omnis ipsum quod reiciendis! Neque, laudantium beatae culpa fugiat perferendis vero dolores tempora dicta esse corporis, veritatis dolore? Quo optio rerum laboriosam soluta harum laudantium ratione eius omnis nesciunt delectus accusamus provident et voluptates ad sapiente dolores, ducimus esse corporis, reprehenderit distinctio similique. Nemo magnam dicta est, voluptatum, explicabo dolores repellendus iure qui eligendi adipisci repellat quo quam ipsa tempore sint blanditiis iste eveniet! Iste reiciendis quos laboriosam sapiente. Recusandae, nihil?</p>
 
-                    <ButtonRef link="" name="My experience"></ButtonRef> 
+                    <ButtonRef link="/Journey" name="My experience"></ButtonRef> 
                 </div>
             </div>
         </div>
@@ -196,7 +203,7 @@
                 <img src="/Laravel.png" alt="" class="animate-icon-3 z-10 absolute w-5 h-5 xl:w-10 xl:h-10 md:right-[200px] right-[30px] top-[10px] md:top-[-10px] xl:top-[-10px] xl:right-[400px]">
 
                 <template #card>
-                    <CardProject image="/Image.png" name="Lalalili.com" type="App mobile" desc="lorem sasias asdjhasjhd asdjnjaskd ajsnd jkasdnkas asjdn aksjd asnd akd n"></CardProject>
+                    <CardProject @click="openModal = true" image="/Image.png" name="Lalalili.com" type="App mobile" desc="lorem sasias asdjhasjhd asdjnjaskd ajsnd jkasdnkas asjdn aksjd asnd akd n"></CardProject>
                     <CardProject image="/Image.png" name="Lalalili.com" type="App mobile" desc="lorem sasias asdjhasjhd asdjnjaskd ajsnd jkasdnkas asjdn aksjd asnd akd n"></CardProject>
                     <CardProject image="/Image.png" name="Lalalili.com" type="App mobile" desc="lorem sasias asdjhasjhd asdjnjaskd ajsnd jkasdnkas asjdn aksjd asnd akd n"></CardProject>
                 </template>
@@ -212,12 +219,33 @@
         <div id="ProductSection" class="relative my-24">
             <templateListProduct title="Built with Code, Designed for You" desc="Ready-to-use web applications built for performance and simplicity">
                 <template #card>
-                    <CardProduct name="Hris" image="/Image.png" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique."></CardProduct>
-                    <CardProduct name="Hris" image="/Image.png" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique."></CardProduct>
-                    <CardProduct name="Hris" image="/Image.png" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique."></CardProduct>
-                    <CardProduct name="Hris" image="/Image.png" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique."></CardProduct>
-                    <CardProduct name="Hris" image="/Image.png" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique."></CardProduct>
-                    <CardProduct name="Hris" image="/Image.png" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique."></CardProduct>
+                    <CardProduct name="Probioware" image="/Image.png" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique.">
+                        <template #button1><buttonSubmit @click="openModal = true" link="" name="Detail"></buttonSubmit><buttonSubmit name="Buy"/></template>
+                    </CardProduct>
+                    <CardProduct name="Probioware" image="/Image.png" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique.">
+                        <template #button1><buttonSubmit @click="openModal = true" link="" name="Detail"></buttonSubmit><buttonSubmit name="Buy"/></template>
+                    </CardProduct>
+                    <modal v-model:open="openModal" name="Probioware" :image="images" imageLogo="/Image.png" PtName="PT. Biofarma" durasi="2 jul - 1 agu" posisi="Fullstack">
+                        <template #buttonBuy>
+                            <ButtonRef link="" name="Buy product" class="ml-auto"></ButtonRef>
+                        </template>
+                        <template #tags>
+                            <tags nameTool="Laravel"/>
+                            <tags nameTool="Boostrap"/>
+                            <tags nameTool="MySQL"/>
+                        </template>
+                        <template #tabsDeskription>
+                            <Tabs id="1" title="Description" desc="Probioware" icon="fas fa-desktop">
+                                <p class="text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique repudiandae ducimus aut reiciendis in sit libero corporis praesentium. Harum, illo, facere ut deserunt obcaecati soluta non atque ipsum voluptatibus voluptatum aspernatur nostrum nesciunt mollitia quis nihil magnam distinctio ullam porro dicta vero nulla officia commodi veniam? Tempora inventore accusamus numquam.</p>
+                            </Tabs>
+                        </template>
+                        <template #tabsFeature>
+                            <Tabs id="2" title="Features" desc="Probioware" icon="fas fa-desktop">
+                                <p class="text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique repudiandae ducimus aut reiciendis in sit libero corporis praesentium. Harum, illo, facere ut deserunt obcaecati soluta non atque ipsum voluptatibus voluptatum aspernatur nostrum nesciunt mollitia quis nihil magnam distinctio ullam porro dicta vero nulla officia commodi veniam? Tempora inventore accusamus numquam.</p>
+                            </Tabs>
+                        </template>
+                    </modal>
+                    
                 </template>
                 <template #button>
                     <ButtonRef link="/Product" name="Show all product"></ButtonRef>
