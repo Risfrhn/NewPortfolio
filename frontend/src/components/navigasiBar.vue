@@ -124,7 +124,6 @@
 
 <script lang="ts" setup>
     import { useScrollStore } from '@/assets/ts/scroll';
-import LandingPageUser from '@/pages/landingPageUser.vue';
     import { onMounted } from 'vue';
     import { useRoute, useRouter } from 'vue-router';
 
