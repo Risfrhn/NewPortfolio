@@ -45,18 +45,13 @@ const routes = [
   })
 
   router.beforeEach((to, From, next)=>{
-    const token = localStorage.getItem('token')
-    const role = localStorage.getItem('role')
+    const isloggedin = !!localStorage.getItem('token')
 
-    if(to.meta.requiresAuth && to.meta.role === 'admin'){
-      if(!token){
-        return next('/login')
-      }
-      if(role !== 'admin'){
-        return next('/')
-      }
+    if(to.meta.requiresAuth && !isloggedin){
+      next({name:'Login'})
+    }else{
+      next()
     }
-    next()
   })
 
 export default router
