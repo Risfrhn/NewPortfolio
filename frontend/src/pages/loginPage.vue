@@ -21,10 +21,12 @@
             });
 
             if(res.data.status){
-                localStorage.setItem('token', res.data.token);
-                localStorage.setItem('name', res.data.token);
+                const token = res.data.token;
+                localStorage.setItem('token', token);
+                localStorage.setItem('name', res.data.name);
                 router.push('/admin/Dashboard')
             }
+
         } catch (err: any){
             errorMessage.value = err.response?.data?.message || err.message
         }

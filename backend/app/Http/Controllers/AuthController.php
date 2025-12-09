@@ -40,12 +40,22 @@ class AuthController extends Controller
         }
     }
 
-    public function logout(){
-        request()->user()->tokens()->delete();
-        Auth::logout();
-        return response()->json([
-            'status' => true,
-            'Message' => "Logout Success"
-        ]);
+    public function logout(Request $request){
+        try{
+            $user = $request->user();
+            $user->currentAccessToken()->delete();
+            return response()->json([
+                'status' => true,
+                'Message' => "Logout Success"
+            ]);
+        }catch(\Throwable $e){
+            return response()->json([
+                'message' => 'Failed logout',
+                'status' => false,
+                'errors' => $e instanceof \Illuminate\Validation\ValidationException 
+                    ? $e->errors() 
+                    : $e->getMessage(),
+            ]);
+        }
     }
 }

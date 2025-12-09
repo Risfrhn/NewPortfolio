@@ -6,21 +6,22 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 // create/update landing
-Route::POST('/UpdatedLanding', [LandingController::class, 'createLanding']);
-Route::GET('/Landing', [LandingController::class, 'showLanding']);
+Route::post('/UpdatedLanding', [LandingController::class, 'createLanding']);
+Route::get('/Landing', [LandingController::class, 'showLanding']);
 
 // project
-Route::POST('/Project/CreateProjects', [ProjectController::class, 'createProject']);
-Route::PATCH('/Project/UpdateProjects/{id}', [ProjectController::class, 'updateProject']);
-Route::DELETE('/Project/DeleteProjects/{id}', [ProjectController::class, 'deleteProject']);
-Route::GET('/Project/{type}', [ProjectController::class, 'showByType']);
-Route::GET('/Project/Search/{Type}', [ProjectController::class, 'searchPortfolio']);
-Route::GET('/Project/Filter/{type}', [ProjectController::class, 'filterByTech']);
-Route::GET('/Project/Fetch-Filter/{type}', [ProjectController::class, 'getTech']);
+Route::post('/Project/CreateProjects', [ProjectController::class, 'createProject']);
+Route::patch('/Project/UpdateProjects/{id}', [ProjectController::class, 'updateProject']);
+Route::delete('/Project/DeleteProjects/{id}', [ProjectController::class, 'deleteProject']);
+Route::get('/Project/{type}', [ProjectController::class, 'showByType']);
+Route::get('/Project/Search/{Type}', [ProjectController::class, 'searchPortfolio']);
+Route::get('/Project/Filter/{type}', [ProjectController::class, 'filterByTech']);
+Route::get('/Project/Fetch-Filter/{type}', [ProjectController::class, 'getTech']);
 
 
 // Experience
 
 // Login/Logout
-Route::POST('/Process-Login', [AuthController::class, 'login']);
+Route::post('/Process-Login', [AuthController::class, 'login']);
+Route::middleware('auth:sanctum')->delete('/Process-Logout', [AuthController::class, 'logout']);
 
