@@ -1,7 +1,38 @@
 <script lang="ts" setup>
-    import { ref } from 'vue';
-    const activeTabs = ref("login"); 
-    const showPassword = ref(false);  
+    import { useRouter } from 'vue-router'
+    import axios from 'axios';
+    import { onMounted, ref } from 'vue';
+
+    const showPassword = ref(false); 
+    
+    const email = ref('');
+    const password = ref('');
+    const router = useRouter()
+    const errorMessage = ref('');
+    const login = async () => {
+        try{
+            const res = await axios.post(`http://127.0.0.1:8000/api/Process-Login`, {
+                email: email.value,
+                password: password.value
+            }, {
+                headers: {
+                    Accept: 'application/json'
+                }
+            });
+
+            if(res.data.status){
+                localStorage.setItem('token', res.data.token);
+                localStorage.setItem('name', res.data.token);
+                router.push('/admin/Dashboard')
+            }
+        } catch (err: any){
+            errorMessage.value = err.response?.data?.message || err.message
+        }
+    }
+
+    onMounted(()=>{
+        login();
+    })
 </script>
 
 <template>
@@ -14,7 +45,7 @@
                 <p class="text-xs text-center text-gray-500 mb-5">We are happy to see you again</p>
                 <form>
                     <div class="mb-5 relative">
-                        <input type="email" class="border-none rounded-lg block w-full px-3 py-2.5 text-gray-200 placeholder-gray-500 pr-10 bg-[#1e1e1e] shadow-[inset_4px_4px_8px_#141414,inset_-4px_-4px_8px_#2a2a2a] focus:shadow-[inset_6px_6px_12px_#141414,inset_-6px_-6px_12px_#2a2a2a] transition-all duration-300" placeholder="Input Email here..." required />
+                        <input v-model="email" type="email" class="border-none rounded-lg block w-full px-3 py-2.5 text-gray-200 placeholder-gray-500 pr-10 bg-[#1e1e1e] shadow-[inset_4px_4px_8px_#141414,inset_-4px_-4px_8px_#2a2a2a] focus:shadow-[inset_6px_6px_12px_#141414,inset_-6px_-6px_12px_#2a2a2a] transition-all duration-300" placeholder="Input Email here..." required />
 
                         <span class="absolute inset-y-0 right-2 flex items-center px-3 text-gray-400 pointer-events-none">
                             <i class="fa-regular fa-envelope"></i>
@@ -22,7 +53,7 @@
                     </div>
 
                     <div class="relative">
-                        <input :type="showPassword ? 'text' : 'password'" id="password" class="border-none rounded-lg block w-full px-3 py-2.5 text-gray-200 placeholder-gray-500 pr-10 bg-[#1e1e1e] shadow-[inset_4px_4px_8px_#141414,inset_-4px_-4px_8px_#2a2a2a] focus:shadow-[inset_6px_6px_12px_#141414,inset_-6px_-6px_12px_#2a2a2a] transition-all duration-300" placeholder="Input Password here..." required/>
+                        <input :type="showPassword ? 'text' : 'password'" id="password" v-model="password" class="border-none rounded-lg block w-full px-3 py-2.5 text-gray-200 placeholder-gray-500 pr-10 bg-[#1e1e1e] shadow-[inset_4px_4px_8px_#141414,inset_-4px_-4px_8px_#2a2a2a] focus:shadow-[inset_6px_6px_12px_#141414,inset_-6px_-6px_12px_#2a2a2a] transition-all duration-300" placeholder="Input Password here..." required/>
                         <a class="absolute inset-y-0 right-2 flex items-center px-3 text-gray-600 cursor-pointer" @click.prevent="showPassword = !showPassword">
                             <i v-if="!showPassword" key="eye" class="fa-regular fa-eye"></i>
                             <i v-else key="slash" class="fa-solid fa-eye-slash"></i>
@@ -31,7 +62,7 @@
                     <div class="flex mt-2">
                         <a href="" class="ml-auto font-semibold text-sm bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent">Forgot password</a>
                     </div>
-                    <button type="button" class="inline-flex w-full items-center my-3 justify-center p-0.5 text-sm font-medium tracking-wide text-white transition duration-300 rounded-full shadow-lg focus-visible:outline-none whitespace-nowrap group bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none hover:shadow-[0_0_20px_rgba(130,90,250,0.4)]">
+                    <button @click="login" type="button" class="inline-flex w-full items-center my-3 justify-center p-0.5 text-sm font-medium tracking-wide text-white transition duration-300 rounded-full shadow-lg focus-visible:outline-none whitespace-nowrap group bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none hover:shadow-[0_0_20px_rgba(130,90,250,0.4)]">
                         <span class="relative px-5 py-2.5 w-full transition-all ease-in duration-75 bg-[#0b0b14] rounded-full group-hover:bg-transparent group-hover:dark:bg-transparent">
                             Submit
                         </span>

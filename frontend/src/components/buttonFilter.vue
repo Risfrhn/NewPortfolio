@@ -1,9 +1,43 @@
 <script lang="ts" setup>
-    import { ref } from 'vue';
-    const emit = defineEmits<{(e: 'filter', value:string): void}>()
+    import axios from 'axios';
+import { onMounted, ref, watch } from 'vue';
+    const props = defineProps({
+      type: String
+    })
+
+    const option = ref<any>(null)
+    const result = ref<any[]>([])
     const selected = ref("")
 
-    const option = ["UI/UX", "Web development", "Mobile development"]
+    const emit = defineEmits(['update'])
+    let delay: any;
+
+    const fetchOption = async () =>{
+      try{
+        const res = await axios.get(`http://localhost:8000/api/Project/Fetch-Filter/${props.type}`);
+        option.value = res.data.data
+      }catch(e){
+        console.log("error:", e)
+      }
+    }
+
+    onMounted(()=>{
+      fetchOption()
+    })
+
+    watch(selected, (value)=>{
+      clearTimeout(delay)
+      delay = setTimeout(async()=>{
+          try{
+            const res = await axios.get(`http://localhost:8000/api/Project/Filter/${props.type}?filter=${value}`)
+            result.value = res.data.data
+            console.log("datanya", result.value)
+            emit('update', result.value)
+          }catch(e){
+            console.log("error:", e)
+          }
+      })
+    })
 </script>
 
 <template>
@@ -17,7 +51,6 @@
     <!-- Select asli tapi disembunyikan -->
     <select
       v-model="selected"
-      @change="emit('filter', selected)"
       class="absolute inset-0 w-full h-full opacity-0 cursor-pointer bg-gray-600"
     >
       <option value="">All categories</option>

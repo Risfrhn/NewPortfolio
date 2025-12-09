@@ -4,23 +4,43 @@
     import searchButton from '@/components/searchButton.vue';
     import filterButton from '@/components/buttonFilter.vue';
     import templateListProduct from '@/components/listProduct.vue';
-    import { ref, watch } from 'vue';
+    import buttonSubmit from '@/components/buttonSubmitForm.vue';
+    import modal from '@/components/modal.vue';
+    import tags from '@/components/iconTools.vue';
+    import Tabs from "@/components/tabs.vue";
+    import ButtonRef from "@/components/buttonRef.vue";
+    import Pagination from "@/components/pagginationButton.vue";
+    import { ref, onMounted } from 'vue';
+    import axios from 'axios';
 
-    const product = ref<any[]>([])
-    const Search = ref("")
-    const filter = ref("")
+    const images = [
+        "/Image.png"
+    ];
 
-    async function fetchproduct(q: string, cat: string) {
-        if(!q && !cat){
-            product.value = []
-            return;
-        }
-        const res = await fetch(``)
-        product.value = await res.json()
+    // MODAL
+    const openModal = ref(false);
+    const selectedProject = ref<any>(null);
+    const openModalProject = (project: any) =>{
+        selectedProject.value = project;
+        openModal.value = true; 
     }
+    // BATAS MODAL
 
-    watch([Search, filter], ([newValue, newfilter])=>{
-        fetchproduct(newValue, newfilter)
+
+    // FETCH DATA
+    const dataProduct = ref<any[]>([]);
+    const currentPage = ref(1)
+    const lastPage = ref(1)
+    const getDataProduct = async (page = 1) => {
+        const res = await axios.get(`http://localhost:8000/api/Project/product?page=${page}`);
+        dataProduct.value = res.data.data.data
+        currentPage.value = res.data.data.current_page
+        lastPage.value = res.data.data.last_page
+    }
+    // BATAS FETCH DATA
+
+    onMounted(()=>{
+        getDataProduct();
     })
 </script>
 
@@ -33,18 +53,66 @@
 
         <templateListProduct title="Built with Code, Designed for You" desc="Ready-to-use web applications built for performance and simplicity">
             <template #control>
-                <searchButton @update="Search =$event"/>
-                <filterButton @update="filter =$event"/>
+                <searchButton type="product" @update="dataProduct = $event"/>
+                <filterButton type="product" @update="dataProduct = $event"/>
             </template>
 
             <template #card>
-                    <CardProduct name="Hris" image="/Image.png" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique."></CardProduct>
-                    <CardProduct name="Hris" image="/Image.png" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique."></CardProduct>
-                    <CardProduct name="Hris" image="/Image.png" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique."></CardProduct>
-                    <CardProduct name="Hris" image="/Image.png" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique."></CardProduct>
-                    <CardProduct name="Hris" image="/Image.png" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique."></CardProduct>
-                    <CardProduct name="Hris" image="/Image.png" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique."></CardProduct>
+                    <CardProduct
+                        v-if="dataProduct.length > 0"
+                        v-for="(data, i) in dataProduct" 
+                        :key="i"
+                        :name="data.project_name" 
+                        :image="data.logo_image" 
+                        :desc="data.description_project">
+                        <template #button1>
+                            <buttonSubmit 
+                                @click="openModalProject(data)" 
+                                link="" 
+                                name="Detail">
+                            </buttonSubmit>
+                            <buttonSubmit name="Buy"/>
+                        </template>
+                    </CardProduct>
             </template>
         </templateListProduct>
+        <div class="flex items-center justify-center my-10">
+            <Pagination :currentPage="currentPage" :lastPage="lastPage" @change="getDataProduct"></Pagination>
+        </div>
     </div>
+    <modal v-if="selectedProject" v-model:open="openModal" 
+        :name="selectedProject?.project_name" 
+        :image="images" 
+        :imageLogo="selectedProject?.logo_project" 
+        :PtName="selectedProject?.Company" 
+        :durasi="selectedProject?.start_project + '-' + selectedProject?.end_project" 
+        :posisi="selectedProject?.position">
+        <template #buttonBuy>
+            <ButtonRef link="" name="Buy product" class="ml-auto"></ButtonRef>
+        </template>
+        <template #tags>
+            <tags v-for="(tools, i) in selectedProject?.Tech" 
+                    :key="i" 
+                    :nameTool="tools"
+            />
+        </template>
+        <template #tabsDeskription>
+            <Tabs 
+                id="1" 
+                title="Description" 
+                :desc="selectedProject?.project_name" 
+                icon="fas fa-desktop">
+                <p class="text-gray-600">{{ selectedProject?.description_project }}</p>
+            </Tabs>
+        </template>
+        <template #tabsFeature>
+            <Tabs 
+                id="2" 
+                title="Features" 
+                :desc="selectedProject?.project_name" 
+                icon="fas fa-desktop">
+                <p class="text-gray-600">{{ selectedProject?.feature }}</p>
+            </Tabs>
+        </template>
+    </modal>
 </template>

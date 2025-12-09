@@ -17,27 +17,74 @@
     import templateListProject from '@/components/listProject.vue';
     import modal from '@/components/modal.vue';
     import tags from '@/components/iconTools.vue';
+    import axios from 'axios';
     
-
-    const typedElement = ref<HTMLElement | null>(null)
-    let typedInstance: Typed | null = null
+    // Modal
     const openModal = ref(false)
+    const selectedProject = ref<any>(null);
+    const openModalProject = (project: any)=>{
+        selectedProject.value = project;
+        openModal.value = true;
+    }
     const images = [
         "/Image.png"
     ]
 
+    // FETCH DATA
+    // Landing data
+    const dataLanding = ref<any>({})
+    const fetchHeaderSkill = ref<string[]>([])
+    const getDataLanding = async () =>{
+        const res = await axios.get('http://localhost:8000/api/Landing')
+        const data = res.data[0]
+        dataLanding.value = res.data[0]
+        fetchHeaderSkill.value = data.HeaderSkill;
+    } 
+
+    // Portfolio
+    const dataPortfolio = ref<any[]>([]);
+    const getDataPortfolio = async () =>{
+        const res = await axios.get('http://localhost:8000/api/Project/portfolio');
+        dataPortfolio.value = res.data.data.data;
+    }
+    
+
+    // Product
+    const dataProduct = ref<any[]>([])
+    const getDataProduct = async () =>{ 
+        const res = await axios.get('http://localhost:8000/api/Project/product');
+        dataProduct.value = res.data.data.data;
+    }
+    // BATAS FETCH DATA
+
+    // typed.js
+    const typedElement = ref<HTMLElement | null>(null)
+    let typedInstance: Typed | null = null
+    
+
     onMounted(() => {
+        // fetch data
+        getDataLanding();
+        getDataPortfolio();
+        getDataProduct();
+
+
         // Typed.js
-        typedInstance = new Typed(typedElement.value as HTMLElement, {
-            strings: ['System Analyst', 'Web Developer'],
-            typeSpeed: 80,
-            backSpeed: 50,
-            backDelay: 1500,
-            loop: true,
-            showCursor: false,
-        });
+        watch(fetchHeaderSkill, (value) => {
+            if(value.length > 0){
+                typedInstance = new Typed(typedElement.value as HTMLElement, {
+                    strings: value,
+                    typeSpeed: 80,
+                    backSpeed: 50,
+                    backDelay: 1500,
+                    loop: true,
+                    showCursor: false,
+                });
+            }
+        })
 
 
+        // Scroll to top
         const scrolled = scroll.targetId
          if(scrolled){
             const el =document.getElementById(scrolled)
@@ -80,7 +127,7 @@
                 <p class="text-white my-2">Hello, Im</p>
                 <p class="text-white my-2 text-4xl lg:text-5xl font-semibold">Risky Farhan</p>
                 <p class="text-4xl lg:text-5xl my-2 font-semibold min-h-[50px] bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent" ref="typedElement"></p>
-                <p class="text-white text-xs lg:text-[15px] my-2 font-thin ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic velit maiores laborum qui, fuga molestias. Recusandae libero tenetur ullam vel aspernatur, labore ex dignissimos asperiores deserunt, iste, illum impedit et.</p>
+                <p class="text-white text-xs lg:text-[15px] my-2 font-thin">{{dataLanding.HeaderDesk}}</p>
 
                 <div class="flex flex-wrap my-5 gap-40">
                     <div class="w-[0%]">
@@ -91,10 +138,10 @@
                     </div>
                 </div>
                 <div class="flex flex-nowrap gap-8">
-                    <IconSosmed link="" icon="fab fa-linkedin"></IconSosmed>
-                    <IconSosmed link="" icon="fab fa-github"></IconSosmed>
-                    <IconSosmed link="" icon="fab fa-instagram"></IconSosmed>
-                    <IconSosmed link="" icon="fab fa-steam"></IconSosmed>
+                    <IconSosmed link="www.linkedin.com/in/muhammad-risky-farhan-596783309" icon="fab fa-linkedin"></IconSosmed>
+                    <IconSosmed link="https://github.com/Risfrhn/" icon="fab fa-github"></IconSosmed>
+                    <IconSosmed link="https://www.instagram.com/risfrhn_/" icon="fab fa-instagram"></IconSosmed>
+                    <IconSosmed link="https://steamcommunity.com/id/Zoow1/" icon="fab fa-steam"></IconSosmed>
                 </div>
 
             </div>
@@ -120,9 +167,9 @@
 
 
         <!-- About me -->
-        <div id="AboutSection" class="relative mt-32 mb-24 md:mb-52 px-3">
+        <div id="AboutSection" class="relative mt-14 md:mt-32 mb-24 md:mb-52 px-3">
             <div class="grid grid-cols-12">
-                <div class="col-span-12 md:col-span-4 mx-14 mb-32 md:mx-0 md:mb-0">
+                <div class="col-span-12 md:col-span-4 hidden md:block">
                     <div class="w-[200px] h-[200px] lg:w-[250px] lg:h-[250px] xl:w-[300px] xl:h-[300px] rounded-xl shadow-lg rotate-[10deg] border-4 border-[#a78bfa] animate-glow translate-x-6 lg:translate-x-14  translate-y-11 lg:translate-y-10 xl:translate-y-1" style="background: linear-gradient(#0b0b14, #0b0b14) padding-box, linear-gradient(to right, #a855f7, #3b82f6, #6366f1) border-box;">
                         <img src="/HeaderHero.png" alt="" class="w-60 h-60 lg:w-80 lg:h-80 xl:w-96 xl:h-96 object-cover rotate-[-10deg] lg:translate-x-11 xl:translate-x-14 translate-x-11 translate-y-7">
                     </div>
@@ -130,7 +177,7 @@
                 <div class="col-span-12 md:col-span-8 md:ps-20">
                     <p class="text-white text-xs font-bold">About me</p>
                     <p class="text-3xl lg:text-5xl lg:my-2 font-semibold min-h-[50px] bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent" style="filter: drop-shadow(0 0 18px rgba(168, 85, 247, 0.9));">Get to know me better</p>
-                    <p class="text-white text-[10px] lg:text-xs xl:text-sm font-thin leading-loose xl:leading-[25px] pb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis nisi, ipsam ratione nostrum quam amet vitae iste consectetur fugiat officia aut, unde odit? Officia soluta voluptatum est inventore a omnis ipsum quod reiciendis! Neque, laudantium beatae culpa fugiat perferendis vero dolores tempora dicta esse corporis, veritatis dolore? Quo optio rerum laboriosam soluta harum laudantium ratione eius omnis nesciunt delectus accusamus provident et voluptates ad sapiente dolores, ducimus esse corporis, reprehenderit distinctio similique. Nemo magnam dicta est, voluptatum, explicabo dolores repellendus iure qui eligendi adipisci repellat quo quam ipsa tempore sint blanditiis iste eveniet! Iste reiciendis quos laboriosam sapiente. Recusandae, nihil?</p>
+                    <p class="text-white text-[10px] lg:text-xs xl:text-sm font-thin leading-loose xl:leading-[25px] pb-5">{{dataLanding.AboutDesk}}</p>
 
                     <ButtonRef link="/Journey" name="My experience"></ButtonRef> 
                 </div>
@@ -203,9 +250,16 @@
                 <img src="/Laravel.png" alt="" class="animate-icon-3 z-10 absolute w-5 h-5 xl:w-10 xl:h-10 md:right-[200px] right-[30px] top-[10px] md:top-[-10px] xl:top-[-10px] xl:right-[400px]">
 
                 <template #card>
-                    <CardProject @click="openModal = true" image="/Image.png" name="Lalalili.com" type="App mobile" desc="lorem sasias asdjhasjhd asdjnjaskd ajsnd jkasdnkas asjdn aksjd asnd akd n"></CardProject>
-                    <CardProject image="/Image.png" name="Lalalili.com" type="App mobile" desc="lorem sasias asdjhasjhd asdjnjaskd ajsnd jkasdnkas asjdn aksjd asnd akd n"></CardProject>
-                    <CardProject image="/Image.png" name="Lalalili.com" type="App mobile" desc="lorem sasias asdjhasjhd asdjnjaskd ajsnd jkasdnkas asjdn aksjd asnd akd n"></CardProject>
+                    <CardProject 
+                        v-if="dataPortfolio.length > 0"
+                        v-for="(data, i) in dataPortfolio.slice(0,3)" 
+                        :key="i"  
+                        image="Image.png" 
+                        :name="data.project_name || ''" 
+                        :type="data.type_project || ''" 
+                        :desc="data.description_project || ''"
+                        @click="openModalProject(data)">
+                    </CardProject>
                 </template>
                 <template #button>
                     <ButtonRef link="/Projects" name="Show all projects"></ButtonRef>
@@ -219,33 +273,22 @@
         <div id="ProductSection" class="relative my-24">
             <templateListProduct title="Built with Code, Designed for You" desc="Ready-to-use web applications built for performance and simplicity">
                 <template #card>
-                    <CardProduct name="Probioware" image="/Image.png" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique.">
-                        <template #button1><buttonSubmit @click="openModal = true" link="" name="Detail"></buttonSubmit><buttonSubmit name="Buy"/></template>
-                    </CardProduct>
-                    <CardProduct name="Probioware" image="/Image.png" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nam facilis sunt similique.">
-                        <template #button1><buttonSubmit @click="openModal = true" link="" name="Detail"></buttonSubmit><buttonSubmit name="Buy"/></template>
-                    </CardProduct>
-                    <modal v-model:open="openModal" name="Probioware" :image="images" imageLogo="/Image.png" PtName="PT. Biofarma" durasi="2 jul - 1 agu" posisi="Fullstack">
-                        <template #buttonBuy>
-                            <ButtonRef link="" name="Buy product" class="ml-auto"></ButtonRef>
+                    <CardProduct
+                        v-if="dataProduct.length > 0"
+                        v-for="(data, i) in dataProduct.slice(0, 6)" 
+                        :key="i"
+                        :name="data.project_name" 
+                        :image="data.logo_image" 
+                        :desc="data.description_project">
+                        <template #button1>
+                            <buttonSubmit 
+                                @click="openModalProject(data)" 
+                                link="" 
+                                name="Detail">
+                            </buttonSubmit>
+                            <buttonSubmit name="Buy"/>
                         </template>
-                        <template #tags>
-                            <tags nameTool="Laravel"/>
-                            <tags nameTool="Boostrap"/>
-                            <tags nameTool="MySQL"/>
-                        </template>
-                        <template #tabsDeskription>
-                            <Tabs id="1" title="Description" desc="Probioware" icon="fas fa-desktop">
-                                <p class="text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique repudiandae ducimus aut reiciendis in sit libero corporis praesentium. Harum, illo, facere ut deserunt obcaecati soluta non atque ipsum voluptatibus voluptatum aspernatur nostrum nesciunt mollitia quis nihil magnam distinctio ullam porro dicta vero nulla officia commodi veniam? Tempora inventore accusamus numquam.</p>
-                            </Tabs>
-                        </template>
-                        <template #tabsFeature>
-                            <Tabs id="2" title="Features" desc="Probioware" icon="fas fa-desktop">
-                                <p class="text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique repudiandae ducimus aut reiciendis in sit libero corporis praesentium. Harum, illo, facere ut deserunt obcaecati soluta non atque ipsum voluptatibus voluptatum aspernatur nostrum nesciunt mollitia quis nihil magnam distinctio ullam porro dicta vero nulla officia commodi veniam? Tempora inventore accusamus numquam.</p>
-                            </Tabs>
-                        </template>
-                    </modal>
-                    
+                    </CardProduct>          
                 </template>
                 <template #button>
                     <ButtonRef link="/Product" name="Show all product"></ButtonRef>
@@ -284,12 +327,12 @@
                                 <p class="text-gray-500 text-center mt-1">Stay in the loop with my projects and posts by following me.</p>
                             </div>
                             <div class="flex flex-wrap gap-3 md:place-content-center">
-                                <contacts name="LinkedIn/Muhammad Risky Farhan" icon="fab fa-linkedin" link="" bgColor="#0077B5"></contacts>
-                                <contacts name="Github/Risfrhn" icon="fab fa-github" link="" bgColor="#4141aa"></contacts>
-                                <contacts name="Instagram/risfrhn_" icon="fab fa-instagram" link="" bgColor="#8900df"></contacts>
+                                <contacts name="LinkedIn/Muhammad Risky Farhan" icon="fab fa-linkedin" link="www.linkedin.com/in/muhammad-risky-farhan-596783309" bgColor="#0077B5"></contacts>
+                                <contacts name="Github/Risfrhn" icon="fab fa-github" link="https://github.com/Risfrhn/" bgColor="#4141aa"></contacts>
+                                <contacts name="Instagram/risfrhn_" icon="fab fa-instagram" link="https://www.instagram.com/risfrhn_/" bgColor="#8900df"></contacts>
                                 <contacts name="Email/rskyfrhn801@gmail.com" icon="fa-solid fa-envelope" link="" bgColor="#D44638"></contacts>
-                                <contacts name="Steam/FarhanKebab" icon="fab fa-steam" link="" bgColor="#012f9a"></contacts>
-                                <contacts name="Whatsapp/+6281345765427" icon="fab fa-phone" link="" bgColor="#25D366"></contacts>
+                                <contacts name="Steam/FarhanKebab" icon="fab fa-steam" link="https://steamcommunity.com/id/Zoow1/" bgColor="#012f9a"></contacts>
+                                <contacts name="Whatsapp/+6281345765427" icon="fab fa-phone" link="wa.me/081345765427" bgColor="#25D366"></contacts>
                             </div>
                         </div>
                     </div>
@@ -298,6 +341,41 @@
         </div>
     </div>
     <BackToTop/>
+    <modal v-if="selectedProject" v-model:open="openModal" 
+        :name="selectedProject?.project_name" 
+        :image="images" 
+        :imageLogo="selectedProject?.logo_project" 
+        :PtName="selectedProject?.Company" 
+        :durasi="selectedProject?.start_project + '-' + selectedProject?.end_project" 
+        :posisi="selectedProject?.position">
+        <template #buttonBuy>
+            <ButtonRef link="" name="Buy product" class="ml-auto"></ButtonRef>
+        </template>
+        <template #tags>
+            <tags v-for="(tools, i) in selectedProject?.Tech" 
+                    :key="i" 
+                    :nameTool="tools"
+            />
+        </template>
+        <template #tabsDeskription>
+            <Tabs 
+                id="1" 
+                title="Description" 
+                :desc="selectedProject?.project_name" 
+                icon="fas fa-desktop">
+                <p class="text-gray-600">{{ selectedProject?.description_project }}</p>
+            </Tabs>
+        </template>
+        <template #tabsFeature>
+            <Tabs 
+                id="2" 
+                title="Features" 
+                :desc="selectedProject?.project_name" 
+                icon="fas fa-desktop">
+                <p class="text-gray-600">{{ selectedProject?.feature }}</p>
+            </Tabs>
+        </template>
+    </modal>
 </template>
 
 

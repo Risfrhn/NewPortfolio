@@ -11,8 +11,8 @@
     }>()
 </script>
 <template>
-    <div class="relative mt-36 mb-24 z-10">
-        <div class="grid grid-cols-12 my-24 gap-4 z-10">
+    <div class="relative mt-36 mb-14 z-10">
+        <div class="grid grid-cols-12 my-14 gap-4 z-10">
             <div class="col-span-12">
                 <p class="text-3xl text-center lg:text-5xl lg:my-2 font-semibold bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent" style="filter: drop-shadow(0 0 18px rgba(168, 85, 247, 0.9));">{{ title }}</p>
             </div>

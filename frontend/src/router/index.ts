@@ -18,7 +18,7 @@ const routes = [
     {
       path:'/admin',
       component: AdminLayout,
-      meta: {requiresAuth: false, role:'admin'},
+      meta: {requiresAuth: true},
       children:[
         {path:'Dashboard', name:'DashboardAdmin', component:DashboardPageAdmin},
         {path:':pathMatch(.*)*', redirect:'' }

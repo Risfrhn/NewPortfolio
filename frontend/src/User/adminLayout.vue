@@ -3,16 +3,13 @@
     <SidebarAdmin/>
     
     <!-- Konten halaman -->
-    <main class="flex-1">
+    <main class="flex-1 bg-[#12121E] p-4 sm:ml-64">
       <router-view /> 
     </main>
     
-
-    <Footers/>
   </div>
 </template>
 
 <script lang="ts" setup>
-import Footers from '@/components/footer.vue';
 import SidebarAdmin from '@/components/sidebarAdmin.vue';
 </script>

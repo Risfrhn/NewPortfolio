@@ -19,8 +19,8 @@
 </script>
 <template>
     <div v-if="props.open" class="fixed inset-0 bg-black/60 z-[9999] flex items-center justify-center p-4" @click.self="emit('update:open', false)">
-        <div class="bg-[#0b0b14] text-white w-full max-w-3xl rounded-xl p-6 relative max-h-[85vh] overflow-y-auto translate-y-9">
-            <div class="grid grid-cols-12 gap-4">
+        <div class="bg-[#0b0b14] text-white w-full max-w-6xl rounded-xl relative max-h-[85vh] overflow-y-auto translate-y-9">
+            <div class="grid grid-cols-12 gap-4 p-6">
                 <div class="col-span-12">
                     <div id="animation-carousel" class="relative w-full" data-carousel="slide">
                         <!-- Carousel wrapper -->
@@ -46,8 +46,8 @@
                     </div>
                 </div>
                 <div class="col-span-12">
-                    <div class="flex flex-wrap  items-center">
-                        <img :src="`${imageLogo}`" alt="" class="w-[90px] h-[90px] rounded-md md:rounded-xl"></img>
+                    <div class="flex flex-wrap items-center">
+                        <img :src="`${imageLogo}`" alt="" class="md:w-[90px] md:h-[90px] w-[70px] h-[70px]  rounded-md md:rounded-xl"></img>
                         <div class="col-span-12">
                             <p class="text-2xl font-bold px-3 bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent">{{ name }}</p>
                             <p class="text-gray-400 px-3">{{PtName}}</p>
@@ -78,3 +78,14 @@
         </div>
     </div>
 </template>
+
+<style scoped>
+    /* Vertikal & horizontal */
+    ::-webkit-scrollbar {
+    display: none; /* untuk Chrome, Edge, Safari */
+    }
+    html, body {
+    -ms-overflow-style: none;  /* IE dan Edge */
+    scrollbar-width: none;     /* Firefox */
+    }
+</style>

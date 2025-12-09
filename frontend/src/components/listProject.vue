@@ -4,7 +4,7 @@
             desc: string
         }>()
         defineSlots<{
-            controls?: () => any
+            control?: () => any
             card: () => any
             button?: () => any
             default: () => any
@@ -21,7 +21,7 @@
                     <p class="text-gray-500 text-center mt-1 mb-5">{{ desc }}</p>
                 </div>
                 <div v-if="$slots.control" class="col-span-12 flex justify-end gap-3 mx-3 mt-12"> 
-                    <slot name="controls"/>
+                    <slot name="control"/>
                 </div>
                 <div class="col-span-12 mt-5">
                     <div class="flex flex-wrap gap-3 justify-center">

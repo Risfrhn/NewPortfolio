@@ -3,24 +3,39 @@
     import CardProject from '@/components/cardProjectPribadi.vue';
     import searchButton from '@/components/searchButton.vue';
     import filterButton from '@/components/buttonFilter.vue';
-    import { ref, watch } from 'vue';
+    import { onMounted, ref, watch } from 'vue';
+    import axios from 'axios';
+    import Modal from '@/components/modal.vue';
+    import ButtonRef from '@/components/buttonRef.vue';
+    import Tabs from '@/components/tabs.vue';
+    import tags from '@/components/iconTools.vue';
+    import Pagination from "@/components/pagginationButton.vue";
 
-    const project = ref<any[]>([])
-    const Search = ref("")
-    const filter = ref("")
-
-    async function fetchproject(q: string, cat: string) {
-        if(!q && !cat){
-            project.value = []
-            return;
-        }
-        const res = await fetch(``)
-        project.value = await res.json()
+    const openModal = ref(false)
+    const selectedProject = ref<any>(null)
+    const openModalProject = (project: any) => {
+        selectedProject.value = project
+        openModal.value = true
     }
 
-    watch([Search, filter], ([newValue, newfilter])=>{
-        fetchproject(newValue, newfilter)
+    const images = [
+        'Images.png'
+    ] 
+
+    const project = ref<any[]>([])
+    const currentPage = ref(1)
+    const lastPage  = ref(1)
+    const getDataProject = async (page = 1) => {
+        const res = await axios.get(`http://localhost:8000/api/Project/portfolio`)
+        project.value = res.data.data.data
+        currentPage.value = res.data.data.current_page
+        lastPage.value = res.data.data.last_page
+    }
+
+    onMounted(()=>{
+        getDataProject()
     })
+
 </script>
 
 <template>
@@ -31,19 +46,53 @@
         
 
         <templateList title="My projects" desc="Some of my recent projects">
-            <template #controls>
-                <searchButton @update="Search =$event"/>
-                <filterButton @update="filter =$event"/>
+            <template #control>
+                a
+                <searchButton type="portfolio" @update="project = $event"/>
+                <filterButton type="portfolio" @update="project = $event"/>
             </template>
 
             <template #card>
-                <CardProject image="/Image.png" name="Lalalili.com" type="App mobile" desc="lorem sasias asdjhasjhd asdjnjaskd ajsnd jkasdnkas asjdn aksjd asnd akd n"></CardProject>
-                <CardProject image="/Image.png" name="Lalalili.com" type="App mobile" desc="lorem sasias asdjhasjhd asdjnjaskd ajsnd jkasdnkas asjdn aksjd asnd akd n"></CardProject>
-                <CardProject image="/Image.png" name="Lalalili.com" type="App mobile" desc="lorem sasias asdjhasjhd asdjnjaskd ajsnd jkasdnkas asjdn aksjd asnd akd n"></CardProject>
-                <CardProject image="/Image.png" name="Lalalili.com" type="App mobile" desc="lorem sasias asdjhasjhd asdjnjaskd ajsnd jkasdnkas asjdn aksjd asnd akd n"></CardProject>
-                <CardProject image="/Image.png" name="Lalalili.com" type="App mobile" desc="lorem sasias asdjhasjhd asdjnjaskd ajsnd jkasdnkas asjdn aksjd asnd akd n"></CardProject>
-                <CardProject image="/Image.png" name="Lalalili.com" type="App mobile" desc="lorem sasias asdjhasjhd asdjnjaskd ajsnd jkasdnkas asjdn aksjd asnd akd n"></CardProject>
+                <CardProject v-if="project.length > 0" v-for="(data, i) in project" :key="i" image="/Image.png" :name="data.project_name" :type="data.type_project" :desc="data.description_project" @click="openModalProject(data)"></CardProject>
             </template>
         </templateList>
+        <div class="flex items-center justify-center my-10">
+            <Pagination :currentPage="currentPage" :lastPage="lastPage" @change="getDataProject"/>
+        </div>
     </div>
+    <Modal v-if="selectedProject" v-model:open="openModal" 
+        :name="selectedProject?.project_name" 
+        :image="images" 
+        :imageLogo="selectedProject?.logo_project" 
+        :PtName="selectedProject?.Company" 
+        :durasi="selectedProject?.start_project + '-' + selectedProject?.end_project" 
+        :posisi="selectedProject?.position">
+        <template #buttonBuy>
+            <ButtonRef link="" name="Buy product" class="ml-auto"></ButtonRef>
+        </template>
+        <template #tags>
+            <tags v-for="(tools, i) in selectedProject?.Tech" 
+                    :key="i" 
+                    :nameTool="tools"
+            />
+        </template>
+        <template #tabsDeskription>
+            <Tabs 
+                id="1" 
+                title="Description" 
+                :desc="selectedProject?.project_name" 
+                icon="fas fa-desktop">
+                <p class="text-gray-600">{{ selectedProject?.description_project }}</p>
+            </Tabs>
+        </template>
+        <template #tabsFeature>
+            <Tabs 
+                id="2" 
+                title="Features" 
+                :desc="selectedProject?.project_name" 
+                icon="fas fa-desktop">
+                <p class="text-gray-600">{{ selectedProject?.feature }}</p>
+            </Tabs>
+        </template>
+    </Modal>
 </template>
