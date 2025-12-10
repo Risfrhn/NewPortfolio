@@ -1,7 +1,7 @@
 <script lang="ts" setup>
     import { useRouter } from 'vue-router'
     import axios from 'axios';
-    import { onMounted, ref } from 'vue';
+    import { ref } from 'vue';
     import alert from '@/components/alert.vue';
 
     const showPassword = ref(false); 
@@ -33,7 +33,7 @@
                 alertType.value = 'success'
                 setTimeout(() => {
                     router.push('/admin/Dashboard')
-                }, 1500);
+                }, 3000);
             }
 
         } catch (err: any){
@@ -49,7 +49,7 @@
 
 <template>
     <div class="relative grid grid-cols-12 w-full min-h-screen bg-[#0b0b14] place-items-center overflow-hidden">
-        <alert v-if="alertVisible" :text="alertText" :type="alertType"/>
+        <alert class="z-[9999]" v-if="alertVisible" :text="alertText" :type="alertType"/>
         <div class="absolute z-0 w-[300px] h-[300px] md:w-[400px] md:h-[400px]  rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 opacity-40 animate-flare blur-[120px] top-[-100px] left-[-100px]"></div>
         <div class="z-0 absolute w-[300px] h-[300px] rounded-full bg-gradient-to-r from-pink-400 via-yellow-400 to-red-400 opacity-30 animate-flare-slow blur-[150px] bottom-[40px] right-[0px]"></div>
         <div class="col-span-12 z-10">

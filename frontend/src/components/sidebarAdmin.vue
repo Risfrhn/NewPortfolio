@@ -1,8 +1,16 @@
 <script lang="ts" setup>
    import axios from 'axios';
-   import { onMounted } from 'vue';
+   import { onMounted, ref } from 'vue';
    import { useRouter } from 'vue-router';
+   import alertDecision from './alertDecision.vue';
+   import buttonSubmit from '@/components/buttonSubmitForm.vue';
 
+   const openModal = ref(false)
+   const openModalConfirm = ()=>{
+      openModal.value = true
+   }
+
+   
    const router = useRouter();
    const token = localStorage.getItem('token')
    const logout = async () =>{
@@ -54,7 +62,7 @@
                </a>
             </li>
             <li class="mt-auto">
-               <button @click="logout" href="#" class="flex items-center px-2 py-1.5 text-white rounded-base hover:bg-neutral-tertiary hover:text-fg-brand group">
+               <button @click="openModalConfirm" href="#" class="flex items-center px-2 py-1.5 text-white rounded-base hover:bg-neutral-tertiary hover:text-fg-brand group">
                   <svg class="shrink-0 w-5 h-5 transition duration-75 group-hover:text-fg-brand" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H4m12 0-4 4m4-4-4-4m3-4h2a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3h-2"/></svg>
                   <span class="flex-1 ms-3 whitespace-nowrap">Sign Out</span>
                </button>
@@ -62,4 +70,13 @@
          </ul>
       </div>
    </aside>
+   <alertDecision class="z-[9999]" text="Are you sure you want to log out?" :open="openModal" @update:open="openModal = $event">
+      <template #buttonSubmit>
+         <buttonSubmit 
+            @click="logout" 
+            link="" 
+            name="Yes, logout me">
+         </buttonSubmit>
+      </template>
+   </alertDecision>/>
 </template>

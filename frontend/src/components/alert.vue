@@ -1,41 +1,48 @@
 <script lang="ts" setup>
-    // import { computed, onMounted, ref } from 'vue';
+    import { computed, onMounted, ref } from 'vue';
 
-    // const props = defineProps({
-    //     text : {type:String, required:true},
-    //     type : {type:String, default:'success'},
-    //     duration: {type:Number, default: 0},
-    // })
+    defineSlots<{
+        buttonSubmit: () => any,
+        buttonClose: () => any,
+    }>();
+
+    const props = defineProps({
+        text : {type:String, required:true},
+        type : {type:String, default:'success'},
+        duration: {type:Number, default: 0},
+    })
     
 
-    // const visible = ref(true);
+    const visible = ref(true);
+    const fadeClass = ref('opacity-0 translate-y-4')
 
-    // onMounted(()=>{
-    //     if(props.duration){
-    //         setTimeout (()=>(visible.value = false), props.duration)
-    //     }
-    // })
+    onMounted(()=>{
+        visible.value = true
+        setTimeout(()=>fadeClass.value = 'opacity-100 translate-y-0 transition-all duration-500 ease-out', 50)
+        if(props.duration){
+            setTimeout (()=>(visible.value = false), props.duration)
+        }
+    })
 
-    // const bgClass = computed(() => {
-    //     switch (props.type) {
-    //         case 'success': return 'bg-green-500'
-    //         case 'error': return 'bg-red-500'
-    //         case 'warning': return 'bg-yellow-500'
-    //         default: return 'bg-gray-500'
-    //     }
-    // })
+    const gif = computed(() => {
+        switch (props.type) {
+            case 'success': return '/Success.gif'
+            case 'error': return '/Failed.gif'
+            case 'warning': return '/Warning.gif'
+            default: return 'bg-gray-500'
+        }
+    })
 </script>
 
 <template>
-    <!-- <div v-if="visible" :class="['py-3 px-5 absolute top-5 right-5 rounded-md text-white w-80', bgClass]">
-        <img src="/GifLoading" alt="">
+  <div v-if="visible" class="fixed inset-0 flex items-center justify-center bg-black/30">
+    <div :class="['py-3 px-20 bg-[#1D1D29] rounded-lg flex flex-col items-center justify-center', fadeClass]">
+      <img :src="gif" alt="">
+      <p class="text-xl my-2 font-semibold min-h-[50px] bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent text-center">
         {{ text }}
-    </div> -->
-    <div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 py-3 px-5 rounded-md text-white w-80 bg-[#1D1D29]">
-        <div class="flex flex-col items-center justify-center">
-            <img src="/GifLoading.gif" alt="">
-            <p></p>Success login
-        </div>
+      </p>
     </div>
+  </div>
 </template>
+
 
