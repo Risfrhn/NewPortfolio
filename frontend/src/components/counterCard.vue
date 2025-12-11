@@ -1,19 +1,24 @@
 <script lang="ts" setup>
-    
+    defineProps<{
+        count: Number
+        text : String,
+        subText : String,
+        icon : string
+    }>()
 </script>
 
 <template>
-    <div class="absolute w-80 h-40 bg-white rounded-md">
+    <div class="w-full bg-[#1D1D29] rounded-md backdrop-blur-sm">
         <div class="flex flex-col mx-5 my-5">
             <div class="flex flex-row">
-                <div class="rounded-full bg-black px-3 py-3 me-auto">
-                    <i class="fas fa-laptop-code text-2xl font-semibold bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent"></i>
+                <div class="rounded-full bg-[#12121E] w-14 h-14 me-auto flex items-center justify-center ">
+                    <i :class="['text-2xl font-semibold bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent', icon]"></i>
                 </div>
-                <p class="text-4xl font-semibold bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent">5+</p>
+                <p class="text-6xl font-semibold bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent">{{ count }}</p>
             </div>
             
-            <p class="text-2xl font-semibold bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent">Total project</p>
-            <p>Number of projects completed and managed so far</p>
+            <p class="text-xl font-semibold bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent">{{ text }}</p>
+            <p class="text-xs text-gray-500">{{ subText }}</p>
         </div>
     </div>
 </template>

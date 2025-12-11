@@ -6,7 +6,7 @@
     import templateListProduct from '@/components/listProduct.vue';
     import buttonSubmit from '@/components/buttonSubmitForm.vue';
     import modal from '@/components/modal.vue';
-    import tags from '@/components/iconTools.vue';
+    import tags from '@/components/iconTags.vue';
     import Tabs from "@/components/tabs.vue";
     import ButtonRef from "@/components/buttonRef.vue";
     import Pagination from "@/components/pagginationButton.vue";

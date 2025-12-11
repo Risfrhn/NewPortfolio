@@ -16,7 +16,7 @@
     import templateListProduct from '@/components/listProduct.vue';
     import templateListProject from '@/components/listProject.vue';
     import modal from '@/components/modal.vue';
-    import tags from '@/components/iconTools.vue';
+    import tags from '@/components/iconTags.vue';
     import axios from 'axios';
     
     // Modal

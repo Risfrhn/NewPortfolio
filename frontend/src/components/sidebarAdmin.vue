@@ -78,5 +78,5 @@
             name="Yes, logout me">
          </buttonSubmit>
       </template>
-   </alertDecision>/>
+   </alertDecision>
 </template>

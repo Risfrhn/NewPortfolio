@@ -3,6 +3,7 @@
     import axios from 'axios';
     import { ref } from 'vue';
     import alert from '@/components/alert.vue';
+    import inputField from "@/components/fieldInput.vue"
 
     const showPassword = ref(false); 
     
@@ -24,6 +25,7 @@
                 }
             });
 
+            
             if(res.data.status){
                 const token = res.data.token;
                 localStorage.setItem('token', token);
@@ -58,15 +60,14 @@
                 <p class="text-xs text-center text-gray-500 mb-5">We are happy to see you again</p>
                 <form>
                     <div class="mb-5 relative">
-                        <input v-model="email" type="email" class="border-none rounded-lg block w-full px-3 py-2.5 text-gray-200 placeholder-gray-500 pr-10 bg-[#1e1e1e] shadow-[inset_4px_4px_8px_#141414,inset_-4px_-4px_8px_#2a2a2a] focus:shadow-[inset_6px_6px_12px_#141414,inset_-6px_-6px_12px_#2a2a2a] transition-all duration-300" placeholder="Input Email here..." required />
-
+                        <inputField v-model="email" type="email" placeholder="Input Email here..."/>
                         <span class="absolute inset-y-0 right-2 flex items-center px-3 text-gray-400 pointer-events-none">
                             <i class="fa-regular fa-envelope"></i>
                         </span>
                     </div>
 
                     <div class="relative">
-                        <input :type="showPassword ? 'text' : 'password'" id="password" v-model="password" class="border-none rounded-lg block w-full px-3 py-2.5 text-gray-200 placeholder-gray-500 pr-10 bg-[#1e1e1e] shadow-[inset_4px_4px_8px_#141414,inset_-4px_-4px_8px_#2a2a2a] focus:shadow-[inset_6px_6px_12px_#141414,inset_-6px_-6px_12px_#2a2a2a] transition-all duration-300" placeholder="Input Password here..." required/>
+                        <inputField v-model="password" :type="showPassword ? 'text' : 'password'" placeholder="Input Email here..."/>
                         <a class="absolute inset-y-0 right-2 flex items-center px-3 text-gray-600 cursor-pointer" @click.prevent="showPassword = !showPassword">
                             <i v-if="!showPassword" key="eye" class="fa-regular fa-eye"></i>
                             <i v-else key="slash" class="fa-solid fa-eye-slash"></i>

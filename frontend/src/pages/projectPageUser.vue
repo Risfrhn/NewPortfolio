@@ -8,7 +8,7 @@
     import Modal from '@/components/modal.vue';
     import ButtonRef from '@/components/buttonRef.vue';
     import Tabs from '@/components/tabs.vue';
-    import tags from '@/components/iconTools.vue';
+    import tags from '@/components/iconTags.vue';
     import Pagination from "@/components/pagginationButton.vue";
 
     const openModal = ref(false)
