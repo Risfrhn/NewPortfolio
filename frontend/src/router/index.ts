@@ -1,11 +1,12 @@
-import AdminLayout from '@/User/adminLayout.vue'
-import UserLayout from '@/User/userLayout.vue'
+import adminLayout from '@/User/adminLayout.vue'
+import userLayout from '@/User/userLayout.vue'
 import { createRouter, createWebHistory } from 'vue-router'
-import LandingPageUser from '../pages/landingPageUser.vue'
-import ProjectPageUser from '../pages/projectPageUser.vue'
-import ProductPage from '../pages/productPage.vue'
-import ExperiencePage from '../pages/experiencePage.vue'
-import DashboardPageAdmin from '@/pages/dashboardPageAdmin.vue'
+import landingPageUser from '../pages/landingPageUser.vue'
+import projectPageUser from '../pages/projectPageUser.vue'
+import productPage from '../pages/productPage.vue'
+import experiencePage from '../pages/experiencePage.vue'
+import dashboardPageAdmin from '@/pages/dashboardPageAdmin.vue'
+import productPageAdmin from '@/pages/productPageAdmin.vue'
 
 
 const routes = [
@@ -17,21 +18,22 @@ const routes = [
     },
     {
       path:'/admin',
-      component: AdminLayout,
+      component: adminLayout,
       meta: {requiresAuth: true},
       children:[
-        {path:'Dashboard', name:'DashboardAdmin', component:DashboardPageAdmin},
+        {path:'Dashboard', name:'DashboardAdmin', component:dashboardPageAdmin},
+        {path:'Product', name:'ProductAdmin', component:productPageAdmin},
         {path:':pathMatch(.*)*', redirect:'' }
       ]
     },
     {
       path:'/',
-      component: UserLayout,
+      component: userLayout,
       children:[
-        {path:'', name:'landing', component: LandingPageUser},
-        {path:'Projects', name:'ProjectList', component: ProjectPageUser},
-        {path:'Product', name:'ProductList', component: ProductPage},
-        {path:'Journey', name:'Experience', component: ExperiencePage},     
+        {path:'', name:'landing', component: landingPageUser},
+        {path:'Projects', name:'ProjectList', component: projectPageUser},
+        {path:'Product', name:'ProductList', component: productPage},
+        {path:'Journey', name:'Experience', component: experiencePage},     
       ]
     },
     {

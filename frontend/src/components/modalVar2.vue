@@ -1,8 +1,10 @@
 <script lang="ts" setup>
+
+
     
-    defineProps<{
+    const props = defineProps<{
         name: string,
-        desc: string
+        desc: string,
     }>()
     defineSlots<{
         tagSlot?: ()=>any
@@ -12,13 +14,26 @@
         buttonSubmit?: ()=>any
     }>()
 
+    // const fadeClass = ref('opacity-0 translate-y-4')
+    // watch(
+    //     () => props.open,
+    //     (newVal)=>{
+    //         if(newVal){
+    //             fadeClass.value = "opacity-0 translate-y-4"
+    //             setTimeout(()=>fadeClass.value = 'opacity-100 translate-y-0 transition-all duration-500 ease-out', 50)
+    //         }else{
+    //             fadeClass.value = "opacity-0 translate-y-4"
+    //         }
+    //     }
+    // )
+
     const emit = defineEmits<{(e: 'update:open', value:boolean):void}>()
 </script>
 
 <template>
     
     <div class="fixed inset-0 bg-black/60 z-[9999] flex items-center justify-center p-4">
-        <div class="bg-[#0b0b14] text-white w-full max-w-xl rounded-xl relative max-h-[85vh] overflow-y-auto translate-y-1">
+        <div  class="bg-[#0b0b14] text-white w-full max-w-xl rounded-xl relative max-h-[85vh] overflow-y-auto translate-y-1">
             <div class="grid grid-cols-12 p-5">
                 <div class="col-span-12 text-center flex flex-col justify-center items-center mb-10">
                     <img src="/Forms.gif" alt="" class="w-20">

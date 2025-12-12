@@ -36,8 +36,8 @@
     const fetchHeaderSkill = ref<string[]>([])
     const getDataLanding = async () =>{
         const res = await axios.get('http://localhost:8000/api/Landing')
-        const data = res.data[0]
-        dataLanding.value = res.data[0]
+        const data = res.data
+        dataLanding.value = res.data
         fetchHeaderSkill.value = data.HeaderSkill;
     } 
 

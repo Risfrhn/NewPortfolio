@@ -44,10 +44,10 @@
       <div class="h-full px-3 py-4 overflow-y-auto bg-[#1D1D29] border-e border-default">
          <ul class="space-y-2 font-medium flex flex-col h-full">
             <li>
-               <a href="#" class="flex items-center px-2 py-1.5 text-white rounded-base hover:bg-neutral-tertiary hover:text-fg-brand group">
+               <router-link :to="{name: 'DashboardAdmin'}" class="flex items-center px-2 py-1.5 text-white rounded-base hover:bg-neutral-tertiary hover:text-fg-brand group">
                   <i class="fa-solid fa-table-list"></i>
                   <span class="ms-3">Dashboard</span>
-               </a>
+               </router-link>
             </li>
             <li>
                <a href="#" class="flex items-center px-2 py-1.5 text-white rounded-base hover:bg-neutral-tertiary hover:text-fg-brand group">
@@ -56,10 +56,10 @@
                </a>
             </li>
             <li>
-               <a href="#" class="flex items-center px-2 py-1.5 text-white rounded-base hover:bg-neutral-tertiary hover:text-fg-brand group">
+               <router-link :to="{name: 'ProductAdmin'}" class="flex items-center px-2 py-1.5 text-white rounded-base hover:bg-neutral-tertiary hover:text-fg-brand group">
                   <i class="fa-solid fa-cart-shopping"></i>
                   <span class="flex-1 ms-3 whitespace-nowrap">Product</span>
-               </a>
+               </router-link>
             </li>
             <li class="mt-auto">
                <button @click="openModalConfirm" href="#" class="flex items-center px-2 py-1.5 text-white rounded-base hover:bg-neutral-tertiary hover:text-fg-brand group">

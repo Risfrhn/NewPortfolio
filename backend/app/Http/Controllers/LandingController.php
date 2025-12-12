@@ -10,7 +10,7 @@ class LandingController extends Controller
 {
     public function showLanding(){
         try{
-            $Data = Landing::all();
+            $Data = Landing::first();
             return response()->json($Data);
         }catch (\Throwable $e){
             return response()->json([
@@ -25,32 +25,38 @@ class LandingController extends Controller
     public function createLanding(Request $request){
         try{
             $validated = $request->validate([
-                'HeaderDesk' => 'required|string',
-                'HeaderSkill' => 'required|array',
+                'HeaderDesk' => 'nullable|string',
+                'HeaderSkill' => 'nullable|array',
                 'CV' => 'nullable|mimes:pdf|max:2048',
-                'AboutDesk' => 'required|string',
+                'AboutDesk' => 'nullable|string',
             ]);
             $path = null;
             $Data = Landing::first();
             if(!$Data){
                 $Data = new Landing();
-                $Data->fill($validated);
+                $Data->HeaderDesk = $validated['HeaderDesk'] ?? $Data->HeaderDesk;
+                $Data->AboutDesk = $validated['AboutDesk'] ?? $Data->AboutDesk;
+                $Data->HeaderSkill = $validated['HeaderSkill'] ?? $Data->HeaderSkill;
                 if($request->hasFile('CV')){
-                    $path = $request->file('CV')->store('images/LandingData/');
+                    if($Data->CV && \Storage::exist($Data->CV)){
+                        \Storage::delete($Data->CV);
+                    }
+                    $path = $request->file('CV')->store('LandingData/CV');
+                    $Data->CV = $path;
                 } 
-                $Data->CV = $path;
                 $Data->save();
             }else{
+                $Data->HeaderDesk = $validated['HeaderDesk'] ?? $Data->HeaderDesk;
+                $Data->AboutDesk = $validated['AboutDesk'] ?? $Data->AboutDesk;
+                $Data->HeaderSkill = $validated['HeaderSkill'] ?? $Data->HeaderSkill;
                 if($request->hasFile('CV')){
-                    $path = $request->file('CV')->store('images/LandingData/');
-                }
-                $Data->update([
-                    'HeaderDesk' => $request->HeaderDesk ?? $Data->HeaderDesk, 
-                    'HeaderSkill' => $request->HeaderSkill?? $Data->HeaderSkill, 
-                    'CV' => $path ?? $Data->CV,
-                    'AboutDesk' => $request->AboutDesk?? $Data->AboutDesk,
-                ]);
-                
+                    if($Data->CV && \Storage::exists($Data->CV)){
+                        \Storage::delete($Data->CV);
+                    }
+                    $path = $request->file('CV')->store('LandingData/CV');
+                    $Data->CV = $path;
+                } 
+                $Data->save();
             }
             return response()->json([
                 'status' => true,

@@ -6,7 +6,7 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 // create/update landing
-Route::post('/UpdatedLanding', [LandingController::class, 'createLanding']);
+Route::middleware('auth:sanctum')->post('/UpdatedLanding', [LandingController::class, 'createLanding']);
 Route::get('/Landing', [LandingController::class, 'showLanding']);
 
 // project
