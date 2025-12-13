@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { computed } from 'vue';
+
     const props = defineProps<{
         open:boolean
         image?: string[]
@@ -7,7 +9,12 @@
         PtName?: string
         durasi?: string
         posisi?: string
+        price?: number
+        type?: 'product' | 'portfolio'
     }>()
+
+    const formatIDR = computed(()=>Intl.NumberFormat('id-ID', {style: 'currency', currency: 'IDR'}).format(props.price ?? 0))
+
     defineSlots<{
         buttonBuy?: () => any
         buttonClose?: () => any
@@ -50,8 +57,9 @@
                         <img :src="`${imageLogo}`" alt="" class="md:w-[90px] md:h-[90px] w-[70px] h-[70px]  rounded-md md:rounded-xl"></img>
                         <div class="col-span-12">
                             <p class="text-2xl font-bold px-3 bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent">{{ name }}</p>
-                            <p class="text-gray-400 px-3">{{PtName}}</p>
-                            <p class="text-xs text-gray-400 px-3">{{durasi}} || {{posisi}}</p>
+                            <p v-if="props.type === 'product'" class="text-gray-400 px-3 text-xl">{{formatIDR}}</p>
+                            <p v-if="props.type === 'portfolio'" class="text-gray-400 px-3">{{PtName}}</p>
+                            <p v-if="props.type === 'portfolio'" class="text-xs text-gray-400 px-3">{{durasi}} || {{posisi}}</p>
                         </div>
                         <div class="col-span-12 mt-10 md:mt-0 md:ml-auto md:mx-0 mx-auto md:flex flex-col gap-2">
                             <slot name="buttonBuy"/>

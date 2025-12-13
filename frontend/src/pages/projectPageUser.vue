@@ -26,7 +26,7 @@
     const currentPage = ref(1)
     const lastPage  = ref(1)
     const getDataProject = async (page = 1) => {
-        const res = await axios.get(`http://localhost:8000/api/Project/portfolio`)
+        const res = await axios.get(`http://localhost:8000/api/Project/portfolio?page=${page}`)
         project.value = res.data.data.data
         currentPage.value = res.data.data.current_page
         lastPage.value = res.data.data.last_page
@@ -47,7 +47,6 @@
 
         <templateList title="My projects" desc="Some of my recent projects">
             <template #control>
-                a
                 <searchButton type="portfolio" @update="project = $event"/>
                 <filterButton type="portfolio" @update="project = $event"/>
             </template>

@@ -1,31 +1,16 @@
 <script lang="ts" setup>
-
-
-    
     const props = defineProps<{
         name: string,
         desc: string,
     }>()
     defineSlots<{
         tagSlot?: ()=>any
+        inputField0?: ()=>any
         inputField1?: ()=>any
         inputField2?: ()=>any
         inputField3?: ()=>any
         buttonSubmit?: ()=>any
     }>()
-
-    // const fadeClass = ref('opacity-0 translate-y-4')
-    // watch(
-    //     () => props.open,
-    //     (newVal)=>{
-    //         if(newVal){
-    //             fadeClass.value = "opacity-0 translate-y-4"
-    //             setTimeout(()=>fadeClass.value = 'opacity-100 translate-y-0 transition-all duration-500 ease-out', 50)
-    //         }else{
-    //             fadeClass.value = "opacity-0 translate-y-4"
-    //         }
-    //     }
-    // )
 
     const emit = defineEmits<{(e: 'update:open', value:boolean):void}>()
 </script>
@@ -40,6 +25,9 @@
                     <slot name="tagSlot"/>
                     <p class="text-2xl font-bold bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent my-3">{{ name }}</p>
                     <p class="text-xs w-[300px] text-gray-500">{{ desc }}</p>
+                </div>
+                <div class="col-span-12 grid grid-cols-1 gap-5 mb-5">
+                    <slot name="inputField0"/>
                 </div>
                 <div class="col-span-12 grid grid-cols-1 gap-5 mb-5">
                     <slot name="inputField1"/>

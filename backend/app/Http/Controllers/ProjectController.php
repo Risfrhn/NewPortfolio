@@ -27,6 +27,7 @@ class ProjectController extends Controller
                 'type'=> 'required|in:portfolio,product',
                 'type_project'=> 'required|in:Website, App mobile, UI/UX Design, App dekstop, Documentation',
                 'Tech'=> 'required|array',
+                'Price'=> 'nullable|decimal',
                 'feature'=> 'required|string',
                 'link_website'=> 'required|string',
                 'link_app'=> 'required|string',
@@ -83,6 +84,7 @@ class ProjectController extends Controller
                 'type'=> 'nullable|in:portfolio,product',
                 'type_project'=> 'nullable|in:Website, App mobile, UI/UX Design, App dekstop, Documentation',
                 'Tech'=> 'nullable|array',
+                'Price'=> 'nullable|decimal',
                 'feature'=> 'nullable|string',
                 'link_website'=> 'nullable|string',
                 'link_app'=> 'nullable|string',
@@ -129,7 +131,7 @@ class ProjectController extends Controller
     public function deleteProject($id_project){
         try{
             $Data = Project::findOrFail($id_project);
-            $fileProject = 'images/projects/' . Str::slug($Data->name);
+            $fileProject = storage_path('app/private/images/' . Str::slug($Data->name));
             $fileProject = $this->deleteFolder($fileProject);
             $Data->delete();
 
@@ -150,12 +152,15 @@ class ProjectController extends Controller
 
 
     private function deleteFolder($filepath){
+        if(!is_dir($filepath)) return false;
         $files = array_diff(scandir($filepath), ['.', '..']);
 
         foreach ($files as $file){
-            $fileLoc = $filepath . '/' . $file;
+            $fileLoc = $filepath . DIRECTORY_SEPARATOR . $file;
 
-            if (is_file($fileLoc)) {
+            if (is_dir($fileLoc)) {
+                $this->deleteFolder($fileLoc);
+            }else{
                 unlink($fileLoc); 
             }
         }

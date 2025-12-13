@@ -25,6 +25,7 @@ return new class extends Migration
             $table->enum('type_project', ['Website', 'App mobile', 'UI/UX Design', 'App dekstop', 'Documentation'])->nullable();
             $table->json('Tech')->nullable();
             $table->string('feature')->nullable();
+            $table->decimal('price', 15, 2)->nullable();
             $table->string('link_website')->nullable();
             $table->string('link_app')->nullable();
             $table->timestamps();

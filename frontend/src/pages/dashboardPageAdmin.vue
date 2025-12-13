@@ -33,9 +33,6 @@
     
     
     const CV = ref<File | null>(null)
-    
-    
-
     const onFileChange = (e: Event) => {
         const target = e.target as HTMLInputElement
         if (target.files && target.files.length > 0) {
@@ -152,10 +149,10 @@
             <counterCard :count="countPortfolio" text="Total project" subText="Lorem ipsum dolor si amet" icon="fas fa-laptop-code"/>
             <counterCard :count=20 text="Total user" subText="Lorem ipsum dolor si amet" icon="fas fa-laptop-code"/>
         </div>
-        <div class="flex flex-row my-5">
+        <!-- <div class="flex flex-row my-5">
             <div class="w-full bg-white p-5">
                 <p>Dasboard element</p>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
