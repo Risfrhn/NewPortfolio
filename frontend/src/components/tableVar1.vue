@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-    import buttonAction from './buttonAction.vue';
-
+ 
     const props = defineProps<{
         columns: { key:string, label:string} []
         rows: any[]

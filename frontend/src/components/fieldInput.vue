@@ -5,7 +5,6 @@
         label?: string
     }>()
     const model = defineModel<string>()
-    // const emit = defineEmits<{(e: "update:VModel", value: string): void;}>()
 </script>
 
 <template>

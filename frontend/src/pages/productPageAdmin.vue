@@ -14,10 +14,24 @@
     import scrollImage from '@/components/scrollImageAction.vue'
     import inputImage from '@/components/inputFileVar1.vue'
     import inputField from "@/components/fieldInput.vue"
+    import tagsInput from "@/components/fieldInputArray.vue"
+    import buttonSubmit from "@/components/buttonSubmitFormVar2.vue"
+    import dropdown from "@/components/dropdownVar1.vue"
+    import alert from "@/components/alert.vue"
+    import buttonAddData from "@/components/buttonSubmitForm.vue"
 
     // data project
     const project = ref<any[]>([])
     const loading = ref(false)
+
+    // token sanctum
+    const token = localStorage.getItem('token')
+
+    // alert
+    const alertVisible = ref(false)
+    const alertText = ref('')
+    const alertType = ref<'success' | 'error' | 'warning'>('success');
+
 
     // pagination
     const currentPage = ref(1)
@@ -28,14 +42,38 @@
     const openModalAction = ref(false)
     const selectedProject = ref<any>(null)
     const selectedProjectAction = ref<any>(null)
+    const selectedType = ref('')
+    const Tech = ref<string[]>([])
+    const modalMode = ref<'add' | 'update'>('add')
     const openModalProject = (product: any)=>{
         selectedProject.value = product
         openModal.value = true
     }
     const openModalProjectAction = (product: any)=>{
-        selectedProjectAction.value = product
+        modalMode.value = 'update';
+        selectedProjectAction.value = {...product}
+        Tech.value = product.Tech 
+        selectedType.value = product.type_project;
+        openModalAction.value = true
+        console.log(selectedProjectAction.value)
+    }
+    const openModalProjectActionAdd = (product: any)=>{
+        modalMode.value = 'add';
+        project.value = product
+        Tech.value = product.Tech 
+        selectedType.value = product.type_project;
         openModalAction.value = true
     }
+
+    // Formating IDR
+    const formatingIDR = (value: number | null)=>{
+        return new Intl.NumberFormat('id-ID',{
+            style: 'currency',
+            currency: 'IDR'
+        }).format(value ?? 0)
+    }
+
+    // fetch data tabel
     const columns = [
         {key:'project_name', label:'Product name'},
         {key:'type_project', label:'Category'},
@@ -44,7 +82,13 @@
         {key:'action', label:'Action'},
     ]
 
-    // fetch data tabel
+    const dataDropdown = [
+        {key: 'Website', value:'Website'},
+        {key: 'App mobile', value:'App mobile'},
+        {key: 'UI/UX Design', value:'UI/UX Design'},
+        {key: 'App desktop', value:'App desktop'},
+        {key: 'Documentation', value:'Documentation'},
+    ]
     const fetchData = async (page = 1) => {
         const res = await axios.get(`http://localhost:8000/api/Project/product?page=${page}`)
         project.value = res.data.data.data
@@ -58,9 +102,104 @@
         fetchData()
     }
 
+    const imageFlyer = ref<File | null>(null)
+    const onFlyerChange = (e: Event)=>{
+        const target = e.target as HTMLInputElement
+        if(target.files && target.files.length > 0){
+            imageFlyer.value = target.files[0] ?? null
+        }else{
+            imageFlyer.value = null
+        }
+    }
+
+    const imageLogo = ref<File | null>(null)
+    const onLogoChange = (e: Event)=>{
+        const target = e.target as HTMLInputElement
+        if(target.files && target.files.length > 0){
+            imageLogo.value = target.files[0] ?? null
+            
+        }else{
+            imageLogo.value = null
+        }
+    }
+
+    const addData = async()=>{
+        const data = new FormData()
+        data.append('project_name', selectedProjectAction.value.project_name)
+        data.append('description_project', selectedProjectAction.value.description_project)
+        data.append('feature', selectedProjectAction.value.feature)
+        data.append('position', selectedProjectAction.value.position)
+        data.append('type_project',  selectedType.value)
+        data.append('price', Number(selectedProjectAction.value.price).toFixed(2))
+        data.append('link_app', selectedProjectAction.value.link_app)
+        data.append('link_website', selectedProjectAction.value.link_website)
+        Tech.value.forEach(s=>data.append(`Tech[]`, s))
+        if(imageFlyer.value){
+            data.append('flyer_image', imageFlyer.value ?? null)
+        }
+        if(imageLogo.value){
+            data.append('logo_project', imageLogo.value ?? null)
+        }
+        try{
+            await axios.post(`http://localhost:8000/api/Project/CreateProjects`, data,
+                {
+                    headers:{
+                        'content-type' : 'multipart/form-data',
+                        'Authorization' : `Bearer ${token}`
+                    }
+                }
+            )
+            alertVisible.value = true
+            alertText.value = 'Success update product'
+            alertType.value = 'success'
+            setTimeout(() => {
+                openModalAction.value = false
+                alertVisible.value = false
+                fetchData()
+            }, 3000);
+        }catch(err: any){
+            console.error('error', err.message?.data || err.message)
+        }
+    }
+
     const updateData = async (id: number)=>{
-        const res = await axios.patch(`http://localhost:8000/api/Project/UpdateProjects/${id}`)
-        fetchData()
+        const data = new FormData()
+        data.append('project_name', selectedProjectAction.value.project_name)
+        data.append('description_project', selectedProjectAction.value.description_project)
+        data.append('feature', selectedProjectAction.value.feature)
+        data.append('position', selectedProjectAction.value.position)
+        data.append('type_project',  selectedType.value)
+        data.append('price', Number(selectedProjectAction.value.price).toFixed(2))
+        data.append('link_app', selectedProjectAction.value.link_app)
+        data.append('link_website', selectedProjectAction.value.link_website)
+        Tech.value.forEach(s=>data.append(`Tech[]`, s))
+        if(imageFlyer.value){
+            data.append('flyer_image', imageFlyer.value ?? null)
+        }
+        if(imageLogo.value){
+            data.append('logo_project', imageLogo.value ?? null)
+        }
+        data.append('_method', 'PATCH');
+        try{
+            await axios.post(`http://localhost:8000/api/Project/UpdateProjects/${id}`, data,
+                {
+                    headers:{
+                        'content-type' : 'multipart/form-data',
+                        'Authorization' : `Bearer ${token}`
+                    }
+                }
+            )
+            alertVisible.value = true
+            alertText.value = 'Success update product'
+            alertType.value = 'success'
+            setTimeout(() => {
+                openModalAction.value = false
+                alertVisible.value = false
+                fetchData()
+            }, 3000);
+        }catch (err: any){
+            console.error('error: ', err.response?.data || err.message)
+        }
     }
 
     onMounted(()=>{
@@ -85,15 +224,22 @@
             <counterCard :count=20 text="Total user" subText="Lorem ipsum dolor si amet" icon="fas fa-laptop-code"/>
         </div>
 
-        <div class="flex justify-end gap-2 my-5">
-            <searchButton type="product" @update="project = $event"/>
-            <filterButton type="product" @update="project = $event"/>
-        </div>
-        
+        <div class="flex flex-row gap-3 my-5">
+            <div class="flex justify-start">
+                <buttonAddData name="Add Data" @click="openModalProjectActionAdd(project)"/>
+            </div>
+            <div class="flex ml-auto gap-2">
+                <searchButton type="product" @update="project = $event"/>
+                <filterButton type="product" @update="project = $event"/>
+            </div>
+        </div>      
 
         <tableProduct :columns="columns" :rows="project" :loading="loading">
             <template #cell-Tech="{row}">
                 <tags class="scale-75" v-for="(tools, i) in row.Tech" :key="i" :nameTool="tools"/>
+            </template>
+            <template #cell-price="{row}">
+                {{ formatingIDR(row.price) }}
             </template>
             <template #cell-action="{row}">
                 <buttonAction name="Edit" type="edit" @click="openModalProjectAction(row)"/>
@@ -137,25 +283,31 @@
         </template>
     </Modal>
     <ModalAction v-if="selectedProjectAction && openModalAction" v-model:open="openModalAction"
-        name="Update product"
+        :name="modalMode === 'add' ? 'Add product' : 'Update product'"
         desc="Lorem ipsum dolor si amet"
     >
         <template #inputField0>
-            <scrollImage/>
+            <scrollImage />
+            <inputImage v-if="selectedProjectAction" @change="onFlyerChange" :src="`http://localhost:8000/storage/${selectedProjectAction.flyer_image}`"/>
+            <inputImage v-if="selectedProjectAction" @change="onLogoChange"/>
         </template>
          <template #inputField2>
-            <inputImage/>
-            <inputImage/>
-            <inputField type="text" placeholder="Input text header here" label="Project name"/>
-            <inputField type="text" placeholder="Input text about here"  label="Position"/>
-            <inputField type="text" placeholder="Input text header here" label="Type project"/>
-            <inputField type="text" placeholder="Input text about here"  label="Price"/>
-            <inputField type="text" placeholder="Input text header here" label="Link app"/>
-            <inputField type="text" placeholder="Input text about here"  label="Link web"/>
+            <inputField type="text" placeholder="Input text header here" label="Project name" v-model="selectedProjectAction.project_name"/>
+            <inputField type="text" placeholder="Input text about here"  label="Position" v-model="selectedProjectAction.position"/>
+            <dropdown label="Project type" :drop="dataDropdown" v-model="selectedType"/>
+            <inputField type="text" placeholder="Input text about here"  label="Price" v-model="selectedProjectAction.price"/>
+            <inputField type="text" placeholder="Input text header here" label="Link app" v-model="selectedProjectAction.link_app"/>
+            <inputField type="text" placeholder="Input text about here"  label="Link web" v-model="selectedProjectAction.link_website"/>
         </template>
         <template #inputField1>
-            <inputField type="text" placeholder="Input text about here"  label="Description project"/>
-            <inputField type="text" placeholder="Input text about here"  label="Tech stack"/>
+            <inputField type="text" placeholder="Input text about here"  label="Description project" v-model="selectedProjectAction.description_project"/>
+            <inputField type="text" placeholder="Input text about here"  label="Feature" v-model="selectedProjectAction.feature"/>
+        </template>
+        <template #buttonSubmit>
+            <tagsInput v-model="Tech"/>
+            <buttonSubmit v-if="modalMode === 'update'" name="Submit form" @click="()=>updateData(selectedProjectAction.id)"/>
+            <buttonSubmit v-if="modalMode === 'add'" name="Submit form" @click="()=>addData()"/>    
         </template>
     </ModalAction>
+    <alert class="z-[9999]" v-if="alertVisible" :type="alertType" :text="alertText"/>
 </template>

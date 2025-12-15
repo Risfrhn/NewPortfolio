@@ -1,7 +1,6 @@
 <script lang="ts" setup>
     import { ref } from 'vue';
     import tags from "@/components/iconTags.vue"
-    import buttonAdd from "@/components/buttonSubmitForm.vue"
 
     const model = defineModel<string[]>()
 

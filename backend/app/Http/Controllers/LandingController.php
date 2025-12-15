@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\Models\LandingModel as Landing;
+use Illuminate\Support\Facades\Storage;
 use Throwable;
 
 class LandingController extends Controller
@@ -38,8 +39,8 @@ class LandingController extends Controller
                 $Data->AboutDesk = $validated['AboutDesk'] ?? $Data->AboutDesk;
                 $Data->HeaderSkill = $validated['HeaderSkill'] ?? $Data->HeaderSkill;
                 if($request->hasFile('CV')){
-                    if($Data->CV && \Storage::exist($Data->CV)){
-                        \Storage::delete($Data->CV);
+                    if($Data->CV && Storage::exist($Data->CV)){
+                        Storage::delete($Data->CV);
                     }
                     $path = $request->file('CV')->store('LandingData/CV');
                     $Data->CV = $path;
@@ -50,8 +51,8 @@ class LandingController extends Controller
                 $Data->AboutDesk = $validated['AboutDesk'] ?? $Data->AboutDesk;
                 $Data->HeaderSkill = $validated['HeaderSkill'] ?? $Data->HeaderSkill;
                 if($request->hasFile('CV')){
-                    if($Data->CV && \Storage::exists($Data->CV)){
-                        \Storage::delete($Data->CV);
+                    if($Data->CV && Storage::exists($Data->CV)){
+                        Storage::delete($Data->CV);
                     }
                     $path = $request->file('CV')->store('LandingData/CV');
                     $Data->CV = $path;

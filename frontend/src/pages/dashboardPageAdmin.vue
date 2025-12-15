@@ -79,8 +79,6 @@
             formData.append('CV', CV.value) 
         }
 
-        console.log(dataModal.value.CV)
-
         try{
             await axios.post(`http://localhost:8000/api/UpdatedLanding`, formData, 
                 {

@@ -84,33 +84,41 @@ class ProjectController extends Controller
                 'type'=> 'nullable|in:portfolio,product',
                 'type_project'=> 'nullable|in:Website, App mobile, UI/UX Design, App dekstop, Documentation',
                 'Tech'=> 'nullable|array',
-                'Price'=> 'nullable|decimal',
+                'price'=> 'nullable|numeric',
                 'feature'=> 'nullable|string',
                 'link_website'=> 'nullable|string',
                 'link_app'=> 'nullable|string',
             ]);
-            
-            $path = null;
-            $files = [
-                'logo_project' => 'logo_project',
-                'flyer_image' => 'flyer_image'
-            ];
-            foreach($files as $input => $column){
-                if ($request->hasFile($input)) {
-                    $file = $request->file($input);
-                    $folder = 'images' . Str::slug($Data->project_name);
-                    if(!storage::exists($folder)){
-                        Storage::makeDirectory($folder);
-                    }
-                    if($Data->{$input} && Storage::exists($Data->{$input})){
-                        Storage::delete($Data->{$input});
-                    }
-                    $newFileName = $Data->project_name . $column;
-                    $path = $file->storeAs($folder, $newFileName);
-                    $Data->{$input} = $path ? 'storage/' . $path : null;
+
+            $Data->project_name = $validated['project_name'] ?? $Data->project_name;
+            $Data->Company = $validated['Company'] ?? $Data->Company;
+            $Data->start_project = $validated['start_project'] ?? $Data->start_project;
+            $Data->end_project = $validated['end_project'] ?? $Data->end_project;
+            $Data->position = $validated['position'] ?? $Data->position;
+            $Data->description_project = $validated['description_project'] ?? $Data->description_project;
+            $Data->type = $validated['type'] ?? $Data->type;
+            $Data->type_project = $validated['type_project'] ?? $Data->type_project;
+            $Data->Tech = $validated['Tech'] ?? $Data->Tech;
+            $Data->price = $validated['price'] ?? $Data->price;
+            $Data->feature = $validated['feature'] ?? $Data->feature;
+            $Data->link_website = $validated['link_website'] ?? $Data->link_website;
+            $Data->link_app = $validated['link_app'] ?? $Data->link_app;
+            if($request->hasFile('logo_project')){
+                if($Data->logo_project && Storage::exists($Data->logo_project)){
+                    Storage::delete($Data->logo_project);
                 }
+                $path = $request->file('logo_project')->store('project/'. $Data->project_name . '/logo', 'public');
+                $Data->logo_project = $path;
             }
-            $Data->fill($validated);
+            if($request->hasFile('flyer_image')){
+                if($Data->flyer_image && Storage::exists($Data->flyer_image)){
+                    Storage::delete($Data->flyer_image);
+                }
+                $path = $request->file('flyer_image')->store('project/'. $Data->project_name . '/flyer', 'public');
+                $Data->flyer_image = $path;
+            }
+            
+            // return response()->json($request->all());
             $Data->save();
             return response()->json([
                 'status' => true,
@@ -249,3 +257,28 @@ class ProjectController extends Controller
         ]);
     }
 }
+
+
+
+
+// $path = null;
+            // $files = [
+            //     'logo_project' => 'logo_project',
+            //     'flyer_image' => 'flyer_image'
+            // ];
+            // foreach($files as $input => $column){
+            //     if ($request->hasFile($input)) {
+            //         $file = $request->file($input);
+            //         $folder = 'images' . Str::slug($Data->project_name);
+            //         if(!storage::exists($folder)){
+            //             Storage::makeDirectory($folder);
+            //         }
+            //         if($Data->{$input} && Storage::exists($Data->{$input})){
+            //             Storage::delete($Data->{$input});
+            //         }
+            //         $newFileName = $Data->project_name . $column;
+            //         $path = $file->storeAs($folder, $newFileName);
+            //         $Data->{$input} = $path ? 'storage/' . $path : null;
+            //     }
+            // }
+            // $Data->fill($validated);
