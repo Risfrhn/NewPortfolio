@@ -44,8 +44,6 @@
     const openModal = ref(false)
     const openModalAction = ref(false)
     
-    // const selectedType = ref('')
-    // const Tech = ref<string[]>([])
     const modalMode = ref<'add' | 'update'>('add')
     const openDetailProduct = (product: any)=>{
         detailProduct.value = product
@@ -55,18 +53,9 @@
         modalMode.value = mode
         formDataProduct.value = product ? {...product, Tech: product.Tech ? [...product.Tech] : []}
         : createEmptyProduct()
-        // Tech.value = product.Tech 
-        // formDataProduct.value = product.type_project;
         openModalAction.value = true
-        // console.log(selectedProjectAction.value)
     }
-    // const openModalProjectActionAdd = (product: any)=>{
-    //     modalMode.value = 'add';
-    //     project.value = product
-    //     Tech.value = product.Tech 
-    //     selectedType.value = product.type_project;
-    //     openModalAction.value = true
-    // }
+    
 
     // Formating IDR
     const formatingIDR = (value: number | null)=>{
@@ -85,12 +74,19 @@
         {key:'action', label:'Action'},
     ]
 
-    const dataDropdown = [
+    const dataTypeProject = [
         {key: 'Website', value:'Website'},
         {key: 'App mobile', value:'App mobile'},
         {key: 'UI/UX Design', value:'UI/UX Design'},
         {key: 'App dekstop', value:'App dekstop'},
         {key: 'Documentation', value:'Documentation'},
+    ]
+
+    const dataPosition = [
+        {key: 'Fullstack', value:'Fullstack'},
+        {key: 'Backend', value:'Backend'},
+        {key: 'Frontend', value:'Frontend'},
+        {key: 'System analyst', value:'System analyst'},
     ]
 
     const fetchData = async (page = 1) => {
@@ -126,14 +122,21 @@
             imageLogo.value = null
         }
     }
+
+    const imagePreview = ref<File[]>([])
+    const onPreviewChange = (file: File[])=>{
+        imagePreview.value = file
+    }
+
+
     const createEmptyProduct = () => ({
         project_name: '',
-        type_project: '',
+        type_project: 'Website',
         price: 0,
         Tech: [],
         description_project: '',
         feature: '',
-        position: '',
+        position: 'Fullstack',
         link_app: '',
         link_website: '',
         flyer_image: null,
@@ -142,12 +145,13 @@
 
     const addData = async()=>{
         const data = new FormData()
+        imagePreview.value.forEach((img:File) => data.append(`image_preview[]`, img));
         data.append('project_name', formDataProduct.value.project_name)
         data.append('description_project', formDataProduct.value.description_project)
         data.append('feature', formDataProduct.value.feature)
-        data.append('position', formDataProduct.value.position)
+        data.append('position', formDataProduct.value.position ?? 'Fullstack')
         data.append('type',  'product')
-        data.append('type_project',  formDataProduct.value.type_project)
+        data.append('type_project',  formDataProduct.value.type_project ?? 'Website')
         data.append('price', Number(formDataProduct.value.price).toFixed(2))
         data.append('link_app', formDataProduct.value.link_app)
         data.append('link_website', formDataProduct.value.link_website)
@@ -185,9 +189,9 @@
         data.append('project_name', formDataProduct.value.project_name)
         data.append('description_project', formDataProduct.value.description_project)
         data.append('feature', formDataProduct.value.feature)
-        data.append('position', formDataProduct.value.position)
+        data.append('position', formDataProduct.value.position ?? 'Fullstack')
         data.append('type',  'product')
-        data.append('type_project',  formDataProduct.value.type_project)
+        data.append('type_project',  formDataProduct.value.type_project ?? 'Website')
         data.append('price', Number(formDataProduct.value.price).toFixed(2))
         data.append('link_app', formDataProduct.value.link_app)
         data.append('link_website', formDataProduct.value.link_website)
@@ -307,14 +311,14 @@
         desc="Lorem ipsum dolor si amet"
     >
         <template #inputField0>
-            <scrollImage />
-            <inputImage v-if="formDataProduct" @change="onFlyerChange" :src="`http://localhost:8000/storage/${formDataProduct.flyer_image}`"/>
-            <inputImage v-if="formDataProduct" @change="onLogoChange"/>
+            <scrollImage :images="formDataProduct.get_preview_image" @update="onPreviewChange"/>
+            <inputImage label="Flyer image" v-if="formDataProduct" @change="onFlyerChange" :src="formDataProduct.flyer_image ? `http://localhost:8000/storage/${formDataProduct.flyer_image}` : ''"/>
+            <inputImage label="Logo Image" v-if="formDataProduct" @change="onLogoChange" :src="formDataProduct.logo_project ? `http://localhost:8000/storage/${formDataProduct.logo_project}` : ''"/>
         </template>
          <template #inputField2>
             <inputField type="text" placeholder="Input text header here" label="Project name" v-model="formDataProduct.project_name"/>
-            <inputField type="text" placeholder="Input text about here"  label="Position" v-model="formDataProduct.position"/>
-            <dropdown label="Project type" :drop="dataDropdown" v-model="formDataProduct.type_project"/>
+            <dropdown label="Position" :drop="dataPosition" v-model="formDataProduct.position"/>
+            <dropdown label="Project type" :drop="dataTypeProject" v-model="formDataProduct.type_project"/>
             <inputField type="text" placeholder="Input text about here"  label="Price" v-model="formDataProduct.price"/>
             <inputField type="text" placeholder="Input text header here" label="Link app" v-model="formDataProduct.link_app"/>
             <inputField type="text" placeholder="Input text about here"  label="Link web" v-model="formDataProduct.link_website"/>

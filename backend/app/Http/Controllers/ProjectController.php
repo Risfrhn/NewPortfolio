@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProjectModel as Project;
+use App\Models\ProjectImage as ProjectImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -16,6 +17,8 @@ class ProjectController extends Controller
 
             // VALIDATION
             $validated = $request->validate([
+                'image_preview' => 'nullable|array',
+                'image_preview.*' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
                 'logo_project' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
                 'flyer_image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
                 'project_name' => 'nullable|string',
@@ -25,7 +28,7 @@ class ProjectController extends Controller
                 'position'=>'nullable|in:Fullstack,Backend,Frontend,System analyst',
                 'description_project'=> 'nullable|string',
                 'type'=> 'nullable|in:portfolio,product',
-                'type_project'=> 'nullable|in:Website, App mobile, UI/UX Design, App dekstop, Documentation',
+                'type_project'=> 'nullable|in:Website,App mobile,UI/UX Design,App dekstop,Documentation',
                 'Tech'=> 'nullable|array',
                 'Price'=> 'nullable|decimal',
                 'feature'=> 'nullable|string',
@@ -36,21 +39,32 @@ class ProjectController extends Controller
             $Data = new Project();
             $Data->fill($validated);
 
-            $path = null;
-            $files = [
-                'logo_project' => 'logo_project',
-                'flyer_image' => 'flyer_image'
-            ];
-            foreach($files as $input => $column){
-                if ($request->hasFile($input)) {
-                    $file = $request->file($input);
-                    $newFileName = $Data->project_name . "-" . $column;
-                    $path = $file->storeAs('images/' . Str::slug($Data->project_name), $newFileName);
-                    $Data->{$input} = $path ? 'storage/' . $path : null;
+             if($request->hasFile('logo_project')){
+                if($Data->logo_project && Storage::exists($Data->logo_project)){
+                    Storage::delete($Data->logo_project);
                 }
+                $path = $request->file('logo_project')->store('project/'. $Data->project_name . '/logo', 'public');
+                $Data->logo_project = $path;
             }
+            if($request->hasFile('flyer_image')){
+                if($Data->flyer_image && Storage::exists($Data->flyer_image)){
+                    Storage::delete($Data->flyer_image);
+                }
+                $path = $request->file('flyer_image')->store('project/'. $Data->project_name . '/flyer', 'public');
+                $Data->flyer_image = $path;
+            }
+            
             $Data->save();
 
+            if($request->hasFile('image_preview')){
+                foreach($request->file('image_preview') as $file){
+                    $path = $file->store('project/'. $Data->project_name . '/preview', 'public');
+                    ProjectImage::create([
+                        'id_Project' => $Data->id,
+                        'path_image' => $path
+                    ]);
+                }
+            }
             return response()->json([
                 'status' => true,
                 'message' => 'Data berhasil ditambahkan',
@@ -82,7 +96,7 @@ class ProjectController extends Controller
                 'position'=>'nullable|in:Fullstack,Backend,Frontend,System analyst',
                 'description_project'=> 'nullable|string',
                 'type'=> 'nullable|in:portfolio,product',
-                'type_project'=> 'nullable|in:Website, App mobile, UI/UX Design, App dekstop, Documentation',
+                'type_project'=> 'nullable|in:Website,App mobile,UI/UX Design,App dekstop,Documentation',
                 'Tech'=> 'nullable|array',
                 'price'=> 'nullable|numeric',
                 'feature'=> 'nullable|string',
@@ -177,7 +191,10 @@ class ProjectController extends Controller
 
     public function showByType($Type){
         try{
-            $data = Project::where('type', $Type)->paginate(12);
+            $data = Project::with('getPreviewImage')
+            ->where('type', $Type)
+            ->paginate(12);
+
             return response()->json([
                 'status' => true,
                 'message' => 'data berhasil ditampilkan semua',

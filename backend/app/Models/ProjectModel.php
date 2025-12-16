@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\ProjectImage as Image;
 
 class ProjectModel extends Model
 {
@@ -27,4 +28,8 @@ class ProjectModel extends Model
     protected $casts = [
         'Tech' => 'array'
     ];
+
+    public function getPreviewImage(){
+        return $this->hasMany(Image::class, 'id_Project');
+    }
 }

@@ -2,19 +2,30 @@
     import { ref } from 'vue';
 
     const dataImage = ref<File[]>([ ])
+    const images = ref<{id: number, path: string}[]>([])
     const input = ref<HTMLInputElement | null>(null)
+    const emit = defineEmits<{(e: 'update', files: File[]): void}>()
+    interface BackendImage {
+    id: number;
+    path_image: string;
+}
+
+const props = defineProps<{ images?: BackendImage[] }>()
     function addItem(){
         if(!input.value?.files)return
         dataImage.value.push(...Array.from(input.value?.files))
+        emit('update', dataImage.value)
         input.value.value = ''
     }
 
     function removeItem(index: number){
         dataImage.value?.splice(index, 1)
+        emit('update', dataImage.value)
     }
 
-    const previewImage = (file: File)=>{
-        return URL.createObjectURL(file)
+    const previewImage = (file: File | BackendImage)=>{
+        if ('path_image' in file) return `http://localhost:8000/storage/${file.path_image}`;
+        return URL.createObjectURL(file as File)
     }
 </script>
 
@@ -33,11 +44,18 @@
      </div>
     <!-- Show value input -->
     <div class="w-full overflow-x-auto">
-        <div class="flex flex-row gap-2 min-w-max">
-            <div class="relative bg-gray-800 py-5 px-5 rounded-md" v-for="(item, i) in dataImage" :key="i">
-                <img :src="previewImage(item)" alt="" class="w-24">
-                <button type="button" @click="removeItem(i)" class="absolute top-1 right-1 py-1 px-3 bg-red-500 text-white rounded-full">X</button>
+       <div class="flex flex-col gap-5">
+            <div class="flex flex-row gap-2 min-w-max">
+                <div class="relative bg-gray-800 py-5 px-5 rounded-md" v-for="(item, i) in dataImage" :key="i">
+                    <img :src="previewImage(item)" alt="" class="w-24">
+                    <button type="button" @click="removeItem(i)" class="absolute top-1 right-1 py-1 px-3 bg-red-500 text-white rounded-full">X</button>
+                </div>
             </div>
-        </div>
+            <div class="flex flex-row gap-2 min-w-max">
+                <div v-for="(img, i) in props.images" :key="img.id" class="relative bg-gray-800 py-5 px-5 rounded-md">
+                    <img :src="previewImage(img)" class="w-24" />
+                </div>
+            </div>
+       </div>
     </div>
 </template>
