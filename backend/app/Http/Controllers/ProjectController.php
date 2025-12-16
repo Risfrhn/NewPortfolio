@@ -16,21 +16,21 @@ class ProjectController extends Controller
 
             // VALIDATION
             $validated = $request->validate([
-                'logo_project' => 'required|image|mimes:jpg,jpeg,png,gif|max:10240',
-                'flyer_image' => 'required|image|mimes:jpg,jpeg,png,gif|max:10240',
-                'project_name' => 'required|string',
-                'Company' => 'required|string',
-                'start_project' => 'required|date',
-                'end_project' => 'required|date',
-                'position'=>'required|in:Fullstack,Backend,Frontend,System analyst',
-                'description_project'=> 'required|string',
-                'type'=> 'required|in:portfolio,product',
-                'type_project'=> 'required|in:Website, App mobile, UI/UX Design, App dekstop, Documentation',
-                'Tech'=> 'required|array',
+                'logo_project' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
+                'flyer_image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
+                'project_name' => 'nullable|string',
+                'Company' => 'nullable|string',
+                'start_project' => 'nullable|date',
+                'end_project' => 'nullable|date',
+                'position'=>'nullable|in:Fullstack,Backend,Frontend,System analyst',
+                'description_project'=> 'nullable|string',
+                'type'=> 'nullable|in:portfolio,product',
+                'type_project'=> 'nullable|in:Website, App mobile, UI/UX Design, App dekstop, Documentation',
+                'Tech'=> 'nullable|array',
                 'Price'=> 'nullable|decimal',
-                'feature'=> 'required|string',
-                'link_website'=> 'required|string',
-                'link_app'=> 'required|string',
+                'feature'=> 'nullable|string',
+                'link_website'=> 'nullable|string',
+                'link_app'=> 'nullable|string',
             ]);
 
             $Data = new Project();
